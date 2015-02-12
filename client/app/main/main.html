@@ -1,0 +1,32 @@
+<div ng-include="'/components/navbar/navbar_home.html'"></div>
+
+<!--<header class="" id="banner">-->
+    <!--<div class="container">-->
+        <!--<h1>CMTech</h1>-->
+        <!--<p class="lead">Kick-start your next web app with Angular Fullstack</p>-->
+        <!--<img src="assets/images/yeoman.png" alt="I'm Yeoman">-->
+    <!--</div>-->
+<!--</header>-->
+
+    <div class="cmtech-tabs">
+        <ul class="nav nav-tabs">
+            <li ><a id="CMTechTab1" ui-sref=".report">Home</a></li>
+            <li ><a id="CMTechTab2" ui-sref=".report">Daily report</a></li>
+            <li ><a id="CMTechTab3" ui-sref=".report">Change order</a></li>
+            <li ><a id="CMTechTab4" ui-sref=".report">RFI</a></li>
+            <li ><a id="CMTechTab5" ui-sref=".report">Submittal</a></li>
+            <li ><a id="CMTechTab6" ui-sref=".report">Transmittal</a></li>
+            <li ><a id="CMTechTab7" ui-sref=".report">Punchlist</a></li>
+            <li ><a id="CMTechTab8" ui-sref=".report">Schedule</a></li>
+        </ul>
+        <div>
+          <div class="tab-content" ui-view></div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="container">
+        <p>CMTech</p>
+    </div>
+</footer>

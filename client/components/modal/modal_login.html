@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Login</h3>
+</div>
+<div class="modal-body">
+    <form class="form" name="form" ng-submit="login(form)" novalidate>
+        <div class="form-group">
+            <input type="email" ng-model="user.email" class="form-control" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+            <input type="password" ng-model="user.password" class="form-control" name="password" required />
+        </div>
+        <div class="form-group has-error">
+            <p class="help-block" ng-show="(form.email.$error.required && form.password.$error.required) && submitted">
+                Please enter your email / password.
+            </p>
+            <p class="help-block" ng-show="form.email.$error.email && submitted">
+                Please enter a valid email.
+            </p>
+
+            <p class="help-block">{{ errors.other }}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button class="btn btn-warning" ng-click="cancel()">Back</button>
+        </div>
+    </form>
+</div>
+

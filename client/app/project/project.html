@@ -1,0 +1,23 @@
+<div ng-include="'/components/navbar/navbar_main.html'"></div>
+
+
+<div class="container">
+    <a ng-click="createProjectModal()" class="btn btn-primary" href="#" role="button">Add a New Project</a>
+</div>
+
+<div class="row"  ng-repeat = 'l in user.lines'>
+  <div class="col-xs-6 col-md-3" ng-repeat = 'p in l'>
+    <a ui-sref="detail({projectId : p._id})" class="thumbnail">
+      <img style='width:100% ; height:100%' ng-src="{{p.project_url}}" >
+    </a>
+  </div>
+</div>
+
+
+
+<footer class="footer">
+    <div class="container">
+        <p>CMTech</p>
+    </div>
+</footer>
+

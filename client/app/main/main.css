@@ -1,0 +1,63 @@
+.cmtech-tabs {
+    margin-top: 15px;
+    height: 700px;
+    width: 100%;
+    background: url("/assets/images/tab1.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cmtech-tabs ul {
+    margin-left: 1.6%; /*20px*/
+}
+
+.cmtech-tabs ul li {
+    height: 50px;
+    width: 12.5%; /*155px*/
+}
+
+
+.tab-content {
+
+    margin-left: 1.6%; /*20px*/
+    
+}
+.cmtech-tabs ul li a {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    color: #000000;
+}
+
+#CMTechTab5 {
+    text-align: initial;
+    padding-left: 26%;
+}
+
+#CMTechTab6 {
+    text-align: initial;
+    padding-left: 18%;
+}
+
+#CMTechTab7 {
+    text-align: initial;
+    padding-left: 17%;
+}
+
+#CMTechTab8 {
+    text-align: initial;
+    padding-left: 15%;
+}
+
+.cmtech-tabs ul li a:focus,
+.cmtech-tabs ul li a:hover {
+    background-color: rgba(100, 100, 100, 0);
+}
+
+.cmtech-tabs ul li a:focus {
+    color: dodgerblue;
+}
