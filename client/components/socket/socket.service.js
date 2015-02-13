@@ -19,30 +19,30 @@ angular.module('qiApp')
       socket: socket,
       syncUpdateUser: function(user){
         var split = function(number) {
-             var lines = [];
-             var line = [];
+             var rows = [];
+             var row = [];
              for(var i =0 ; i < user.projects.length ; i++ ) {
                  if(i%number === 0) {
-                     if(line.length !==0) {
-                           console.log(line)
-                         lines.push(line);
-                         line = [];
+                     if(row.length !==0) {
+                           console.log(row)
+                         rows.push(row);
+                         row = [];
                      }
-                     line.push(user.projects[i]);
+                     row.push(user.projects[i]);
                  }
                  else {
-                      line.push(user.projects[i]);
+                      row.push(user.projects[i]);
                  }
              }
-             if(line.length !== 0) {
-                 lines.push(line);
+             if(row.length !== 0) {
+                 rows.push(row);
              }
-             return lines;
+             return rows;
          };
           socket.on('user:save',function(item){
               if(user._id.toString() === item._id.toString()) {
                 user.projects = item.projects
-                user.lines = split(3, user);
+                user.rows = split(3, user);
               }
           });
 

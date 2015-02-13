@@ -1,29 +1,27 @@
 'use strict';
 
-angular.module('qiApp')
-  .controller('ProjectCtrl', function ($scope, $http, $modal, socket, Auth) {
-    $scope.message = 'Hello';
+angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $modal, socket, Auth) {
+        $scope.message = 'Hello';
 
         $scope.user = Auth.getCurrentUser();
-        $scope.user.$promise.then(function(){
-            $scope.user.lines  = [];
-              var line = [];
-              for(var i =0 ; i <  $scope.user.projects.length ; i++ ) {
-                  if(i%3 === 0) {
-                      if(line.length !==0) {
-                          $scope.user.lines.push(line);
-                          line = [];
-                      }
-                      line.push($scope.user.projects[i]);
-                  }
-                  else {
-                       line.push($scope.user.projects[i]);
-                  }
-              }
-              if(line.length !== 0) {
-                  $scope.user.lines.push(line);
-              }
-              console.log($scope.user.lines)
+        $scope.user.$promise.then(function () {
+            $scope.user.rows = [];
+            var row = [];
+            for (var i = 0; i < $scope.user.projects.length; i++) {
+                if (i % 3 === 0) {
+                    if (row.length !== 0) {
+                        $scope.user.rows.push(row);
+                        row = [];
+                    }
+                    row.push($scope.user.projects[i]);
+                } else {
+                    row.push($scope.user.projects[i]);
+                }
+            }
+            if (row.length !== 0) {
+                $scope.user.rows.push(row);
+            }
+            console.log($scope.user.rows)
         });
 
         $scope.createProjectModal = function (form) {
@@ -46,15 +44,15 @@ angular.module('qiApp')
             });
             modalInstance.result.then(function (ctrl) {
                 if (ctrl) {
-                	socket.syncUpdateUser(Auth.getCurrentUser());
-                	console.log("hello",$scope.user.lines)
+                    socket.syncUpdateUser(Auth.getCurrentUser());
+                    console.log("hello", $scope.user.rows)
                     console.log("modal closed");
                 }
             });
         };
 
         var CreateProjectModalCtrl = function ($scope, $modalInstance) {
-    //                console.log(Auth)
+            //                console.log(Auth)
             $scope.project = {};
             $scope.errors = {};
             $scope.selectImage = function () {
@@ -104,4 +102,4 @@ angular.module('qiApp')
             }
 
         };
-  });
+    });
