@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $modal, socket, Auth) {
-        $scope.message = 'Hello';
-
         $scope.user = Auth.getCurrentUser();
         $scope.user.$promise.then(function () {
             $scope.user.rows = [];

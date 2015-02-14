@@ -10,14 +10,14 @@
 
 <div class="cmtech-tabs">
     <ul class="nav nav-tabs">
-        <li ><a id="CMTechTab1" ui-sref=".home({projectId : test})">Home</a></li>
-        <li ><a id="CMTechTab2" ui-sref=".wadw">Daily report</a></li>
-        <li ><a id="CMTechTab3" ui-sref=".wad">Change order</a></li>
-        <li ><a id="CMTechTab4" ui-sref=".rfi">RFI</a></li>
-        <li ><a id="CMTechTab5" ui-sref=".submittal({projectId : test})">Submittal</a></li>
-        <li ><a id="CMTechTab6" ui-sref=".reporwt">Transmittal</a></li>
-        <li ><a id="CMTechTab7" ui-sref=".repwort">Punchlist</a></li>
-        <li ><a id="CMTechTab8" ui-sref=".rewssport">Schedule</a></li>
+        <li><a id="CMTechTab1" ui-sref=".home({projectID : projectID})">Home</a></li>
+        <li><a id="CMTechTab2" ui-sref=".daily_report({projectID : projectID})">Daily report</a></li>
+        <li><a id="CMTechTab3" ui-sref=".change_order">Change order</a></li>
+        <li><a id="CMTechTab4" ui-sref=".rfi({projectID : projectID})">RFI</a></li>
+        <li><a id="CMTechTab5" ui-sref=".submittal({projectID : projectID})">Submittal</a></li>
+        <li><a id="CMTechTab6" ui-sref=".transmittal({projectID : projectID})">Transmittal</a></li>
+        <li><a id="CMTechTab7" ui-sref=".punchlist({projectID : projectID})">Punchlist</a></li>
+        <li><a id="CMTechTab8" ui-sref=".schedule({projectID : projectID})">Schedule</a></li>
     </ul>
     <div>
         <div class="tab-content" ui-view></div>
