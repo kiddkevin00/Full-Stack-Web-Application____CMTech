@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="page-header">
                 <h4>
-                    <button type="button" class="btn btn-primary btn-md" ng-click="createSubmittal()">
+                    <button type="button" class="btn btn-primary btn-md" ng-click="createSubmittalView()">
                         Create New Submittal
                     </button>
                     <button type="button" class="btn btn-info btn-md" ng-click="">To Be Submittal Log</button>
@@ -147,103 +147,104 @@
     </div>
 </div>
 <div ng-show="isCreatingSubmittal" class="cmtech-tab-content">
-    <div class="row">
-        <div class="col-lg-1">
-            <button style="margin-top: 400%" type="button" class="btn btn-primary col-lg-12" ng-click="saveCreateSubmittal()">
-                Save
-            </button>
-            <button type="button" class="btn btn-danger col-lg-12" ng-click="deleteCreateSubmittal()">
-                Delete
-            </button>
-            <br>
-            <br>
-            <button type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittal()">
-                Back
-            </button>
-        </div>
-        <div class="col-lg-11">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        <b>ABC Contractors Inc.</b>
+    <form name="form" ng-submit="createSubmittal(form)">
+        <div class="row">
+            <div class="col-lg-1">
+                <button style="margin-top: 400%" type="submit" class="btn btn-primary col-lg-12">
+                    Save
+                </button>
+                <button type="button" class="btn btn-danger col-lg-12" ng-click="deleteCreateSubmittal()">
+                    Delete
+                </button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittal()">
+                    Back
+                </button>
+            </div>
+            <div class="col-lg-11">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            <b>ABC Contractors Inc.</b>
 
-                        <p>32W 39th St. New York, NY, 10020</p>
+                            <p>32W 39th St. New York, NY, 10020</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <p>Contact Tom Collins</p>
+
+                        <p>Phone: (646) 151-1234</p>
+                    </div>
+                    <div class="col-lg-offset-2 col-lg-6">
+                        Project: City of New York, ABC Residental 32 Broadway, New York, NY, 10004
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            <h4>
+                                <b>Submittal 02100-04-01</b>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <b>General Information</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Title
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Spec Section
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Number
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Revision
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Type
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Add more titles
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input class="col-lg-12" type="text" />
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <p>Contact Tom Collins</p>
-
-                    <p>Phone: (646) 151-1234</p>
-                </div>
-                <div class="col-lg-offset-2 col-lg-6">
-                    Project: City of New York, ABC Residental 32 Broadway, New York, NY, 10004
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        <h4>
-                            <b>Submittal 02100-04-01</b>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <b>General Information</b>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Title
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    Concrete Dech Shop..
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Spec Section
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    02100
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Number
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    4
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Revision
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    1
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Type
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    Shop Drawing
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    Add more titles
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                    Add info
-                </div>
-            </div>
         </div>
-    </div>
-</div>
+    </form>
 </div>

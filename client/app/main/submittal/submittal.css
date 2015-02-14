@@ -1,3 +1,12 @@
 .cmtech-input-line {
     border-bottom: 1px solid #000000;
 }
+
+.cmtech-input-line input {
+    background-color: rgba(255,0,0,0);
+    border: none;
+}
+
+.cmtech-input-line input:focus{
+    outline: 0;
+}
