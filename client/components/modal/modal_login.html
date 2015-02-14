@@ -7,12 +7,14 @@
             <input type="email" ng-model="user.email" class="form-control" name="email" placeholder="Email" required />
         </div>
         <div class="form-group">
-            <input type="password" ng-model="user.password" class="form-control" name="password" required />
+            <input type="password" ng-model="user.password" class="form-control" name="password" placeholder="Password"
+                   required />
         </div>
         <div class="form-group has-error">
             <p class="help-block" ng-show="(form.email.$error.required && form.password.$error.required) && submitted">
                 Please enter your email / password.
             </p>
+
             <p class="help-block" ng-show="form.email.$error.email && submitted">
                 Please enter a valid email.
             </p>
