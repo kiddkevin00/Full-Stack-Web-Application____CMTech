@@ -55,3 +55,7 @@
 .cmtech-tabs ul li a:focus {
     color: dodgerblue;
 }
+
+.cmtech-tab-content {
+    margin: 0 5%;
+}

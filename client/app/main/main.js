@@ -14,7 +14,7 @@ angular.module('qiApp').config(function ($stateProvider) {
         templateUrl: '/app/main/daily_report/daily_report.html',
         controller: 'DailyReportCtrl'
     }).state('main.change_order', {
-        url: ':/projectID',
+        url: '/:projectID',
         templateUrl: '/app/main/change_order/change_order.html',
         controller: 'ChangeOrderCtrl'
     }).state('main.rfi', {
