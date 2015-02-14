@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $location) {
-    $scope.projectID = $location.path().substring($location.path().indexOf("/", 1) + 1);
+angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $stateParams) {
+    $scope.projectID = $stateParams.projectID;
     $scope.isCreatingSubmittal = false;
     $scope.createSubmittalView = function() {
         $scope.isCreatingSubmittal = true;

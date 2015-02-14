@@ -21,7 +21,6 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
             }
         });
     };
-
     var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
         $scope.user = {};
         $scope.errors = {};
@@ -61,7 +60,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                         phone: $scope.user.phoneNumber,
                         profile_picture: $scope.user.blob.url
                     }).then(function () {
-                        $location.path('/main');
+                        $location.path('/project');
                         $modalInstance.close(true);
                     }).catch(function (err) {
                         err = err.data;
@@ -76,7 +75,6 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                 } else {
                     alert("Confirm password and password don't match!");
                 }
-
             } else {
                 console.log("form invalid!")
             }
@@ -85,7 +83,6 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
             $modalInstance.close(false);
         };
     };
-
     $scope.loginModal = function () {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_login.html",

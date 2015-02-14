@@ -7,8 +7,9 @@ angular.module('qiApp').config(function ($stateProvider) {
 	    templateUrl: '/app/main/main.html',
 	    controller: 'MainCtrl'
   	}).state('main.home', {
-      url: '/:projectID',
-      templateUrl: '/app/main/main_home/main_home.html'
+        url: '/:projectID',
+        templateUrl: '/app/main/main_home/main_home.html',
+        controller: 'MainHomeCtrl'
     }).state('main.daily_report', {
         url: '/:projectID',
         templateUrl: '/app/main/daily_report/daily_report.html',
