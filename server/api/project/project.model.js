@@ -12,6 +12,7 @@ var ProjectSchema = new Schema({
   name: String,
   files: [String],
   project_url : String
+  
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

@@ -29,7 +29,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li ng-repeat="item in getCurrentUser().projects track by item._id">
-                        <a ng-bind="item.name" href="/main"></a>
+                        <a ng-bind="item.name" ui-sref="main.home({projectID : item._id})"></a>
                     </li>
                 </ul>
             </div>
