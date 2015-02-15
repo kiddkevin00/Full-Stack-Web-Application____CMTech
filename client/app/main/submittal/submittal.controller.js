@@ -6,8 +6,10 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $statePara
     $scope.createSubmittalView = function() {
         $scope.isCreatingSubmittal = true;
     };
-    $scope.createSubmittal = function() {
-        // TODO..
+    $scope.createSubmittal = function(form) {
+//        console.log($scope.createSubmittalForm)
+        // (TODO) HTTP POST REQUEST..
+
 
     }
     $scope.leaveCreateSubmittal = function() {
