@@ -4,100 +4,134 @@
 <div class="modal-body">
     <form class="form" name="form" ng-submit="signup(form)" novalidate>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.firstName.$valid && submitted,
                                                     'has-error': form.firstName.$invalid && submitted }">
                     <input type="text" ng-model="user.firstName" class="form-control" name="firstName"
                            placeholder="First Name" required />
-                    <span class="help-block" ng-show="form.firstName.$error.required && submitted">
-                        first name is required
-                    </span>
+                    <p class="help-block" ng-show="form.firstName.$error.required && submitted">
+                        First name is required
+                    </p>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.lastName.$valid && submitted,
                                                     'has-error': form.lastName.$invalid && submitted }">
                     <input type="text" ng-model="user.lastName" class="form-control" name="lastName"
                            placeholder="Last Name" required />
-                    <span class="help-block" ng-show="form.lastName.$error.required && submitted">
-                        last name is required
-                    </span>
+                    <p class="help-block" ng-show="form.lastName.$error.required && submitted">
+                        Last name is required
+                    </p>
                 </div>
             </div>
 
         </div>
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-            <input type="email" ng-model="user.email" class="form-control" id="email"
-                   name="email" placeholder="Email" required mongoose-error />
-            <span class="help-block" ng-show="form.email.$error.required && submitted">
-                Email is required
-            </span>
-            <span class="help-block" ng-show="form.email.$error.email && submitted">
-                valid Email is required
-            </span>
-            <span class="help-block" ng-show="form.email.$error.mongoose">
-                {{ errors.email }}
-            </span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
-                                            'has-error': form.password.$invalid && submitted }">
-            <input type="password" ng-model="user.password" class="form-control" id="password"
-                   name="password" placeholder="Password" ng-minlength="3" required mongoose-error />
-            <span class="help-block" ng-show="form.password.$error.required && submitted">
-                password is required
-            </span>
-            <span class="help-block" ng-show="form.password.$error.minlength && submitted">
-                password must be at least 3 characters.
-            </span>
-            <span class="help-block" ng-show="form.password.$error.mongoose">
-                {{ errors.password }}
-            </span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && submitted,
-                                            'has-error': form.confirmPassword.$invalid && submitted }">
-            <input type="password" ng-model="user.confirmPassword" class="form-control" id="confirmPassword"
-                   name="confirmPassword" placeholder="Confirm Password" ng-minlength="3" required mongoose-error />
-            <span class="help-block" ng-show="form.confirmPassword.$error.required && submitted">
-                confirm password is required
-            </span>
-            <span class="help-block"
-                  ng-show="form.confirmPassword.$error.minlength && submitted">
-                Password must be at least 3 characters.
-            </span>
-            <span class="help-block" ng-show="form.password.$error.mongoose">
-                {{ errors.password }}
-            </span>
-        </div>
-
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-12">
+                <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
+                                                    'has-error': form.email.$invalid && submitted }">
+                    <input type="email" ng-model="user.email" class="form-control" id="email"
+                           name="email" placeholder="Email" required mongoose-error />
+                    <p class="help-block" ng-show="form.email.$error.required && submitted">
+                        Email is required
+                    </p>
+                    <p class="help-block" ng-show="form.email.$error.email && submitted">
+                        Valid Email is required
+                    </p>
+                    <p class="help-block" ng-show="form.email.$error.mongoose">
+                        {{ errors.email }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
+                                                    'has-error': form.password.$invalid && submitted }">
+                    <input type="password" ng-model="user.password" class="form-control" id="password"
+                           name="password" placeholder="Password" ng-minlength="3" required mongoose-error />
+                    <p class="help-block" ng-show="form.password.$error.required && submitted">
+                        Password is required
+                    </p>
+                    <p class="help-block" ng-show="form.password.$error.minlength && submitted">
+                        Password must be at least 3 characters.
+                    </p>
+                    <p class="help-block" ng-show="form.password.$error.mongoose">
+                        {{ errors.password }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && submitted,
+                                                    'has-error': form.confirmPassword.$invalid && submitted }">
+                    <input type="password" ng-model="user.confirmPassword" class="form-control" id="confirmPassword"
+                           name="confirmPassword" placeholder="Confirm Password" ng-minlength="3" required mongoose-error />
+                    <p class="help-block" ng-show="form.confirmPassword.$error.required && submitted">
+                        Confirm password is required
+                    </p>
+                    <p class="help-block"
+                          ng-show="form.confirmPassword.$error.minlength && submitted">
+                        Password must be at least 3 characters.
+                    </p>
+                    <p class="help-block" ng-show="form.password.$error.mongoose">
+                        {{ errors.password }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
                                                     'has-error': form.phoneNumber.$invalid && submitted }">
                     <input type="text" ng-model="user.phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"
                            placeholder="Phone" required />
-                    <span class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
-                        phone number is required
-                    </span>
+                    <p class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
+                        Phone number is required
+                    </p>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': imageSrc && submitted,
                                                     'has-error': !imageSrc && submitted }">
                     <input type="button" ng-model="user.uploadPhoto" class="form-control" id="uploadPhoto" name="uploadPhoto"
                            value="Upload Photo"
                            ng-click="selectImage()" />
-                    <span class="help-block" ng-show="!imageSrc && submitted">
+                    <p class="help-block" ng-show="!imageSrc && submitted">
                         Profile Picture is required
-                    </span>
+                    </p>
                     <i ng-hide="imageSrc || submitted">No image chosen</i>
-                    <img style='width:200px' ng-src="{{ imageSrc }}" id='up' /><br />
+                    <!--<img style='width:200px' ng-src="{{ imageSrc }}" id='up' />-->
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <label>Please select predefined company here</label>
+                <div class="form-group" ng-class="{ 'has-success': form.uploadPhoto.$valid && submitted,
+                                                    'has-error': form.uploadPhoto.$invalid && submitted }">
+                    <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled"
+                               style="width: 300px;">
+                        <ui-select-match placeholder="Select or search a country in the list...">
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="country in $parent.countries | filter: $select.search">
+                            <span ng-bind-html="country.name | highlight: $select.search"></span>
+                            <small ng-bind-html="country.code | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                    <p>Selected: {{country.selected}}</p>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <label>Didn't find your company</label>
+                <button ng-click="createCompanyModal()" type="button" class="btn btn-primary">Create New Company</button>
             </div>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Sign Up</button>
-            <button class="btn btn-warning" ng-click="cancel()">Back</button>
+            <button type="button" class="btn btn-warning" ng-click="cancel()">Back</button>
         </div>
     </form>
 </div>

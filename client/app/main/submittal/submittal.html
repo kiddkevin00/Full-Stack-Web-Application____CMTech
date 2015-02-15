@@ -1,9 +1,9 @@
-<div ng-hide="isCreatingSubmittal" class="cmtech-tab-content">
+<div ng-hide="isSubmittalFormView" ng-init="getProjectInfo()" class="cmtech-tab-content">
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
                 <h4>
-                    <button type="button" class="btn btn-primary btn-md" ng-click="createSubmittalView()">
+                    <button type="button" class="btn btn-primary btn-md" ng-click="viewCreateSubmittalForm()">
                         Create New Submittal
                     </button>
                     <button type="button" class="btn btn-info btn-md" ng-click="">To Be Submittal Log</button>
@@ -146,7 +146,7 @@
         </div>
     </div>
 </div>
-<div ng-show="isCreatingSubmittal" class="cmtech-tab-content">
+<div ng-show="isSubmittalFormView" class="cmtech-tab-content">
     <form name="form" ng-submit="createSubmittal(form)">
         <div class="row">
             <div class="col-lg-1">
@@ -157,8 +157,6 @@
                 <button type="button" class="btn btn-danger col-lg-12" ng-click="deleteCreateSubmittal()">
                     Delete
                 </button>
-                <br>
-                <br>
                 <button type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittal()">
                     Back
                 </button>
@@ -167,9 +165,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="page-header">
-                            <b>ABC Contractors Inc.</b>
+                            <b ng-bind="projectName">ABC Contractors Inc.</b>
 
-                            <p>32W 39th St. New York, NY, 10020</p>
+                            <p ng-bind="projectAddress">32W 39th St. New York, NY, 10020</p>
                         </div>
                     </div>
                 </div>
@@ -253,7 +251,28 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
-                        Issued by Approver:
+                        Issued by:
+                    </div>
+                    <div class="col-lg-10">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        Approver:
+                    </div>
+                    <div class="col-lg-10">
+                        <p>Selected: {{country.selected}}</p>
+                        <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled"
+                                   style="width: 300px;">
+                            <ui-select-match placeholder="Select or search a country in the list...">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="country in countries | filter: $select.search">
+                                <span ng-bind-html="country.name | highlight: $select.search"></span>
+                                <small ng-bind-html="country.code | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
                 <div class="row">

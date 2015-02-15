@@ -1,19 +1,11 @@
 'use strict';
 
-angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
+angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal, $location, Auth) {
     $scope.signupModal = function () {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
             size: "md",
-            controller: SignupModalCtrl,
-            resolved: {
-                $location: function () {
-                    return $location;
-                },
-                Auth: function () {
-                    return Auth;
-                }
-            }
+            controller: SignupModalCtrl
         });
         modalInstance.result.then(function (ctrl) {
             if (ctrl) {
@@ -22,6 +14,35 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
         });
     };
     var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
+        $scope.country = {};
+        $scope.countries = [ // Taken from https://gist.github.com/unceus/6501985
+            {name: 'Afghanistan', code: 'AF'},
+            {name: 'Åland Islands', code: 'AX'},
+            {name: 'Albania', code: 'AL'},
+            {name: 'Algeria', code: 'DZ'},
+            {name: 'American Samoa', code: 'AS'},
+            {name: 'Andorra', code: 'AD'},
+            {name: 'Angola', code: 'AO'},
+            {name: 'Anguilla', code: 'AI'},
+            {name: 'Antarctica', code: 'AQ'},
+            {name: 'Antigua and Barbuda', code: 'AG'},
+            {name: 'Argentina', code: 'AR'},
+            {name: 'Armenia', code: 'AM'},
+            {name: 'Aruba', code: 'AW'},
+            {name: 'Australia', code: 'AU'},
+            {name: 'Austria', code: 'AT'},
+            {name: 'Azerbaijan', code: 'AZ'},
+            {name: 'Bahamas', code: 'BS'},
+            {name: 'Bahrain', code: 'BH'},
+            {name: 'Bangladesh', code: 'BD'},
+            {name: 'Barbados', code: 'BB'},
+            {name: 'Belarus', code: 'BY'},
+            {name: 'Belgium', code: 'BE'},
+            {name: 'Belize', code: 'BZ'},
+            {name: 'Benin', code: 'BJ'},
+            {name: 'Bermuda', code: 'BM'}
+        ];
+
         $scope.user = {};
         $scope.errors = {};
         $scope.selectImage = function () {
@@ -47,11 +68,9 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
         $scope.signup = function (form) {
             $scope.submitted = true;
             if (!$scope.user.blob) {
-                // alert("Please upload a photo!")
+                alert("Please upload a photo!")
             } else if (form.$valid) {
-                console.log("valid!");
                 if ($scope.user.password === $scope.user.confirmPassword) {
-                    console.log("password matched!")
                     Auth.createUser({
                         first_name: $scope.user.firstName,
                         last_name: $scope.user.lastName,
@@ -65,7 +84,6 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                     }).catch(function (err) {
                         err = err.data;
                         $scope.errors = {};
-
                         // Update validity of form fields that match the mongoose errors
                         angular.forEach(err.errors, function (error, field) {
                             form[field].$setValidity('mongoose', false);
@@ -76,38 +94,63 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                     alert("Confirm password and password don't match!");
                 }
             } else {
-                console.log("form invalid!")
+                console.log("Form Invalid");
+            }
+        };
+        $scope.cancel = function () {
+            $modalInstance.close(false);
+        };
+
+        $scope.createCompanyModal = function () {
+            var modalInstance = $modal.open({
+                templateUrl: "/components/modal/modal_createcompany.html",
+                size: "md",
+                controller: CreateCompanyModalCtrl
+            });
+            modalInstance.result.then(function (ctrl) {
+                if (ctrl) {
+                    console.log("modal closed");
+                }
+            });
+        };
+    };
+
+    var CreateCompanyModalCtrl = function ($rootScope, $scope, $modalInstance) {
+        $scope.company = {};
+        $scope.errors = {};
+        $scope.createCompany = function (form) {
+            if (form.$valid) {
+//                console.log($scope.company);
+                // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
+
+                // (TODO) UPDATE ROOTSCOPE FOR COMPANY LIST
+
+            } else {
+                console.log("Form Invalid");
             }
         };
         $scope.cancel = function () {
             $modalInstance.close(false);
         };
     };
+
     $scope.loginModal = function () {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_login.html",
             size: "md",
-            controller: LoginModalCtrl,
-            resolved: {
-                $location: function () {
-                    return $location;
-                },
-                Auth: function () {
-                    return Auth;
-                }
-            }
+            controller: LoginModalCtrl
         });
         modalInstance.result.then(function (ctrl) {
             if (ctrl) {
-                console.log("modal closed");
+                console.log("Form Submitted");
             }
         });
-    }
+    };
     var LoginModalCtrl = function ($scope, $modalInstance, Auth, $location) {
         $scope.user = {};
         $scope.errors = {};
         $scope.login = function (form) {
-            $scope.submitted = true
+            $scope.submitted = true;
             if (form.$valid) {
                 Auth.login({
                     email: $scope.user.email,
@@ -118,10 +161,14 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                 }).catch(function (err) {
                     $scope.errors.other = err.message;
                 });
+            } else {
+                console.log("Form Invalid")
             }
         };
         $scope.cancel = function () {
             $modalInstance.close(false);
         };
-    }
+    };
+
+
 });
