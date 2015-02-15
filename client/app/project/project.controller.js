@@ -78,12 +78,12 @@ angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $moda
                 $scope.submitted = true
                 //            if (form.$valid) {
                 var data = {
-                    name: $scope.project.name,
-                    number: $scope.project.number,
-                    address: $scope.project.address,
-                    city: $scope.project.city,
-                    zip: $scope.project.zipcode,
-                    project_url: $scope.project.blob.url
+                    project_name: $scope.project.project_name,
+                    project_number: $scope.project.project_number,
+                    project_address: $scope.project.project_address,
+                    project_city: $scope.project.project_city,
+                    project_zip: $scope.project.project_zip,
+                    project_image_url: $scope.project.blob.url
                 };
                 $http.post("/api/projects", data).success(function (data) {
                     $modalInstance.close(true);

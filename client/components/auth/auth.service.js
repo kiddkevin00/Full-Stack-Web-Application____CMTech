@@ -21,7 +21,7 @@ angular.module('qiApp')
         var deferred = $q.defer();
 
         $http.post('/auth/local', {
-          email: user.email,
+          email: user.user_email,
           password: user.password
         }).
         success(function(data) {

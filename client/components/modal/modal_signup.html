@@ -5,39 +5,39 @@
     <form class="form" name="form" ng-submit="signup(form)" novalidate>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group" ng-class="{ 'has-success': form.firstName.$valid && submitted,
-                                                    'has-error': form.firstName.$invalid && submitted }">
-                    <input type="text" ng-model="user.firstName" class="form-control" name="firstName"
+                <div class="form-group" ng-class="{ 'has-success': form.user_first_name.$valid && submitted,
+                                                    'has-error': form.user_first_name.$invalid && submitted }">
+                    <input type="text" ng-model="user.user_first_name" class="form-control" name="user_first_name"
                            placeholder="First Name" required />
-                    <span class="help-block" ng-show="form.firstName.$error.required && submitted">
+                    <span class="help-block" ng-show="form.user_first_name.$error.required && submitted">
                         first name is required
                     </span>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group" ng-class="{ 'has-success': form.lastName.$valid && submitted,
-                                                    'has-error': form.lastName.$invalid && submitted }">
-                    <input type="text" ng-model="user.lastName" class="form-control" name="lastName"
+                <div class="form-group" ng-class="{ 'has-success': form.user_last_name.$valid && submitted,
+                                                    'has-error': form.user_last_name.$invalid && submitted }">
+                    <input type="text" ng-model="user.user_last_name" class="form-control" name="user_last_name"
                            placeholder="Last Name" required />
-                    <span class="help-block" ng-show="form.lastName.$error.required && submitted">
+                    <span class="help-block" ng-show="form.user_last_name.$error.required && submitted">
                         last name is required
                     </span>
                 </div>
             </div>
 
         </div>
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-            <input type="email" ng-model="user.email" class="form-control" id="email"
-                   name="email" placeholder="Email" required mongoose-error />
-            <span class="help-block" ng-show="form.email.$error.required && submitted">
+        <div class="form-group" ng-class="{ 'has-success': form.user_email.$valid && submitted,
+                                            'has-error': form.user_email.$invalid && submitted }">
+            <input type="email" ng-model="user.user_email" class="form-control" id="email"
+                   name="user_email" placeholder="Email" required mongoose-error />
+            <span class="help-block" ng-show="form.user_email.$error.required && submitted">
                 Email is required
             </span>
-            <span class="help-block" ng-show="form.email.$error.email && submitted">
+            <span class="help-block" ng-show="form.user_email.$error.email && submitted">
                 valid Email is required
             </span>
-            <span class="help-block" ng-show="form.email.$error.mongoose">
-                {{ errors.email }}
+            <span class="help-block" ng-show="form.user_email.$error.mongoose">
+                {{ errors.user_email }}
             </span>
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
@@ -74,7 +74,7 @@
             <div class="col-md-6">
                 <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
                                                     'has-error': form.phoneNumber.$invalid && submitted }">
-                    <input type="text" ng-model="user.phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"
+                    <input type="text" ng-model="user.user_phone" class="form-control" id="phoneNumber" name="phoneNumber"
                            placeholder="Phone" required />
                     <span class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
                         phone number is required

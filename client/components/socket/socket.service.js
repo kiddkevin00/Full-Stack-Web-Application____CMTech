@@ -24,7 +24,6 @@ angular.module('qiApp')
              for(var i =0 ; i < user.projects.length ; i++ ) {
                  if(i%number === 0) {
                      if(row.length !==0) {
-                           console.log(row)
                          rows.push(row);
                          row = [];
                      }

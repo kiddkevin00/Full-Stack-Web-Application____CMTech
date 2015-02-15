@@ -52,14 +52,8 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
                 console.log("valid!");
                 if ($scope.user.password === $scope.user.confirmPassword) {
                     console.log("password matched!")
-                    Auth.createUser({
-                        first_name: $scope.user.firstName,
-                        last_name: $scope.user.lastName,
-                        email: $scope.user.email,
-                        password: $scope.user.password,
-                        phone: $scope.user.phoneNumber,
-                        profile_picture: $scope.user.blob.url
-                    }).then(function () {
+                    $scope.user.user_profile_url = $scope.user.blob.url;
+                    Auth.createUser($scope.user).then(function () {
                         $location.path('/project');
                         $modalInstance.close(true);
                     }).catch(function (err) {
@@ -110,7 +104,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal) {
             $scope.submitted = true
             if (form.$valid) {
                 Auth.login({
-                    email: $scope.user.email,
+                    user_email: $scope.user.user_email,
                     password: $scope.user.password
                 }).then(function () {
                     $location.path('/project');
