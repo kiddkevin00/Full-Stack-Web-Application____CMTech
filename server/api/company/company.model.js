@@ -9,9 +9,7 @@ var CompanySchema = new Schema({
   company_address: String,
   company_contact: String,
   company_phone: String,
-  role:[{
-  	type: Schema.Types.ObjectId, ref: 'Role' 
-  }]
+  role:{type: String, enum: ['Contruction Manager', 'Contructor', 'Engineer', 'Owner']}
 });
 
 module.exports = mongoose.model('Company', CompanySchema);

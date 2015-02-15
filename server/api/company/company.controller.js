@@ -3,12 +3,17 @@
 var _ = require('lodash');
 var Company = require('./company.model');
 
+
 // Get list of companys
 exports.index = function(req, res) {
   Company.find(function (err, companys) {
     if(err) { return handleError(res, err); }
     return res.json(200, companys);
   });
+};
+
+exports.role = function(req,res) {
+  return res.json(Company.schema.path('role').enumValues);
 };
 
 // Get a single company
