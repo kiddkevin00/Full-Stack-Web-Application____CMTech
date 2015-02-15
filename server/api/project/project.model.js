@@ -11,8 +11,10 @@ var ProjectSchema = new Schema({
   zip: String,
   name: String,
   files: [String],
-  project_url : String
-  
+  project_url : String,
+  submittals :[{
+  	type: Schema.Types.ObjectId, ref: 'Submittal' 
+  }]
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
