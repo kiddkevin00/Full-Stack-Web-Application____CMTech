@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal, $location, Auth) {
+angular.module('qiApp').controller('HomeCtrl', function ($scope, $http, $modal, $location, Auth) {
     $scope.signupModal = function () {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
@@ -71,14 +71,9 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal, $locati
                 alert("Please upload a photo!")
             } else if (form.$valid) {
                 if ($scope.user.password === $scope.user.confirmPassword) {
-                    Auth.createUser({
-                        first_name: $scope.user.firstName,
-                        last_name: $scope.user.lastName,
-                        email: $scope.user.email,
-                        password: $scope.user.password,
-                        phone: $scope.user.phoneNumber,
-                        profile_picture: $scope.user.blob.url
-                    }).then(function () {
+//                    console.log("password matched!")
+                    $scope.user.user_profile_url = $scope.user.blob.url;
+                    Auth.createUser($scope.user).then(function () {
                         $location.path('/project');
                         $modalInstance.close(true);
                     }).catch(function (err) {
@@ -118,10 +113,22 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal, $locati
     var CreateCompanyModalCtrl = function ($rootScope, $scope, $modalInstance) {
         $scope.company = {};
         $scope.errors = {};
+        $scope.roles = [];
+        $http.get("/api/companys/show/roles").success(function(data) {
+            console.log(data)
+        }).error(function(data) {
+
+        });
         $scope.createCompany = function (form) {
             if (form.$valid) {
 //                console.log($scope.company);
                 // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
+                $http.post("/api/companys", $scope.company).success(function(data) {
+                    console.log(data);
+                }).error(function(data) {
+
+                });
+
 
                 // (TODO) UPDATE ROOTSCOPE FOR COMPANY LIST
 
@@ -153,7 +160,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $modal, $locati
             $scope.submitted = true;
             if (form.$valid) {
                 Auth.login({
-                    email: $scope.user.email,
+                    user_email: $scope.user.user_email,
                     password: $scope.user.password
                 }).then(function () {
                     $location.path('/project');

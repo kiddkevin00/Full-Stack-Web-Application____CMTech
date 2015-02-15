@@ -4,11 +4,14 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CompanySchema = new Schema({
-  name: String,
-  info: String,
-  address: String,
-  contact: String,
-  phone: String
+  company_name: String,
+  company_info: String,
+  company_address: String,
+  company_contact: String,
+  company_phone: String,
+  role:[{
+  	type: Schema.Types.ObjectId, ref: 'Role' 
+  }]
 });
 
 module.exports = mongoose.model('Company', CompanySchema);

@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ProjectSchema = new Schema({
-  number: Number,
-  address: String,
-  city: String,
-  state: String,
-  zip: String,
-  name: String,
-  files: [String],
-  project_url : String,
+  project_number: Number,
+  project_address: String,
+  project_city: String,
+  project_state: String,
+  project_zip: String,
+  project_name: String,
+  project_files: [String],
+  project_image_url : String,
   submittals :[{
   	type: Schema.Types.ObjectId, ref: 'Submittal' 
   }]

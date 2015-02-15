@@ -5,9 +5,9 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
-  first_name: String,
-  last_name: String,
-  email: { type: String, lowercase: true },
+  user_first_name: String,
+  user_last_name: String,
+  user_email: { type: String, lowercase: true },
   role: {
     type: String,
     default: 'user'
@@ -15,12 +15,12 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  phone: String,
+  user_phone: String,
   projects: [{
     type : Schema.Types.ObjectId,
     ref : 'Project'
   }],
-  profile_picture: String
+  user_profile_url: String
 });
 
 /**
@@ -42,11 +42,11 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'first_name': this.first_name,
-      'last_name' : this.last_name,
-      'phone' : this.phone,
+      'user_first_name': this.user_first_name,
+      'user_last_name' : this.user_last_name,
+      'user_phone' : this.user_phone,
       'role': this.role,
-      'profile_picture':  this.profile_picture
+      'user_profile_url':  this.user_profile_url
     };
   });
 
@@ -66,7 +66,7 @@ UserSchema
 
 // Validate empty email
 UserSchema
-  .path('email')
+  .path('user_email')
   .validate(function(email) {
     return email.length;
   }, 'Email cannot be blank');
@@ -80,12 +80,13 @@ UserSchema
 
 // Validate email is not taken
 UserSchema
-  .path('email')
+  .path('user_email')
   .validate(function(value, respond) {
     var self = this;
-    this.constructor.findOne({email: value}, function(err, user) {
+    this.constructor.findOne({user_email: value}, function(err, user) {
       if(err) throw err;
       if(user) {
+        console.log(self.id, user.id)
         if(self.id === user.id) return respond(true);
         return respond(false);
       }
