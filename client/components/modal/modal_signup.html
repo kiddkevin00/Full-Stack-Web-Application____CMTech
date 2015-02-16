@@ -107,17 +107,17 @@
                 <label>Please select predefined company here</label>
                 <div class="form-group" ng-class="{ 'has-success': form.uploadPhoto.$valid && submitted,
                                                     'has-error': form.uploadPhoto.$invalid && submitted }">
-                    <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled"
+                    <ui-select ng-model="company.selected" theme="selectize" ng-disabled="disabled"
                                style="width: 300px;">
-                        <ui-select-match placeholder="Select or search a country in the list...">
+                        <ui-select-match placeholder="Select or search a company in the list...">
                             {{$select.selected.name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="country in $parent.countries | filter: $select.search">
-                            <span ng-bind-html="country.name | highlight: $select.search"></span>
-                            <small ng-bind-html="country.code | highlight: $select.search"></small>
+                        <ui-select-choices repeat="company in $parent.companies | filter: $select.search">
+                            <span ng-bind-html="company.company_name | highlight: $select.search"></span>
+                            <small ng-bind-html="company.company_role | highlight: $select.search"></small>
                         </ui-select-choices>
                     </ui-select>
-                    <p>Selected: {{country.selected}}</p>
+                    <p>Selected: {{company.selected}}</p>
                 </div>
             </div>
             <div class="col-lg-5">

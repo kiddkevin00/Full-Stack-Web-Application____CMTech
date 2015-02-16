@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('qiApp').controller('HomeCtrl', function ($scope, $http, $modal, $location, Auth) {
+angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $http, $modal, $location, Auth) {
     $scope.signupModal = function () {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
@@ -14,34 +14,15 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $http, $modal, 
         });
     };
     var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
-        $scope.country = {};
-        $scope.countries = [ // Taken from https://gist.github.com/unceus/6501985
-            {name: 'Afghanistan', code: 'AF'},
-            {name: 'Åland Islands', code: 'AX'},
-            {name: 'Albania', code: 'AL'},
-            {name: 'Algeria', code: 'DZ'},
-            {name: 'American Samoa', code: 'AS'},
-            {name: 'Andorra', code: 'AD'},
-            {name: 'Angola', code: 'AO'},
-            {name: 'Anguilla', code: 'AI'},
-            {name: 'Antarctica', code: 'AQ'},
-            {name: 'Antigua and Barbuda', code: 'AG'},
-            {name: 'Argentina', code: 'AR'},
-            {name: 'Armenia', code: 'AM'},
-            {name: 'Aruba', code: 'AW'},
-            {name: 'Australia', code: 'AU'},
-            {name: 'Austria', code: 'AT'},
-            {name: 'Azerbaijan', code: 'AZ'},
-            {name: 'Bahamas', code: 'BS'},
-            {name: 'Bahrain', code: 'BH'},
-            {name: 'Bangladesh', code: 'BD'},
-            {name: 'Barbados', code: 'BB'},
-            {name: 'Belarus', code: 'BY'},
-            {name: 'Belgium', code: 'BE'},
-            {name: 'Belize', code: 'BZ'},
-            {name: 'Benin', code: 'BJ'},
-            {name: 'Bermuda', code: 'BM'}
-        ];
+        $rootScope.getCompanies = function () {
+            $http.get("api/companies").success(function (data) {
+                console.log(data)
+                $scope.companies = data;
+            }).error(function (data) {
+
+            });
+        };
+        $rootScope.getCompanies();
 
         $scope.user = {};
         $scope.errors = {};
@@ -71,7 +52,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $http, $modal, 
                 alert("Please upload a photo!")
             } else if (form.$valid) {
                 if ($scope.user.password === $scope.user.confirmPassword) {
-//                    console.log("password matched!")
+                    //                    console.log("password matched!")
                     $scope.user.user_profile_url = $scope.user.blob.url;
                     Auth.createUser($scope.user).then(function () {
                         $location.path('/project');
@@ -113,23 +94,24 @@ angular.module('qiApp').controller('HomeCtrl', function ($scope, $http, $modal, 
     var CreateCompanyModalCtrl = function ($rootScope, $scope, $modalInstance) {
         $scope.company = {};
         $scope.errors = {};
-        $scope.roles = [];
-        $http.get("/api/companys/show/roles").success(function(data) {
-            console.log(data)
-        }).error(function(data) {
+        $http.get("/api/companies/roles/info").success(function (data) {
+//            console.log(data);
+            $scope.companyRoles = data;
+        }).error(function (data) {
 
         });
         $scope.createCompany = function (form) {
             if (form.$valid) {
-//                console.log($scope.company);
+                //                console.log($scope.company);
                 // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
-                $http.post("/api/companys", $scope.company).success(function(data) {
+                $http.post("/api/companies", $scope.company).success(function (data) {
                     console.log(data);
-                }).error(function(data) {
+                    $rootScope.getCompanies();
+                    $modalInstance.close(true);
+
+                }).error(function (data) {
 
                 });
-
-
                 // (TODO) UPDATE ROOTSCOPE FOR COMPANY LIST
 
             } else {

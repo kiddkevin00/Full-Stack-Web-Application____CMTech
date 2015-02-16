@@ -16,7 +16,7 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   user_phone: String,
-  projects: [{
+  link_projects: [{
     type : Schema.Types.ObjectId,
     ref : 'Project'
   }],

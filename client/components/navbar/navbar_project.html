@@ -28,7 +28,7 @@
                     Project List<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li ng-repeat="item in getCurrentUser().projects track by item._id">
+                    <li ng-repeat="item in getCurrentUser().link_projects track by item._id">
                         <a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>
                     </li>
                 </ul>

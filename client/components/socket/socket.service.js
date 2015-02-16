@@ -21,16 +21,16 @@ angular.module('qiApp')
         var split = function(number) {
              var rows = [];
              var row = [];
-             for(var i =0 ; i < user.projects.length ; i++ ) {
+             for(var i =0 ; i < user.link_projects.length ; i++ ) {
                  if(i%number === 0) {
                      if(row.length !==0) {
                          rows.push(row);
                          row = [];
                      }
-                     row.push(user.projects[i]);
+                     row.push(user.link_projects[i]);
                  }
                  else {
-                      row.push(user.projects[i]);
+                      row.push(user.link_projects[i]);
                  }
              }
              if(row.length !== 0) {
@@ -40,7 +40,7 @@ angular.module('qiApp')
          };
           socket.on('user:save',function(item){
               if(user._id.toString() === item._id.toString()) {
-                user.projects = item.projects
+                user.link_projects = item.link_projects
                 user.rows = split(3, user);
               }
           });

@@ -10,7 +10,7 @@ angular.module('qiApp')
 
       if(form.$valid) {
         Auth.login({
-          email: $scope.user.email,
+          user_email: $scope.user.email,
           password: $scope.user.password
         })
         .then( function() {

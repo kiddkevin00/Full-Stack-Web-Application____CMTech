@@ -15,7 +15,7 @@ exports.index = function(req, res) {
 
 // Get a single project
 exports.show = function(req, res) {
-  Project.findById(req.params.id).populate('submittals').exec(function(err, project) {
+  Project.findById(req.params.id).populate('link_submittals').exec(function(err, project) {
     if(err) { return handleError(res, err); }
     if(!project) { return res.send(404); }
     return res.json(project);
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
          console.log(err , user)
        if (err) return next(err);
        if (!user) return res.send(401);
-        user.projects.push(project._id);
+        user.link_projects.push(project._id);
         project.save(function(err) {
            user.save(function(err) {
                return res.json(200, project);

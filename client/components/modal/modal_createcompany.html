@@ -7,7 +7,7 @@
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.companyName.$valid && submitted,
                                                     'has-error': form.companyName.$invalid && submitted }">
-                    <input type="text" ng-model="company.name" class="form-control" name="companyName"
+                    <input type="text" ng-model="company.company_name" class="form-control" name="companyName"
                            placeholder="Company Name" required />
 
                     <p class="help-block" ng-show="form.companyName.$error.required && submitted">
@@ -18,8 +18,7 @@
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.companyRole.$valid && submitted,
                                                     'has-error': form.companyRole.$invalid && submitted }">
-                    <input type="text" ng-model="company.role" class="form-control" name="companyRole"
-                           placeholder="Company Role" required />
+                    <select ng-options="item for item in companyRoles" ng-model="company.company_role" required></select>
 
                     <p class="help-block" ng-show="form.companyRole.$error.required && submitted">
                         Company role is required
@@ -31,7 +30,8 @@
             <div class="col-lg-12">
                 <div class="form-group" ng-class="{ 'has-success': form.companyAddress.$valid && submitted,
                                                     'has-error': form.companyAddress.$invalid && submitted }">
-                    <input type="text" ng-model="company.address" class="form-control" name="companyAddress" placeholder="Address"
+                    <input type="text" ng-model="company.company_address" class="form-control" name="companyAddress"
+                           placeholder="Address"
                            required />
 
                     <p class="help-block" ng-show="form.companyAddress.required && submitted">
@@ -44,7 +44,7 @@
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.companyCity.$valid && submitted,
                                                     'has-error': form.companyCity.$invalid && submitted }">
-                    <input type="text" ng-model="company.city" class="form-control" name="companyCity" placeholder="City"
+                    <input type="text" ng-model="company.company_city" class="form-control" name="companyCity" placeholder="City"
                            required />
 
                     <p class="help-block" ng-show="form.companyCity.$error.required && submitted">
@@ -55,7 +55,8 @@
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.companyState.$valid && submitted,
                                                     'has-error': form.companyState.$invalid && submitted }">
-                    <input type="text" ng-model="company.state" class="form-control" name="companyState" placeholder="State"
+                    <input type="text" ng-model="company.company_state" class="form-control" name="companyState"
+                           placeholder="State"
                            required />
 
                     <p class="help-block" ng-show="form.companyState.$error.required && submitted">
@@ -65,10 +66,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.companyZip.$valid && submitted,
                                                     'has-error': form.companyZip.$invalid && submitted }">
-                    <input type="text" ng-model="company.zip" class="form-control" name="companyZip"
+                    <input type="text" ng-model="company.company_zip" class="form-control" name="companyZip"
                            placeholder="Zip" required />
 
                     <p class="help-block" ng-show="form.companyZip.$error.required && submitted">
@@ -76,6 +77,18 @@
                     </p>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-success': form.companyPhone.$valid && submitted,
+                                                    'has-error': form.companyPhone.$invalid && submitted }">
+                    <input type="text" ng-model="company.company_phone" class="form-control" name="companyPhone"
+                           placeholder="Zip" required />
+
+                    <p class="help-block" ng-show="form.companyPhone.$error.required && submitted">
+                        Phone is required
+                    </p>
+                </div>
+            </div>
+
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Upload</button>

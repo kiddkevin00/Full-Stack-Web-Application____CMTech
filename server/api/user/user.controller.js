@@ -89,7 +89,7 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
-    user.populate({path:'projects',select:'-files'},function(err,user){
+    user.populate({path:'link_projects',select:'-files'},function(err,user){
        res.json(user);
     });
   });
