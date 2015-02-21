@@ -44,6 +44,25 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $st
     $scope.viewCreateSubmittalForm = function () {
         $scope.isSubmittalFormView = true;
     };
+
+    $scope.submittal = {submittal_attachments : []};
+    $scope.pickPDF = function() {
+        filepicker.setKey("Ash9bU3IkR1Cf41AiwTAjz");
+        filepicker.pick({
+            extension: '.pdf',
+            container: 'modal',
+            services: ['COMPUTER']
+        }, function (Blob) {
+            $scope.submittal.submittal_attachments.push({
+                pdf_file_name : Blob.filename,
+                pdf_url : Blob.url
+            });
+            $scope.$apply();
+        }, function (FPError) {
+            console.log(FPError.toString());
+        });
+    };
+
     $scope.createSubmittal = function (form) {
         //        console.log($scope.country);
         $http.post("/api/submittals", $scope.createSubmittalForm).success(function (data) {
@@ -55,9 +74,8 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $st
         }).error(function (data) {
 
         });
+    };
 
-
-    }
     $scope.leaveCreateSubmittal = function () {
         $scope.isSubmittalFormView = false;
     };

@@ -8,8 +8,8 @@
             </h4>
         </div>
     </div>
-    <div class="row" ng-repeat="row in user.rows">
-        <div class="col-lg-4" ng-repeat='item in row track by item._id'>
+    <div class="row" ng-repeat="row in user.link_projects | chunk: 3">
+        <div class="col-lg-4" ng-repeat="item in row">
             <a ui-sref="main.home({projectID : item._id})"  class="thumbnail">
                 <img style='width:100%; height:100%' ng-src="{{ item.project_image_url }}" />
             </a>

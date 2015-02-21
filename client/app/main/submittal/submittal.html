@@ -293,19 +293,13 @@
                         <b>Attachments</b>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        abc.pdf
+                <div class="row" ng-repeat="row in submittal.submittal_attachments | chunk:3">
+                    <div class="col-lg-3" ng-repeat="item in row">
+                        {{ item.pdf_file_name }}
                     </div>
-                    <div class="col-lg-3">
-                        abc.pdf
-                    </div>
-                    <div class="col-lg-3">
-                        abc.pdf
-                    </div>
-                    <div class="col-lg-3">
-                        abc.pdf
-                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <button type="button" ng-click="pickPDF()">Attach  a new file</button>
                 </div>
             </div>
         </div>

@@ -2,24 +2,6 @@
 
 angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $modal, socket, Auth, $location) {
     $scope.user = Auth.getCurrentUser();
-    $scope.user.$promise.then(function () {
-        $scope.user.rows = [];
-        var row = [];
-        for (var i = 0; i < $scope.user.link_projects.length; i++) {
-            if (i % 3 === 0) {
-                if (row.length !== 0) {
-                    $scope.user.rows.push(row);
-                    row = [];
-                }
-                row.push($scope.user.link_projects[i]);
-            } else {
-                row.push($scope.user.link_projects[i]);
-            }
-        }
-        if (row.length !== 0) {
-            $scope.user.rows.push(row);
-        }
-    });
 
     $scope.createProjectModal = function (form) {
         var modalInstance = $modal.open({
@@ -82,7 +64,6 @@ angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $moda
                 console.log("Form Invalid");
             }
         };
-
     };
     $scope.cancel = function () {
         $modalInstance.close(false);

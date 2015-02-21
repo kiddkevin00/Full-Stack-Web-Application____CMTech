@@ -9,6 +9,10 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+exports.show_roles = function(req,res) {
+    return res.json(User.schema.path('user_role').enumValues);
+};
+
 /**
  * Get list of users
  * restriction: 'admin'
@@ -89,7 +93,7 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
-    user.populate({path:'link_projects',select:'-files'},function(err,user){
+    user.populate({path:'link_projects'},function(err,user){
        res.json(user);
     });
   });

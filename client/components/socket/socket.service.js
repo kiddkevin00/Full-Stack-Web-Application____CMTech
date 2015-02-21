@@ -18,33 +18,11 @@ angular.module('qiApp')
     return {
       socket: socket,
       syncUpdateUser: function(user){
-        var split = function(number) {
-             var rows = [];
-             var row = [];
-             for(var i =0 ; i < user.link_projects.length ; i++ ) {
-                 if(i%number === 0) {
-                     if(row.length !==0) {
-                         rows.push(row);
-                         row = [];
-                     }
-                     row.push(user.link_projects[i]);
-                 }
-                 else {
-                      row.push(user.link_projects[i]);
-                 }
-             }
-             if(row.length !== 0) {
-                 rows.push(row);
-             }
-             return rows;
-         };
           socket.on('user:save',function(item){
               if(user._id.toString() === item._id.toString()) {
                 user.link_projects = item.link_projects
-                user.rows = split(3, user);
               }
           });
-
       },
 
       /**

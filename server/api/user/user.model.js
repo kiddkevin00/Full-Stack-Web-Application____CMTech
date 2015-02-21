@@ -7,15 +7,24 @@ var crypto = require('crypto');
 var UserSchema = new Schema({
     user_first_name: String,
     user_last_name: String,
-    user_email: { type: String, lowercase: true },
-    role: {
+    user_title: String,
+    user_email: String,
+    user_office_phone: String,
+    user_mobile_phone: String,
+    user_profile_url: String,
+    user_is_admin: Boolean,
+    user_view_home: Boolean,
+    user_view_daily_report: Boolean,
+    user_view_change_order: Boolean,
+    user_view_rfi: Boolean,
+    user_view_submittal: Boolean,
+    user_view_transmittal: Boolean,
+    user_view_punchlist: Boolean,
+    user_view_schedule: Boolean,
+    user_role: {
         type: String,
-        default: 'user'
+        enum: ['Construction Manager', 'Contructor', 'Engineer', 'Owner']
     },
-    hashedPassword: String,
-    provider: String,
-    salt: String,
-    user_phone: String,
     link_company: {
         type: Schema.Types.ObjectId,
         ref: 'Company'
@@ -26,38 +35,44 @@ var UserSchema = new Schema({
             ref: 'Project'
         }
     ],
-    user_profile_url: String
+    role: {
+        type: String,
+        default: 'user'
+    },
+    hashedPassword: String,
+    provider: String,
+    salt: String
 });
 
 /**
  * Virtuals
  */
 UserSchema.virtual('password').set(function (password) {
-        this._password = password;
-        this.salt = this.makeSalt();
-        this.hashedPassword = this.encryptPassword(password);
-    }).get(function () {
-        return this._password;
-    });
+    this._password = password;
+    this.salt = this.makeSalt();
+    this.hashedPassword = this.encryptPassword(password);
+}).get(function () {
+    return this._password;
+});
 
 // Public profile information
 UserSchema.virtual('profile').get(function () {
-        return {
-            'user_first_name': this.user_first_name,
-            'user_last_name': this.user_last_name,
-            'user_phone': this.user_phone,
-            'role': this.role,
-            'user_profile_url': this.user_profile_url
-        };
-    });
+    return {
+        'user_first_name': this.user_first_name,
+        'user_last_name': this.user_last_name,
+        'user_phone': this.user_phone,
+        'role': this.role,
+        'user_profile_url': this.user_profile_url
+    };
+});
 
 // Non-sensitive info we'll be putting in the token
 UserSchema.virtual('token').get(function () {
-        return {
-            '_id': this._id,
-            'role': this.role
-        };
-    });
+    return {
+        '_id': this._id,
+        'role': this.role
+    };
+});
 
 /**
  * Validations
@@ -65,27 +80,27 @@ UserSchema.virtual('token').get(function () {
 
     // Validate empty email
 UserSchema.path('user_email').validate(function (email) {
-        return email.length;
-    }, 'Email cannot be blank');
+    return email.length;
+}, 'Email cannot be blank');
 
 // Validate empty password
 UserSchema.path('hashedPassword').validate(function (hashedPassword) {
-        return hashedPassword.length;
-    }, 'Password cannot be blank');
+    return hashedPassword.length;
+}, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema.path('user_email').validate(function (value, respond) {
-        var self = this;
-        this.constructor.findOne({user_email: value}, function (err, user) {
-            if (err) throw err;
-            if (user) {
-                console.log(self.id, user.id)
-                if (self.id === user.id) return respond(true);
-                return respond(false);
-            }
-            respond(true);
-        });
-    }, 'The specified email address is already in use.');
+    var self = this;
+    this.constructor.findOne({user_email: value}, function (err, user) {
+        if (err) throw err;
+        if (user) {
+            console.log(self.id, user.id)
+            if (self.id === user.id) return respond(true);
+            return respond(false);
+        }
+        respond(true);
+    });
+}, 'The specified email address is already in use.');
 
 var validatePresenceOf = function (value) {
     return value && value.length;
@@ -95,14 +110,14 @@ var validatePresenceOf = function (value) {
  * Pre-save hook
  */
 UserSchema.pre('save', function (next) {
-        if (!this.isNew) return next();
+    if (!this.isNew) return next();
 
     if (!validatePresenceOf(this.hashedPassword)) {
         next(new Error('Invalid password'));
     } else {
         next();
     }
-    });
+});
 
 /**
  * Methods

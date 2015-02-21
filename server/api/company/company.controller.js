@@ -11,10 +11,6 @@ exports.index = function(req, res) {
   });
 };
 
-exports.show_roles = function(req,res) {
-  return res.json(Company.schema.path('company_role').enumValues);
-};
-
 // Get a single company
 exports.show = function(req, res) {
   Company.findById(req.params.id, function (err, company) {
