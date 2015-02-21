@@ -4,13 +4,24 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $st
     $scope.projectID = $stateParams.projectID;
     $scope.isSubmittalFormView = false;
 
+    $scope.getSubmittals = function() {
+        $http.get("/api/submittals").success(function(data) {
+            console.log(data);
+            $scope.submittals = data;
+
+        }).error(function(data) {
+
+        })
+
+    };
+
     // get proejct info
-    $scope.getProjectInfo = function() {
-        $http.get("/api/projects/" + $scope.projectID).success(function(data) {
-            console.log(data)
+    $scope.getProjectInfo = function () {
+        $http.get("/api/projects/" + $scope.projectID).success(function (data) {
+            console.log(data);
             $scope.projectName = data.name;
             $scope.projectAddress = data.address;
-        }).error(function(data) {
+        }).error(function (data) {
 
         })
     };
@@ -20,8 +31,17 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $st
         $scope.isSubmittalFormView = true;
     };
     $scope.createSubmittal = function (form) {
-                console.log($scope.country)
-        // (TODO) HTTP POST REQUEST..
+//        console.log($scope.country);
+        $http.post("/api/submittals", $scope.createSubmittalForm).success(function(data) {
+            console.log(data);
+            $scope.getSubmittals();
+            // (TODO) reset all previous input
+
+            $scope.isSubmittalFormView = false;
+        }).error(function(data) {
+
+        });
+
 
     }
     $scope.leaveCreateSubmittal = function () {

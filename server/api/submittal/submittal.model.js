@@ -4,10 +4,8 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 var SubmittalSchema = new Schema({
     link_project: {
-        type: Schema.Types.ObjectId, ref: 'User'
+        type: Schema.Types.ObjectId, ref: 'Project'
     },
-    submittal_name: String,
-    submittal_info: String,
     submittal_title: String,
     submittal_spec_section: String,
     submittal_number: Number,
@@ -17,17 +15,15 @@ var SubmittalSchema = new Schema({
     submittal_due_date: Date,
     submittal_response_date: Date,
     submittal_tag: String,
-    submittal_issued_by: {
+    submittal_issuer: {
         type: Schema.Types.ObjectId, ref: 'User'
     },
-    submittal_approver: {
+    submittal_approver: [{
         type: Schema.Types.ObjectId, ref: 'User'
-    },
-    submittal_distributions: [
-        {
+    }],
+    submittal_distributions: [{
             type: Schema.Types.ObjectId, ref: 'User'
-        }
-    ],
+    }],
     submittal_description: String,
     submittal_attachments: [String]
 });

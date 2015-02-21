@@ -5,7 +5,7 @@ var user = require('./user.model');
 
 exports.register = function(socket) {
   user.schema.post('save', function (doc) {
-      doc.populate({path: 'projects'}, function (err, user) {
+      doc.populate({path: 'link_projects'}, function (err, user) {
           onSave(socket, user);
       });
   });

@@ -16,14 +16,15 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
     var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
         $rootScope.getCompanies = function () {
             $http.get("api/companies").success(function (data) {
-                console.log(data)
+//                console.log(data)
                 $scope.companies = data;
             }).error(function (data) {
-
+                console.log("Error on Companies GET API")
             });
         };
         $rootScope.getCompanies();
 
+        $scope.company = {};
         $scope.user = {};
         $scope.errors = {};
         $scope.selectImage = function () {
