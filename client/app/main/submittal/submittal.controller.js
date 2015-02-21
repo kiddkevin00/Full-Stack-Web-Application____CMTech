@@ -1,29 +1,43 @@
 'use strict';
 
-angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $stateParams) {
+angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $stateParams, Auth) {
     $scope.projectID = $stateParams.projectID;
     $scope.isSubmittalFormView = false;
+    $scope.projectInfo = {};
 
-    $scope.getSubmittals = function() {
-        $http.get("/api/submittals").success(function(data) {
+    // get project info
+    $scope.getProjectInfo = function () {
+        $http.get("/api/projects/" + $scope.projectID).success(function (data) {
             console.log(data);
-            $scope.submittals = data;
 
-        }).error(function(data) {
+            $scope.projectInfo.projectName = data.project_name;
+            $scope.projectInfo.projectAddress = data.project_address;
+        }).error(function (data) {
 
+        })
+    };
+
+    // get user info
+    $scope.getUserInfo = function () {
+        Auth.getCurrentUser().$promise.then(function (data) {
+            console.log(data);
         })
 
     };
 
-    // get proejct info
-    $scope.getProjectInfo = function () {
-        $http.get("/api/projects/" + $scope.projectID).success(function (data) {
+    $scope.getSubmittals = function () {
+        $http.get("/api/submittals").success(function (data) {
             console.log(data);
-            $scope.projectName = data.name;
-            $scope.projectAddress = data.address;
+            //            console.log(data.submittal_issue_date)
+            //            data.submittal_issue_date = new Date(data.submittal_issue_date);
+            //            console.log(data.submittal_issue_date)
+            //            data.submittal_due_date = new Date(data.submittal_due_date);
+            $scope.submittals = data;
+
         }).error(function (data) {
 
         })
+
     };
 
 
@@ -31,14 +45,14 @@ angular.module('qiApp').controller('SubmittalCtrl', function ($scope, $http, $st
         $scope.isSubmittalFormView = true;
     };
     $scope.createSubmittal = function (form) {
-//        console.log($scope.country);
-        $http.post("/api/submittals", $scope.createSubmittalForm).success(function(data) {
+        //        console.log($scope.country);
+        $http.post("/api/submittals", $scope.createSubmittalForm).success(function (data) {
             console.log(data);
             $scope.getSubmittals();
             // (TODO) reset all previous input
 
             $scope.isSubmittalFormView = false;
-        }).error(function(data) {
+        }).error(function (data) {
 
         });
 

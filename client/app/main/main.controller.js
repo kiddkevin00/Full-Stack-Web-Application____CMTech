@@ -26,6 +26,7 @@ angular.module('qiApp').controller('MainCtrl', function ($scope, $http, socket, 
 
     $scope.projectID = $location.path().substring($location.path().indexOf("/", 1) + 1);
 });
+
 $(document).ready(function () {
     $(document).on('click', ".cmtech-tabs > .nav-tabs a", function () {
         var index = $(this).attr('id').slice(-1);

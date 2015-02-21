@@ -1,4 +1,4 @@
-<div ng-hide="isSubmittalFormView" ng-init="getSubmittals(); getProjectInfo()" class="cmtech-tab-content">
+<div ng-hide="isSubmittalFormView" ng-init="getSubmittals(); getUserInfo(); getProjectInfo();" class="cmtech-tab-content">
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
@@ -46,10 +46,10 @@
                     <td ng-bind="item.submittal_revision"></td>
                     <td ng-bind="item.submittal_title"></td>
                     <td ng-bind="item.submittal_type"></td>
-                    <td ng-bind=""></td>
-                    <td ng-bind=""></td>
-                    <td ng-bind=""></td>
-                    <td ng-bind=""></td>
+                    <td ng-bind="item.submittal_issue_date"></td>
+                    <td ng-bind="item.submittal_due_date"></td>
+                    <td ng-bind="item.submittal_response_date"></td>
+                    <td ng-bind="item.submittal_tag"></td>
                 </tr>
                 </tbody>
             </table>
@@ -117,12 +117,13 @@
         </div>
     </div>
 </div>
+
 <div ng-show="isSubmittalFormView" class="cmtech-tab-content">
     <form name="form" ng-submit="createSubmittal(form)">
         <div class="row">
-            <div class="col-lg-1">
-                <!-- (TODO) margin-top: 800% doesn't work for TV screen -->
-                <button style="margin-top: 800%" type="submit" class="btn btn-primary col-lg-12">
+            <div class="col-lg-2" style="border-right: 1px solid black">
+                <!-- (TODO) margin-top: 320% doesn't work for TV screen -->
+                <button style="margin-top: 320%" type="submit" class="btn btn-primary col-lg-12">
                     Save
                 </button>
                 <button type="button" class="btn btn-danger col-lg-12" ng-click="deleteCreateSubmittal()">
@@ -132,13 +133,13 @@
                     Back
                 </button>
             </div>
-            <div class="col-lg-11">
+            <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="page-header">
-                            <b ng-bind="projectName">ABC Contractors Inc.</b>
+                            <b ng-bind="projectInfo.projectName"></b>
 
-                            <p ng-bind="projectAddress">32W 39th St. New York, NY, 10020</p>
+                            <p ng-bind="projectInfo.projectAddress"></p>
                         </div>
                     </div>
                 </div>
@@ -149,7 +150,8 @@
                         <p>Phone: (646) 151-1234</p>
                     </div>
                     <div class="col-lg-offset-2 col-lg-6">
-                        Project: City of New York, ABC Residental 32 Broadway, New York, NY, 10004
+                        <span ng-bind="projectInfo.projectName"></span>
+                        <span ng-bind="projectInfo.projectAddress"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -181,13 +183,25 @@
                     <div class="cmtech-input-line col-lg-4">
                         <input ng-model="createSubmittalForm.submittal_spec_section" class="col-lg-12" type="text" />
                     </div>
+                    <div class="col-lg-2">
+                        Issue Date
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input ng-model="createSubmittalForm.submittal_issue_date" class="col-lg-12" type="date" />
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
                         Number
                     </div>
                     <div class="cmtech-input-line col-lg-4">
-                        <input ng-model="createSubmittalForm.submittal_number" class="col-lg-12" type="text" />
+                        <input ng-model="createSubmittalForm.submittal_number" class="col-lg-12" type="number" />
+                    </div>
+                    <div class="col-lg-2">
+                        Due Date
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input ng-model="createSubmittalForm.submittal_due_date" class="col-lg-12" type="date" />
                     </div>
                 </div>
                 <div class="row">
@@ -195,7 +209,13 @@
                         Revision
                     </div>
                     <div class="cmtech-input-line col-lg-4">
-                        <input ng-model="createSubmittalForm.submittal_revision" class="col-lg-12" type="text" />
+                        <input ng-model="createSubmittalForm.submittal_revision" class="col-lg-12" type="number" />
+                    </div>
+                    <div class="col-lg-2">
+                        Response Date
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input ng-model="createSubmittalForm.submittal_response_date" class="col-lg-12" type="date" />
                     </div>
                 </div>
                 <div class="row">
@@ -204,6 +224,12 @@
                     </div>
                     <div class="cmtech-input-line col-lg-4">
                         <input ng-model="createSubmittalForm.submittal_type" class="col-lg-12" type="text" />
+                    </div>
+                    <div class="col-lg-2">
+                        Tag
+                    </div>
+                    <div class="cmtech-input-line col-lg-4">
+                        <input ng-model="createSubmittalForm.submittal_tag" class="col-lg-12" type="text" />
                     </div>
                 </div>
                 <div class="row">
@@ -282,5 +308,6 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </div>

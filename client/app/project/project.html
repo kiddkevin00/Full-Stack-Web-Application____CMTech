@@ -8,7 +8,6 @@
             </h4>
         </div>
     </div>
-
     <div class="row" ng-repeat="row in user.rows">
         <div class="col-lg-4" ng-repeat='item in row track by item._id'>
             <a ui-sref="main.home({projectID : item._id})"  class="thumbnail">
@@ -17,9 +16,3 @@
         </div>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p>CMTech</p>
-    </div>
-</footer>

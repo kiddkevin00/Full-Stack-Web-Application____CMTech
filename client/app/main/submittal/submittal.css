@@ -1,3 +1,7 @@
+* {
+    font-size: 98% !important;
+}
+
 .cmtech-input-line {
     border-bottom: 1px solid #000000;
 }
@@ -5,6 +9,7 @@
 .cmtech-input-line input {
     background-color: rgba(255,0,0,0);
     border: none;
+    height: 16px;
 }
 
 .cmtech-input-line input:focus{
