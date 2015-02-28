@@ -29,7 +29,7 @@ var SubmittalSchema = new Schema({
             ref: 'User'
         }
     ],
-    link_distributers: [
+    link_distributors: [
         {
             type: Schema.Types.ObjectId,
             ref: 'User'

@@ -14,7 +14,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
         });
     };
     var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
-        $rootScope.getCompanies();
+        //$rootScope.getCompanies();
         $rootScope.getCompanies = function () {
             $http.get("api/companies").success(function (data) {
 //                console.log(data)
