@@ -20,10 +20,10 @@ angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $moda
     var CreateProjectModalCtrl = function ($scope, $modalInstance) {
         $scope.project = {};
         $scope.errors = {};
-        $scope.selectImage = function () {
+        $scope.pickImage = function () {
             filepicker.setKey("Ash9bU3IkR1Cf41AiwTAjz");
             filepicker.pick({
-                mimetypes: ['image/*', 'text/plain'],
+                mimetypes: ['image/*'],
                 container: 'modal',
                 services: ['COMPUTER']
             }, function (Blob) {
@@ -43,18 +43,9 @@ angular.module('qiApp').controller('ProjectCtrl', function ($scope, $http, $moda
         $scope.createProject = function (form) {
             console.log($scope.form.$error)
             $scope.submitted = true;
-            if (!$scope.project.blob) {
-                alert("Please upload a photo!");
-            } else if (form.$valid) {
-                var data = {
-                    project_name: $scope.project.project_name,
-                    project_number: $scope.project.project_number,
-                    project_address: $scope.project.project_address,
-                    project_city: $scope.project.project_city,
-                    project_zip: $scope.project.project_zip,
-                    project_image_url: $scope.project.blob.url
-                };
-                $http.post("/api/projects", data).success(function (data) {
+            if (form.$valid && $scope.project.blob) {
+                $scope.project.project_image_url = $scope.project.blob.url;
+                $http.post("/api/projects", $scope.project).success(function (data) {
                     $modalInstance.close(true);
                 }).error(function (data) {
 
