@@ -96,8 +96,11 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
     }
   };
   // leave create submittal form view
-  $scope.leaveCreateSubmittal = function(resetForm) {
-    $scope.viewOnly = false;
+  $scope.leaveCreateSubmittalForm = function(resetForm) {
+    if ($scope.viewOnly) {
+      var resetForm = true;
+      $scope.viewOnly = false;
+    }
     if (resetForm) {
       $scope.createSubmittalForm = {
         link_distributors: [],
@@ -161,6 +164,7 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
         $scope.createSubmittalForm.link_distributors.push($scope.distributors[item]._id);
       }
     }
+    $scope.createSubmittalForm.submittal_description +=  $scope.createSubmittalForm._submittal_description2;
     $http.post("/api/submittals", $scope.createSubmittalForm).success(function(data) {
       $scope.createSubmittalForm = {
         link_distributors: [],
