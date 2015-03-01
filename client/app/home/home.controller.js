@@ -24,21 +24,19 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
         $scope.roles = roles;
         $rootScope.getCompanies = function () {
             $http.get("api/companies").success(function (data) {
-//                console.log(data)
                 $scope.companies = data;
             }).error(function (data) {
                 console.log("Error on Companies GET API")
             });
         };
-        $rootScope.getCompanies();
 
         $scope.company = {};
         $scope.user = {};
         $scope.errors = {};
-        $scope.selectImage = function () {
+        $scope.pickImage = function () {
             filepicker.setKey("Ash9bU3IkR1Cf41AiwTAjz");
             filepicker.pick({
-                mimetypes: ['image/*', 'text/plain'],
+                mimetypes: ['image/*'],
                 container: 'modal',
                 services: ['COMPUTER']
             }, function (Blob) {
@@ -57,11 +55,8 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
         };
         $scope.signup = function (form) {
             $scope.submitted = true;
-            if (!$scope.user.blob) {
-                alert("Please upload a photo!")
-            } else if (form.$valid) {
+            if (form.$valid && $scope.user.blob) {
                 if ($scope.user.password === $scope.user.confirmPassword) {
-                    //                    console.log("password matched!")
                     $scope.user.user_profile_url = $scope.user.blob.url;
                     Auth.createUser($scope.user).then(function () {
                         $location.path('/project');
@@ -162,6 +157,4 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
             $modalInstance.close(false);
         };
     };
-
-
 });
