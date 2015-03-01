@@ -1,0 +1,30 @@
+<div class="modal-header">
+<h3 class="modal-title">invite users</h3>
+</div>
+<form class="form" novalidate>
+   <div class='row'>
+    <div class="form-group col-md-4" ng-class="{ 'has-success': form.email.$valid && submitted,
+                                        'has-error': form.email.$invalid && submitted }">
+        <input type="email" ng-model="$parent.email" class="form-control" name="email"
+               placeholder="email" required/>
+        <p class="help-block" ng-show="form.email.$error.required && submitted">
+            email is required
+        </p> 
+        <p class="help-block" ng-show="form.email.$error.email && submitted">
+            email is invalid
+        </p>
+    </div>
+    <div class='col-md-4'></div>
+        <button class='btn btn-primary' ng-click="addEmail()">Add</button>
+   </div>
+   <div class='row' ng-repeat='email in emails track by $index'>
+        <div class='col-md-4'>
+            <span>{{email}}</span>
+        </div>
+        <div class='col-md-4'>
+            <button class='btn btn-danger' ng-click="emails.splice($index,1)">X</button>
+        </div>
+   </div>
+   <button class='btn btn-info' ng-click='createProject()'>submit</button>
+</form>
+

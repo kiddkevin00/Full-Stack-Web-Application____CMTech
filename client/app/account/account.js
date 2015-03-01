@@ -9,7 +9,7 @@ angular.module('qiApp')
         controller: 'LoginCtrl'
       })
       .state('signup', {
-        url: '/signup',
+        url: '/signup/:messageId',
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })

@@ -5,5 +5,5 @@ angular.module('qiApp').config(function ($stateProvider) {
         url: '/project',
         templateUrl: 'app/project/project.html',
         controller: 'ProjectCtrl'
-    });
+    })
 });

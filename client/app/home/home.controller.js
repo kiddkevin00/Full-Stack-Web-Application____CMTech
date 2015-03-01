@@ -5,7 +5,14 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
             size: "md",
-            controller: SignupModalCtrl
+            controller: SignupModalCtrl,
+            resolve : {
+                roles : function(){
+                    return $http.get('/api/users/roles/info').then(function(data){
+                        return data.data;
+                    })
+                }
+            }
         });
         modalInstance.result.then(function (ctrl) {
             if (ctrl) {
@@ -13,7 +20,8 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
             }
         });
     };
-    var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location) {
+    var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location, roles) {
+        $scope.roles = roles;
         $rootScope.getCompanies = function () {
             $http.get("api/companies").success(function (data) {
 //                console.log(data)
@@ -93,17 +101,12 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
     };
 
     var CreateCompanyModalCtrl = function ($rootScope, $scope, $modalInstance) {
+        $scope.submitted = false;
         $scope.company = {};
         $scope.errors = {};
-        $http.get("/api/companies/roles/info").success(function (data) {
-//            console.log(data);
-            $scope.companyRoles = data;
-        }).error(function (data) {
-
-        });
         $scope.createCompany = function (form) {
+            $scope.submitted = true;
             if (form.$valid) {
-                //                console.log($scope.company);
                 // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
                 $http.post("/api/companies", $scope.company).success(function (data) {
                     console.log(data);

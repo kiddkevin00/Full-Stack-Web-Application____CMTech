@@ -94,7 +94,6 @@ UserSchema.path('user_email').validate(function (value, respond) {
     this.constructor.findOne({user_email: value}, function (err, user) {
         if (err) throw err;
         if (user) {
-            console.log(self.id, user.id)
             if (self.id === user.id) return respond(true);
             return respond(false);
         }

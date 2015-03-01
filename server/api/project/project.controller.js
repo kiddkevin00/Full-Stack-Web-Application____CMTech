@@ -16,8 +16,8 @@ exports.index = function(req, res) {
 // Get a single project
 exports.show = function(req, res) {
   Project.findById(req.params.id).populate('link_submittal').exec(function(err, project) {
-    if(err) { return handleError(res, err); }
-    if(!project) { return res.send(404); }
+    if(err) { return res.json(401,err);  }
+    if(!project) { return res.send(401); }
     return res.json(project);
   });
 };
@@ -26,7 +26,7 @@ exports.show = function(req, res) {
 // Creates a new project in the DB.
 exports.create = function(req, res) {
   Project.create(req.body, function(err, project) {
-    if(err) { return handleError(res, err); }
+    if(err) { return res.json(401,err); }
     var userId = req.user._id;
      User.findById(userId, function (err, user) {
          console.log(err , user)
