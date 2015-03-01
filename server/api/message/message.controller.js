@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Message = require('./message.model');
 var moment = require('moment');
 var nodemailer = require('nodemailer');
+var async = require('async');
 
 
 var transporter = nodemailer.createTransport({
@@ -45,30 +46,50 @@ exports.create = function(req, res) {
   var userId = req.body.userId;
   var projectId = req.body.projectId;
   var recipients = req.body.recipients;
-  var message = {
-    message_content: "this is a test",
-    message_deleted: false,
-    message_from_user : userId,
-    message_project : projectId,
-    message_expire_date : moment().add(10, 'd').utc().format()
-  }
-  Message.create(message, function(err,message){
-    var mailOptions = {
-        from: 'qi tang<cmtech46@yahoo.com>', // sender address
-        to: recipients, // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world ✔', // plaintext body
-        html: 'dsdsdddddddd<a href="http://localhost:9000/signup/' + message._id + '">' + "click here to sign up" + '</a>'// html body
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            console.log(error);
-        }else{
-            console.log('Message sent: ' + info.response);
-            return res.send(info.response)
-        }
+  async.each(recipients, function(r,callback) {
+    var message = new Message();
+    message.message_content = "this is a test",
+    message.message_deleted = false,
+    message.message_from_user = userId,
+    message.message_project = projectId,
+    message.message_expire_date = moment().add(10, 'd').utc().format();
+    message.save(function(err, m){
+      if(err) callback(err);
+      m.sendEmail(r,function(err,info){
+        if(err) callback(err);
+        console.log(info)
+        callback();
+      })
     });
+  },function(err){
+    if(err) return res.send(err);
+    return res.json(205,'ok')
   })
+  // var message = {
+  //   message_content: "this is a test",
+  //   message_deleted: false,
+  //   message_from_user : userId,
+  //   message_project : projectId,
+  //   message_expire_date : moment().add(10, 'd').utc().format()
+  // }
+  
+  // Message.create(message, function(err,message){
+  //   var mailOptions = {
+  //       from: 'qi tang<cmtech46@yahoo.com>', // sender address
+  //       to: recipients, // list of receivers
+  //       subject: 'Hello ✔', // Subject line
+  //       text: 'Hello world ✔', // plaintext body
+  //       html: 'dsdsdddddddd<a href="http://localhost:9000/signup/' + message._id + '">' + "click here to sign up" + '</a>'// html body
+  //   };
+  //   transporter.sendMail(mailOptions, function(error, info){
+  //       if(error){
+  //           console.log(error);
+  //       }else{
+  //           console.log('Message sent: ' + info.response);
+  //           return res.send(info.response)
+  //       }
+  //   });
+  // })
 };
 
 // Updates an existing message in the DB.

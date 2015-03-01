@@ -25,6 +25,14 @@
             <button class='btn btn-danger' ng-click="emails.splice($index,1)">X</button>
         </div>
    </div>
-   <button class='btn btn-info' ng-click='createProject()'>submit</button>
+   <div class='row'>
+    <div class='col-md-4'>
+      <button class='btn btn-info' ng-click="$parent.modalURL='/components/modal/modal_inviteuser.html'">back</button>
+    </div>
+    <div class='col-md-4'>
+      <button class='btn btn-info' ng-click='createProject()'>submit</button>
+    </div>
+   </div>
+  
 </form>
 
