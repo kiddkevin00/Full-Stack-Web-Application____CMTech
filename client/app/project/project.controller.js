@@ -84,17 +84,12 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal
                 console.log(FPError.toString());
             });
         };
-        $scope.createProject = function(form) {
+        $scope.createProject = function() {
             $scope.submitted = true;
-            if (form.$valid && $scope.project.blob) {
+            if ($scope.form.$valid && $scope.project.blob) {
                 $scope.project.project_image_url = $scope.project.blob.url;
-                $http.post("/api/projects", $scope.project).success(function(data) {
-                    $modalInstance.close(true);
-                }).error(function(data) {
-
-                });
                 $http.post("/api/companies", $scope.company).success(function(companyID) {
-                    $http.post("/api/projects", data).success(function(data) {
+                    $http.post("/api/projects", $scope.project).success(function(data) {
                         $http.post("/api/tbl_user_company_projects", {
                             link_user: user._id,
                             link_company: companyID,
@@ -110,8 +105,6 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal
                         })
                     });
                 });
-                $modalInstance.close(true);
-
             } else {
                 console.log("Form Invalid");
             }
