@@ -24,7 +24,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Company.create(req.body, function(err, company) {
     if(err) { return handleError(res, err); }
-    return res.json(201, company);
+    return res.json(201, company._id);
   });
 };
 

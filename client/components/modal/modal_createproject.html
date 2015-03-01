@@ -2,12 +2,12 @@
     <h3 class="modal-title">Add a New Project</h3>
 </div>
 <div class="modal-body">
-    <form class="form" name="form" ng-submit="createProject(form)" novalidate>
+    <form class="form" novalidate>
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.projectName.$valid && submitted,
                                                     'has-error': form.projectName.$invalid && submitted }">
-                    <input type="text" ng-model="project.project_name" class="form-control" name="projectName"
+                    <input type="text" ng-model="$parent.project.project_name" class="form-control" name="projectName"
                            placeholder="Project Name" required />
 
                     <p class="help-block" ng-show="form.projectName.$error.required && submitted">
@@ -18,7 +18,7 @@
             <div class="col-lg-6">
                 <div class="form-group" ng-class="{ 'has-success': form.porjectNumber.$valid && submitted,
                                                     'has-error': form.porjectNumber.$invalid && submitted }">
-                    <input type="text" ng-model="project.project_number" class="form-control" name="porjectNumber"
+                    <input type="text" ng-model="$parent.project.project_number" class="form-control" name="porjectNumber"
                            placeholder="Project #" required />
 
                     <p class="help-block" ng-show="form.porjectNumber.$error.required && submitted">
@@ -31,43 +31,52 @@
             <div class="col-lg-12">
                 <div class="form-group" ng-class="{ 'has-success': form.projectAddress.$valid && submitted,
                                                     'has-error': form.projectAddress.$invalid && submitted }">
-                    <input type="text" ng-model="project.project_address" class="form-control" name="projectAddress"
-                           placeholder="Address" required />
-                    <p class="help-block" ng-show="form.projectAddress.$error.required && submitted">
-                        project address is required
-                    </p>
+                    <input type="text" ng-model="$parent.project.project_address" class="form-control" name="projectAddress"
+                           placeholder="Address"
+                           required />
+            <span class="help-block" ng-show="form.projectAddress.required && submitted">
+                project address is required
+            </span>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group" ng-class="{ 'has-success': form.projectType.$valid && submitted,
-                                                    'has-error': form.projectType.$invalid && submitted }">
-                    <input type="text" ng-model="project.project_type" class="form-control" name="projectType"
-                           placeholder="Type" required />
+                <div class="form-group" ng-class="{ 'has-success': form.projectCity.$valid && submitted,
+                                            'has-error': form.projectCity.$invalid && submitted }">
+                    <input type="text" ng-model="$parent.project.project_city" class="form-control" name="projectCity"
+                           placeholder="City" required />
+            <span class="help-block" ng-show="form.projectCity.$error.required && submitted">
+                project city is required
+            </span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group" ng-class="{ 'has-success': form.projectZipcode.$valid && submitted,
+                                                    'has-error': form.projectZipcode.$invalid && submitted }">
+                            <input type="text" ng-model="$parent.project.project_zip" class="form-control" name="projectZipcode"
+                                   placeholder="Zip" required />
 
-                    <p class="help-block" ng-show="form.projectType.$error.required && submitted">
-                        project type is required
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group" ng-class="{ 'has-success': imageSrc && submitted,
+                            <p class="help-block" ng-show="form.projectType.$error.required && submitted">
+                                project type is required
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group" ng-class="{ 'has-success': imageSrc && submitted,
                                                     'has-error': !imageSrc && submitted }">
-                    <input type="button" class="form-control" id="uploadPhoto" name="uploadPhoto" value="Upload Photo"
-                           ng-click="pickImage()" />
+                            <input type="button" class="form-control" id="uploadPhoto" name="uploadPhoto" value="Upload Photo"
+                                   ng-click="pickImage()" />
 
-                    <p class="help-block" ng-show="!imageSrc && submitted">
-                        Profile Picture is required
-                    </p>
-                    <i ng-hide="imageSrc || submitted">No image chosen</i>
-                    <img style='width:200px' ng-src="{{ imageSrc }}" id='up' />
+                            <p class="help-block" ng-show="!imageSrc && submitted">
+                                Profile Picture is required
+                            </p>
+                            <i ng-hide="imageSrc || submitted">No image chosen</i>
+                            <img style='width:200px' ng-src="{{ imageSrc }}" id='up' />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button ng-click="submitProject()" class="btn btn-primary">Next</button>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" >Upload</button>
-            <button type="button" class="btn btn-warning" ng-click="cancel()">Back</button>
         </div>
     </form>
 </div>

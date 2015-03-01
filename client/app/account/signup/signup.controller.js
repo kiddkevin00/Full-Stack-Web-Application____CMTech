@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('qiApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, Auth, $location,$stateParams, $http) {
     $scope.user = {};
     $scope.errors = {};
+   console.log($stateParams.messageId)
+
+   $http.get("/api/messages/"+ $stateParams.messageId).success(function(data){
+
+   });
 
     $scope.register = function(form) {
       $scope.submitted = true;
