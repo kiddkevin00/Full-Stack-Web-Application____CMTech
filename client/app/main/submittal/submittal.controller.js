@@ -127,14 +127,29 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
       container: 'modal',
       services: ['COMPUTER']
     }, function(Blob) {
-      $scope.createSubmittalForm.submittal_attachments.push({
-        pdf_file_name: Blob.filename,
-        pdf_url: Blob.url
+      $scope.$apply(function() {
+        $scope.createSubmittalForm.submittal_attachments.push({
+          pdf_file_name: Blob.filename,
+          pdf_url: Blob.url
+        });
       });
-      $scope.$apply();
     }, function(FPError) {
       console.log(FPError.toString());
     });
+  };
+  $scope.removeDistributorList = function(distributor) {
+    for (var item in $scope.distributors) {
+      if ($scope.distributors[item]._id === distributor._id) {
+        $scope.distributors.splice(item, 1);
+      }
+    }
+  };
+  $scope.removeAttachmentList = function(attachment) {
+    for (var item in $scope.createSubmittalForm.submittal_attachments) {
+      if ($scope.createSubmittalForm.submittal_attachments[item].pdf_url === attachment.pdf_url) {
+        $scope.createSubmittalForm.submittal_attachments.splice(item, 1);
+      }
+    }
   };
   // submit submittal form
   $scope.createSubmittal = function(form) {

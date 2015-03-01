@@ -279,6 +279,9 @@
             <div ng-repeat="item in distributors track by $index" class="row">
               <b>{{ item.user_first_name + ' ' + item.user_last_name }}</b>&nbsp;
               {{ item.user_email }}
+              <button ng-click="removeDistributorList(item)" type="button" class="btn btn-danger btn-xs">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
             </div>
           </div>
         </div>
@@ -309,8 +312,11 @@
           <div class="col-lg-9">
             <div class="row" ng-repeat="row in createSubmittalForm.submittal_attachments | chunk: 3">
               <div class="col-lg-4" ng-repeat="item in row">
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;
                 {{ item.pdf_file_name }}
+                <button ng-click="removeAttachmentList(item)" type="button" class="btn btn-danger btn-xs">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
               </div>
             </div>
           </div>
