@@ -114,7 +114,17 @@
                          Profile Picture is required
                      </p>
                      <i ng-hide="imageSrc || submitted">No image chosen</i>
-                     <!--<img style='width:200px' ng-src="{{ imageSrc }}" id='up' />-->
+                     <table class='table table-bordered' ng-show="imageSrc || submitted">
+                      <tr class="active">
+                        <td>file name</td>
+                        <td>size</td>
+                      </tr>
+                      <tr class="success">
+                        <td>{{user.blob.filename}}</td>
+                        <td>{{user.blob.size}}</td>
+                      </tr>
+                     </table>
+                     <!-- <img style='width:200px' ng-src="{{ imageSrc }}" id='up' /> -->
                  </div>
              </div>
          </div>

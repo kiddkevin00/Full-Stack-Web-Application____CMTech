@@ -81,30 +81,52 @@ angular.module('qiApp')
       if (form.$valid && $scope.user.blob) {
           if ($scope.user.password === $scope.user.confirmPassword) {
               $scope.user.user_profile_url = $scope.user.blob.url;
-              $http.post('/api/companies/' + $scope.projectId, $scope.company).then(function(company){
+              if($scope.showCompanyForm === 'no') {
                 $scope.user.link_projects = [];
                 $scope.user.link_projects.push($scope.projectId);
-                  Auth.createUser($scope.user).then(function (user) {
-                      $http.post('/api/tbl_user_company_projects',{
-                        link_user :  Auth.getCurrentUser()._id,
-                        link_company : company._id,
-                        link_project : $scope.projectId
-                      }).success(function(){
-                          $location.path('/project');
-                      });
-                  }).catch(function (err) {
-                      err = err.data;
-                      $scope.errors = {};
-                      // Update validity of form fields that match the mongoose errors
-                      angular.forEach(err.errors, function (error, field) {
-                          form[field].$setValidity('mongoose', false);
-                          $scope.errors[field] = error.message;
-                      });
-                  });
-              }).catch(function(err){
-                form.companyName.$setValidity('mongoose', false);
-                $scope.errors.companyName = err.data;
-              });
+                Auth.createUser($scope.user).then(function (user) {
+                    $http.post('/api/tbl_user_company_projects',{
+                      link_user :  Auth.getCurrentUser()._id,
+                      link_company : $scope.company.selected._id,
+                      link_project : $scope.projectId
+                    }).success(function(){
+                        $location.path('/project');
+                    });
+                }).catch(function (err) {
+                    err = err.data;
+                    $scope.errors = {};
+                    // Update validity of form fields that match the mongoose errors
+                    angular.forEach(err.errors, function (error, field) {
+                        form[field].$setValidity('mongoose', false);
+                        $scope.errors[field] = error.message;
+                    });
+                });
+              } else {
+                $http.post('/api/companies/' + $scope.projectId, $scope.company).then(function(company){
+                  $scope.user.link_projects = [];
+                  $scope.user.link_projects.push($scope.projectId);
+                    Auth.createUser($scope.user).then(function (user) {
+                        $http.post('/api/tbl_user_company_projects',{
+                          link_user :  Auth.getCurrentUser()._id,
+                          link_company : company._id,
+                          link_project : $scope.projectId
+                        }).success(function(){
+                            $location.path('/project');
+                        });
+                    }).catch(function (err) {
+                        err = err.data;
+                        $scope.errors = {};
+                        // Update validity of form fields that match the mongoose errors
+                        angular.forEach(err.errors, function (error, field) {
+                            form[field].$setValidity('mongoose', false);
+                            $scope.errors[field] = error.message;
+                        });
+                    });
+                }).catch(function(err){
+                  form.companyName.$setValidity('mongoose', false);
+                  $scope.errors.companyName = err.data;
+                });
+              }
           }
       }
         // $scope.submitted = true;
