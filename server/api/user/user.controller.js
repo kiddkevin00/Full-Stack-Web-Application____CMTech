@@ -15,7 +15,7 @@ exports.show_roles = function(req,res) {
 
 /**
  * Get list of users
- * restriction: 'admin'
+ * restriction: 'user'
  */
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {

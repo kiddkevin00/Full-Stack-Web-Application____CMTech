@@ -1,46 +1,51 @@
 <div class="modal-header">
-<h3 class="modal-title">Add a New Company</h3>
+    <h3 class="modal-title">Add a New Company</h3>
 </div>
 <div class="modal-body">
     <form class="form" name="form" novalidate>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group" ng-class="{ 'has-success': form.companyName.$valid && submitted,
-                                                'has-error': form.companyName.$invalid && submitted }">
-                <input type="text" ng-model="$parent.company.company_name" class="form-control" name="companyName"
-                       placeholder="Company Name" mongoose-error required/>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-success': form.companyName.$valid && submitted,
+                                                    'has-error': form.companyName.$invalid && submitted }">
+                    <input type="text" ng-model="$parent.company.company_name" class="form-control" name="companyName"
+                           placeholder="Company Name" mongoose-error required />
 
-                <p class="help-block" ng-show="form.companyName.$error.required && submitted">
-                    Company name is required
-                </p>
+                    <p class="help-block" ng-show="form.companyName.$error.required && submitted">
+                        Company name is required
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group" ng-class="{ 'has-success': form.companyTitle.$valid && submitted,
+            <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-success': form.companyTitle.$valid && submitted,
                                                 'has-error': form.companyTitle.$invalid && submitted }">
-                <input type="text" ng-model="$parent.company.company_title" class="form-control" name="companyTitle"
-                       placeholder="Title" required/>
-                <p class="help-block" ng-show="form.companyTitle.required && submitted">
-                    Company title is required
-                </p>
+                    <input type="text" ng-model="$parent.company.company_title" class="form-control" name="companyTitle"
+                           placeholder="Title" required />
+
+                    <p class="help-block" ng-show="form.companyTitle.required && submitted">
+                        Company title is required
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-class="{ 'has-success': form.companyAddress.$valid && submitted,
+                                                    'has-error': form.companyAddress.$invalid && submitted }">
+                    <input type="text" ng-model="$parent.company.company_address" class="form-control" name="companyAddress"
+                           placeholder="Address" required />
+
+                    <p class="help-block" ng-show="form.companyAddress.$error.required && submitted">
+                        Company city is required
+                    </p>
+                </div>
             </div>
         </div>
-    
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-group" ng-class="{ 'has-success': form.companyAddress.$valid && submitted,
-                                                'has-error': form.companyAddress.$invalid && submitted }">
-                <input type="text" ng-model="$parent.company.company_address" class="form-control" name="companyAddress" placeholder="Address" required/>
-                <p class="help-block" ng-show="form.companyAddress.$error.required && submitted">
-                    Company city is required
-                </p>
-            </div>
-        </div>
-    </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-warning" ng-click="$parent.modalURL='/components/modal/modal_createproject.html'">Back</button>
-            <button  class="btn btn-primary" ng-click="submitCompany()">Next</button>
+            <button type="button" class="btn btn-warning"
+                    ng-click="$parent.modalURL='/components/modal/modal_createproject.html'">Back
+            </button>
+            <button class="btn btn-primary" ng-click="submitCompany()">Next</button>
         </div>
     </form>
 </div>

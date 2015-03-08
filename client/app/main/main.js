@@ -36,7 +36,7 @@ angular.module('qiApp').config(function ($stateProvider) {
         controller: 'PunchlistCtrl'
     }).state('main.schedule', {
         url: '/:projectID',
-        templateUrl: '/app/main/schedule/schedule.html',
+        templateUrl: '/app/main/directory/directory.html',
         controller: 'ScheduleCtrl'
     })
 });
