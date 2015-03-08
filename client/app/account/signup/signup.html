@@ -95,11 +95,35 @@
              <div class="col-lg-6">
                  <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
                                                      'has-error': form.phoneNumber.$invalid && submitted }">
-                     <input type="text" ng-model="user.user_phone" class="form-control" id="phoneNumber" name="phoneNumber"
-                            placeholder="Phone" required />
+                     <input type="text" ng-model="user.user_mobile_phone" class="form-control" id="phoneNumber" name="phoneNumber"
+                            placeholder="Mobile Phone" required />
 
                      <p class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
-                         Phone number is required
+                         Mobile Phone number is required
+                     </p>
+                 </div>
+             </div>
+             <div class="col-lg-6">
+                 <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
+                                                     'has-error': form.phoneNumber.$invalid && submitted }">
+                     <input type="text" ng-model="user.user_office_phone" class="form-control" id="phoneNumber" name="phoneNumber"
+                            placeholder="Office Phone" required />
+
+                     <p class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
+                         Office Phone number is required
+                     </p>
+                 </div>
+             </div>
+          </div>
+          <div class='row'>
+             <div class="col-lg-6">
+                 <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
+                                                     'has-error': form.phoneNumber.$invalid && submitted }">
+                     <input type="text" ng-model="user.user_title" class="form-control" id="phoneNumber" name="phoneNumber"
+                            placeholder="title" required />
+
+                     <p class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
+                         title is required
                      </p>
                  </div>
              </div>

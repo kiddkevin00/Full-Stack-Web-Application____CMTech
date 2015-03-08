@@ -56,9 +56,23 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
   // persons section
   $scope.projectUsers = [];
   $scope.getProjectUsers = function() {
-    $http.get("/api/users").success(function(data) {
-      $scope.projectUsers = data;
-
+    $http.get("/api/tbl_user_company_projects/project/" + $scope.projectID ).success(function(data) {
+      $scope.projectAllInfo = data;
+      $scope.companies = {};
+      data.forEach(function(d){
+        if(!$scope.companies[d.link_company._id]) {
+          var temp = [];
+          temp.push(d.link_user);
+          $scope.companies[d.link_company._id] = {
+            company_name : d.link_company.company_name,
+            company_title : d.link_company.company_title,
+            company_address : d.link_company.company_address,
+            users : temp
+          }
+        } else {
+          $scope.companies[d.link_company._id].users.push(d.link_user);
+        }
+      });
     }).error(function(data) {
 
     });
@@ -70,16 +84,20 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
     }
 
   };
-  $scope.updatePersonModal = function(event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  $scope.updatePersonModal = function(user) {
+    // if (event) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
     var modalInstance = $modal.open({
       templateUrl: "/components/modal/modal_updateuser.html",
       size: "md",
       controller: UpdatePersonModalCtrl,
-      resolve: {}
+      resolve: {
+        user : function(){
+          return user;
+        }
+      }
     });
     modalInstance.result.then(function(ctrl) {
       if (ctrl) {
@@ -87,7 +105,8 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
       }
     });
   };
-  var UpdatePersonModalCtrl = function($scope, $modalInstance) {
+  var UpdatePersonModalCtrl = function($scope, $modalInstance,user) {
+    $scope.user = user;
     $scope.createPerson = function() {
 
     };
