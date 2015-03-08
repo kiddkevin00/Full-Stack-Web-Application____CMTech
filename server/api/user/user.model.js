@@ -8,7 +8,7 @@ var UserSchema = new Schema({
   user_first_name: String,
   user_last_name: String,
   user_title: String,
-  user_email: String,
+  user_email:  { type : String , lowercase : true , trim : true},
   user_office_phone: String,
   user_mobile_phone: String,
   user_profile_url: String,
@@ -106,6 +106,7 @@ UserSchema.path('hashedPassword').validate(function(hashedPassword) {
 UserSchema.path('user_email').validate(function(value, respond) {
   var self = this;
   this.constructor.findOne({user_email: value}, function(err, user) {
+    console.log(user)
     if (err) throw err;
     if (user) {
       console.log(self.id, user.id)

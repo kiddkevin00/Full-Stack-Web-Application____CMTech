@@ -9,4 +9,5 @@ var CompanySchema = new Schema({
     company_address: String
 });
 
+
 module.exports = mongoose.model('Company', CompanySchema);

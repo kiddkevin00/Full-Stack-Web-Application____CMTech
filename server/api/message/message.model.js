@@ -2,10 +2,25 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var nodemailer = require('nodemailer');
+var _ = require("lodash");
+var transporter = nodemailer.createTransport({
+    service: 'yahoo',
+    auth: {
+        user: 'cmtech46@yahoo.com',
+        pass: 'cmtech123'
+    }
+});
 
 var MessageSchema = new Schema({
   //name: String,
-  message_content: String,
+  message_first_name : String,
+  message_last_name : String,
+  message_title : String,
+  message_company : String,
+  message_office_phone : String,
+  message_mobile_phone : String,
+  message_email : { type : String , lowercase : true , trim : true},
   message_deleted: Boolean,
   message_from_user :{ type: Schema.Types.ObjectId,
         ref: 'User'},
@@ -20,11 +35,24 @@ var MessageSchema = new Schema({
   message_create_date : {
   	type : Date,
     default: Date.now
-  },
-  message_expire_date : {
-  	type: Date,
-  	expires: 0
   }
 });
+
+
+MessageSchema.methods = {
+  sendEmail : function(recipient_email, callback){
+    var mailOptions = {
+        from: 'qi tang<cmtech46@yahoo.com>', // sender address
+        to: recipient_email, // list of receivers
+        subject: 'Hello ✔', // Subject line
+        text: 'Hello world ✔', // plaintext body
+        html: 'dsdsdddddddd<a href="http://localhost:9000/signup/' + this._id + '">' + "click here to sign up" + '</a>'// html body
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+       if(error) return callback(error);
+       return callback(null,info)
+    });
+  }
+}
 
 module.exports = mongoose.model('Message', MessageSchema);

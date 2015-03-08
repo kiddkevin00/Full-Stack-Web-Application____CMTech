@@ -2,7 +2,11 @@
 
 var _ = require('lodash');
 var Company = require('./company.model');
-
+var User = require('../user/user.model');
+var TblUserCompanyProject = require('../tbl_user_company_project/tbl_user_company_project.model');
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
 // Get list of companys
 exports.index = function(req, res) {
   Company.find(function (err, companys) {
@@ -22,10 +26,46 @@ exports.show = function(req, res) {
 
 // Creates a new company in the DB.
 exports.create = function(req, res) {
-  Company.create(req.body, function(err, company) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, company._id);
-  });
+ var newCompany = new Company(req.body);
+ newCompany.save(function(err, company) {
+   if (err) return validationError(res, err);
+   res.json(company);
+ });
+};
+
+
+exports.checkCreate = function(req, res) {
+ var newCompany = new Company(req.body);
+ var projectId = req.params.projectId;
+ if(!projectId) return res.send("invalid projectid");
+ Company.find({company_name : newCompany.company_name}).select("_id").exec(function(err, docs){
+    if(err) { return handleError(res, err); };
+    if(docs.length !== 0) {
+      TblUserCompanyProject.find({link_project : projectId}).select("link_company").exec(function(err, items){
+        console.log(docs,items)
+        for(var i = 0 ; i < docs.length ; i++) {
+          for(var j =0 ; j <items.length ; j++) {
+            console.log(docs[i]._id , items[j].link_company)
+            if(docs[i]._id.toString() === items[j].link_company.toString()) return res.json(422, 'Company name used in the company');
+          }
+        } 
+          Company.create(newCompany, function(err, company){
+          if(err) { return handleError(res, err); };
+          return res.json(company);
+        })
+      });
+    } else {
+      Company.create(newCompany, function(err, company){
+        if(err) { return handleError(res, err); };
+        return res.json(company);
+      })
+    }
+ });
+ // TblUserCompanyProject.find
+ // newCompany.save(function(err, company) {
+ //   if (err) return validationError(res, err);
+ //   res.json(company);
+ // });
 };
 
 // Updates an existing company in the DB.
