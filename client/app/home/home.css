@@ -1,17 +1,17 @@
 .jumbotron-background {
-    background: url('/assets/images/jumbotron-background.jpeg') no-repeat;
+    background: url('/assets/images/jumbotron-background.jpg') no-repeat;
     background-size: 100% 100%;
-    height: 400px;
+    height: 350px;
+    margin-top: -51px;
 }
 
 .jumbotron-background .row {
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 .cmtech-offset {
     margin-left: 0.3%
 }
-
 
 /* ================================== Default CSS ====================================== */
 .thing-form {
