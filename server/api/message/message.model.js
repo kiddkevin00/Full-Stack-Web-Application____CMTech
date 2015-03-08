@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 var nodemailer = require('nodemailer');
+var _ = require("lodash");
 var transporter = nodemailer.createTransport({
     service: 'yahoo',
     auth: {
@@ -13,7 +14,13 @@ var transporter = nodemailer.createTransport({
 
 var MessageSchema = new Schema({
   //name: String,
-  message_content: String,
+  message_first_name : String,
+  message_last_name : String,
+  message_title : String,
+  message_company : String,
+  message_office_phone : String,
+  message_mobile_phone : String,
+  message_email : { type : String , lowercase : true , trim : true},
   message_deleted: Boolean,
   message_from_user :{ type: Schema.Types.ObjectId,
         ref: 'User'},
@@ -28,10 +35,6 @@ var MessageSchema = new Schema({
   message_create_date : {
   	type : Date,
     default: Date.now
-  },
-  message_expire_date : {
-  	type: Date,
-  	expires: 0
   }
 });
 

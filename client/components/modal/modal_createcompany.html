@@ -8,7 +8,7 @@
             <div class="form-group" ng-class="{ 'has-success': form.companyName.$valid && submitted,
                                                 'has-error': form.companyName.$invalid && submitted }">
                 <input type="text" ng-model="$parent.company.company_name" class="form-control" name="companyName"
-                       placeholder="Company Name" required/>
+                       placeholder="Company Name" mongoose-error required/>
 
                 <p class="help-block" ng-show="form.companyName.$error.required && submitted">
                     Company name is required

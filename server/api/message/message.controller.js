@@ -5,7 +5,7 @@ var Message = require('./message.model');
 var moment = require('moment');
 var nodemailer = require('nodemailer');
 var async = require('async');
-
+var User = require('../user/user.model');
 
 var transporter = nodemailer.createTransport({
     service: 'yahoo',
@@ -47,20 +47,25 @@ exports.create = function(req, res) {
   var projectId = req.body.projectId;
   var recipients = req.body.recipients;
   async.each(recipients, function(r,callback) {
-    var message = new Message();
-    message.message_content = "this is a test",
-    message.message_deleted = false,
-    message.message_from_user = userId,
-    message.message_project = projectId,
-    message.message_expire_date = moment().add(10, 'd').utc().format();
-    message.save(function(err, m){
+    User.findOne({user_email : r}, function(err, u){
       if(err) callback(err);
-      m.sendEmail(r,function(err,info){
-        if(err) callback(err);
-        console.log(info)
-        callback();
-      })
-    });
+      if(!u) {
+        var message = new Message();
+        message.message_email = r,
+        message.message_deleted = false,
+        message.message_from_user = userId,
+        message.message_project = projectId,
+        message.message_expire_date = moment().add(10, 'd').utc().format();
+        message.save(function(err, m){
+          if(err) callback(err);
+          m.sendEmail(r,function(err,info){
+            if(err) callback(err);
+            console.log(info)
+            callback();
+          })
+        });
+      }
+    })
   },function(err){
     if(err) return res.send(err);
     return res.json(205,'ok')

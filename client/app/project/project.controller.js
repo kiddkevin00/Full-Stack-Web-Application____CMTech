@@ -88,11 +88,11 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal
             $scope.submitted = true;
             if ($scope.form.$valid && $scope.project.blob) {
                 $scope.project.project_image_url = $scope.project.blob.url;
-                $http.post("/api/companies", $scope.company).success(function(companyID) {
+                $http.post("/api/companies", $scope.company).success(function(com) {
                     $http.post("/api/projects", $scope.project).success(function(data) {
                         $http.post("/api/tbl_user_company_projects", {
                             link_user: user._id,
-                            link_company: companyID,
+                            link_company: com._id,
                             link_project: data._id
                         }).success(function() {
                             $http.post("/api/messages", {

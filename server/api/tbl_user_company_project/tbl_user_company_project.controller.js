@@ -13,7 +13,31 @@ exports.index = function(req, res) {
 
 // Get a single tbl_user_company_project
 exports.show = function(req, res) {
-  TblUserCompanyProject.findById(req.params.id, function (err, tbl_user_company_project) {
+  TblUserCompanyProject.findById(req.params.id).populate("link_user link_company link_subcompany link_project").exec(function (err, tbl_user_company_project) {
+    if(err) { return handleError(res, err); }
+    if(!tbl_user_company_project) { return res.send(404); }
+    return res.json(tbl_user_company_project);
+  });
+};
+
+exports.showByProject = function(req, res) {
+  TblUserCompanyProject.find({link_project : req.params.id}).populate("link_user link_company link_subcompany link_project").exec( function (err, tbl_user_company_project) {
+    if(err) { return handleError(res, err); }
+    if(!tbl_user_company_project) { return res.send(404); }
+    return res.json(tbl_user_company_project);
+  });
+};
+
+exports.showByCompany = function(req, res) {
+  TblUserCompanyProject.find({link_company : req.params.id}).populate("link_user link_company link_subcompany link_project").exec( function (err, tbl_user_company_project) {
+    if(err) { return handleError(res, err); }
+    if(!tbl_user_company_project) { return res.send(404); }
+    return res.json(tbl_user_company_project);
+  });
+};
+
+exports.showByUser = function(req, res) {
+  TblUserCompanyProject.find({link_user : req.params.id}).populate("link_user link_company link_subcompany link_project").exec( function (err, tbl_user_company_project) {
     if(err) { return handleError(res, err); }
     if(!tbl_user_company_project) { return res.send(404); }
     return res.json(tbl_user_company_project);
