@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <h3 class="modal-title">PERSONS</h3>
+</div>
+<div class="modal-body">
+  <form class="form" name="form" novalidate>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_first_name" class="form-control" name="firstName"
+                 placeholder="Name" required />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_last_name" class="form-control" name="lastName"
+                 placeholder="Last Name" required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_email" class="form-control" name="email" placeholder="Email" required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <input type="text" ng-model="user.title" class="form-control" name="title" placeholder="Title" required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_office_phone" class="form-control" name="officePhone" placeholder="Office No." required />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_mobile_phone" class="form-control" name="mobilePhone" placeholder="Mobile No." required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="form-group">
+          Company
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Add a New Company" required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          Make this User Admin
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="form-group">
+          <input type="text" ng-model="user.user_is_admin" class="form-control" name="isAdmin" placeholder="Yes/No" required />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="form-group">
+          privileges
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <div class="form-group">
+          <input type="text" ng-model="user.privileges" class="form-control" name="privileges" placeholder="Dropdown" required />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="createPerson()">Save</button>
+      <button type="button" class="btn btn-warning" ng-click="cancel()">Back</button>
+    </div>
+  </form>
+</div>
+
