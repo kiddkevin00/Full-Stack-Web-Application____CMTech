@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/report/report.socket').register(socket);
   require('../api/message/message.socket').register(socket);
   require('../api/tbl_user_company_project/tbl_user_company_project.socket').register(socket);
   require('../api/company/company.socket').register(socket);
