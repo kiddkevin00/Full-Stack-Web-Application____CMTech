@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $http, $modal, $location, Auth) {
+    // sign up modal
     $scope.signupModal = function() {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
@@ -20,6 +21,7 @@ angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $htt
             }
         });
     };
+    // sign up controller
     var SignupModalCtrl = function($scope, $modalInstance, Auth, $location, roles) {
         $scope.roles = roles;
         $rootScope.getCompanies = function() {
@@ -80,47 +82,8 @@ angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $htt
         $scope.cancel = function() {
             $modalInstance.close(false);
         };
-
-        $scope.createCompanyModal = function() {
-            var modalInstance = $modal.open({
-                templateUrl: "/components/modal/modal_createcompany.html",
-                size: "md",
-                controller: CreateCompanyModalCtrl
-            });
-            modalInstance.result.then(function(ctrl) {
-                if (ctrl) {
-                    console.log("modal closed");
-                }
-            });
-        };
     };
-    var CreateCompanyModalCtrl = function($rootScope, $scope, $modalInstance) {
-        $scope.submitted = false;
-        $scope.company = {};
-        $scope.errors = {};
-        $scope.createCompany = function(form) {
-            $scope.submitted = true;
-            if (form.$valid) {
-                // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
-                $http.post("/api/companies", $scope.company).success(function(data) {
-                    console.log(data);
-                    $rootScope.getCompanies();
-                    $modalInstance.close(true);
-
-                }).error(function(data) {
-
-                });
-                // (TODO) UPDATE ROOTSCOPE FOR COMPANY LIST
-
-            } else {
-                console.log("Form Invalid");
-            }
-        };
-        $scope.cancel = function() {
-            $modalInstance.close(false);
-        };
-    };
-
+    // login modal
     $scope.loginModal = function() {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_login.html",
@@ -133,6 +96,7 @@ angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $htt
             }
         });
     };
+    // login modal controller
     var LoginModalCtrl = function($scope, $modalInstance, Auth, $location) {
         $scope.user = {};
         $scope.errors = {};

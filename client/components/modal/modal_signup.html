@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col-lg-6" ng-class="{ 'has-success': form.user_role.$valid && submitted,'has-error': form.user_role.$invalid && submitted }" >
                 <select ng-model="user.user_role" class="form-control" name="user_role" ng-options="item for item in roles" required>
-                    <option value="">--choose a role--</option>
+                    <option value="">-- choose role --</option>
                 </select>
                 <span class="help-block" ng-show="form.user_role.$invalid && submitted">
                     user role is required
@@ -120,28 +120,6 @@
                 </div>
             </div>
         </div>
-      <!--   <div class="row">
-            <div class="col-lg-7">
-                <label>Please select predefined company here</label>
-                <div class="form-group has-error">
-                    <ui-select ng-model="company.selected" theme="selectize" ng-disabled="disabled"
-                               style="width: 300px;">
-                        <ui-select-match placeholder="Select or search a company in the list...">
-                            {{ $select.selected.company_name }}
-                        </ui-select-match>
-                        <ui-select-choices repeat="company in $parent.companies | filter: $select.search">
-                            <span ng-bind-html="company.company_name | highlight: $select.search"></span>
-                            <small ng-bind-html="company.company_address | highlight: $select.search"></small>
-                        </ui-select-choices>
-                    </ui-select>
-                    <span>Didn't find your company?</span>
-                    <button ng-click="createCompanyModal()" type="button" class="btn btn-link">Create New Company</button>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                
-            </div>
-        </div> -->
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Sign Up</button>
             <button type="button" class="btn btn-warning" ng-click="cancel()">Back</button>
