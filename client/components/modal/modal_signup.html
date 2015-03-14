@@ -41,8 +41,10 @@
                     {{ errors.user_email }}
                 </span>
             </div>
-            <div class="form-group col-lg-6" ng-class="{ 'has-success': form.user_role.$valid && submitted,'has-error': form.user_role.$invalid && submitted }" >
-                <select ng-model="user.user_role" class="form-control" name="user_role" ng-options="item for item in roles" required>
+            <div class="form-group col-lg-6"
+                 ng-class="{ 'has-success': form.user_role.$valid && submitted,'has-error': form.user_role.$invalid && submitted }">
+                <select ng-model="user.user_role" class="form-control" name="user_role" ng-options="item for item in roles"
+                        required>
                     <option value="">-- choose role --</option>
                 </select>
                 <span class="help-block" ng-show="form.user_role.$invalid && submitted">
@@ -135,12 +137,11 @@
                     <input type="button" class="form-control" id="uploadPhoto" name="uploadPhoto"
                            value="Upload Photo"
                            ng-click="pickImage()" />
-
+                    <i ng-hide="imageSrc || submitted">No image chosen</i>
+                    <!--<img style='width:200px' ng-src="{{ imageSrc }}" />-->
                     <p class="help-block" ng-show="!imageSrc && submitted">
                         Profile Picture is required
                     </p>
-                    <i ng-hide="imageSrc || submitted">No image chosen</i>
-                    <!--<img style='width:200px' ng-src="{{ imageSrc }}" id='up' />-->
                 </div>
             </div>
         </div>
