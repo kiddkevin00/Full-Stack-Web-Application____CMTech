@@ -11,22 +11,43 @@
                                                   style="width:79%; margin-top:-1%;" /></a>
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <div class="btn-group" style="position:absolute; width:100%; left:50%; margin-top:0.8%;">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <div class="btn-group dropdown" style="position:absolute; left:50%; margin-top:0.8%;">
+                <button type="button" class="btn btn-default dropdown-toggle clear">
                     Project List<span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" dropdown-menu>
                     <li ng-repeat="item in getCurrentUser().link_projects track by item._id">
                         <a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>
                     </li>
                 </ul>
             </div>
-
             <ul class="nav navbar-nav navbar-right">
                 <li><a style="cursor: pointer"><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
                 <li><a style="cursor: pointer"><img src="/assets/images/notification.ico" /></span></a></li>
-                <li><a style="cursor: pointer"><img ng-src="{{ getCurrentUser().user_profile_url }}" /></a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle clear">
+                        <img ng-src="{{ getCurrentUser().user_profile_url }}" />
+                    </a>
+                    <ul class="dropdown-menu" dropdown-menu>
+                        <li>
+                            <a ng-click="action1()">Action1</a>
+                        </li>
+                        <li>
+                            <a ng-click="action2()">Action2</a>
+                        </li>
+                        <li>
+                            <a ng-click="action3()">Action3</a>
+                        </li>
+                        <li>
+                            <a ng-click="action4()">Action4</a>
+                        </li>
+                        <li>
+                            <a ng-click="action5()">Action5</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+
         </div>
     </div>
 </div>
