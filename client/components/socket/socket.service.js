@@ -24,7 +24,9 @@ angular.module('qiApp')
               }
           });
       },
+       syncUpdateSingle: function(modelName, ) {
 
+       }
       /**
        * Register listeners to sync an array with updates on a model
        *

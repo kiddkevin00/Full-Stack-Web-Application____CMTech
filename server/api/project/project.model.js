@@ -18,10 +18,10 @@ var ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Home'
     },
-    link_daily_report: {
+    link_daily_report: [{
         type: Schema.Types.ObjectId,
-        ref: 'DailyReport'
-    },
+        ref: 'Report'
+    }],
     link_change_order: {
         type: Schema.Types.ObjectId,
         ref: 'ChangeOrder'
