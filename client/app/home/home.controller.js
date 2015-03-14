@@ -1,31 +1,31 @@
 'use strict';
 
-angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $http, $modal, $location, Auth) {
-    $scope.signupModal = function () {
+angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $http, $modal, $location, Auth) {
+    $scope.signupModal = function() {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_signup.html",
             size: "md",
             controller: SignupModalCtrl,
-            resolve : {
-                roles : function(){
-                    return $http.get('/api/users/roles/info').then(function(data){
+            resolve: {
+                roles: function() {
+                    return $http.get('/api/users/roles/info').then(function(data) {
                         return data.data;
                     })
                 }
             }
         });
-        modalInstance.result.then(function (ctrl) {
+        modalInstance.result.then(function(ctrl) {
             if (ctrl) {
                 console.log("modal closed");
             }
         });
     };
-    var SignupModalCtrl = function ($scope, $modalInstance, Auth, $location, roles) {
+    var SignupModalCtrl = function($scope, $modalInstance, Auth, $location, roles) {
         $scope.roles = roles;
-        $rootScope.getCompanies = function () {
-            $http.get("api/companies").success(function (data) {
+        $rootScope.getCompanies = function() {
+            $http.get("api/companies").success(function(data) {
                 $scope.companies = data;
-            }).error(function (data) {
+            }).error(function(data) {
                 console.log("Error on Companies GET API")
             });
         };
@@ -33,39 +33,39 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
         $scope.company = {};
         $scope.user = {};
         $scope.errors = {};
-        $scope.pickImage = function () {
+        $scope.pickImage = function() {
             filepicker.setKey("Ash9bU3IkR1Cf41AiwTAjz");
             filepicker.pick({
                 mimetypes: ['image/*'],
                 container: 'modal',
                 services: ['COMPUTER']
-            }, function (Blob) {
+            }, function(Blob) {
                 $scope.user.blob = Blob;
-                filepicker.read(Blob, { base64encode: true }, function (imgdata) {
-                    $scope.$apply(function () {
+                filepicker.read(Blob, { base64encode: true }, function(imgdata) {
+                    $scope.$apply(function() {
                         $scope.imageSrc = 'data:image/png;base64,' + imgdata;
                         console.log("Read successful!");
                     });
-                }, function (fperror) {
+                }, function(fperror) {
                     console.log(fperror.toString());
                 });
-            }, function (FPError) {
+            }, function(FPError) {
                 console.log(FPError.toString());
             });
         };
-        $scope.signup = function (form) {
+        $scope.signup = function(form) {
             $scope.submitted = true;
             if (form.$valid && $scope.user.blob) {
                 if ($scope.user.password === $scope.user.confirmPassword) {
                     $scope.user.user_profile_url = $scope.user.blob.url;
-                    Auth.createUser($scope.user).then(function () {
+                    Auth.createUser($scope.user).then(function() {
                         $location.path('/project');
                         $modalInstance.close(true);
-                    }).catch(function (err) {
+                    }).catch(function(err) {
                         err = err.data;
                         $scope.errors = {};
                         // Update validity of form fields that match the mongoose errors
-                        angular.forEach(err.errors, function (error, field) {
+                        angular.forEach(err.errors, function(error, field) {
                             form[field].$setValidity('mongoose', false);
                             $scope.errors[field] = error.message;
                         });
@@ -77,38 +77,37 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
                 console.log("Form Invalid");
             }
         };
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $modalInstance.close(false);
         };
 
-        $scope.createCompanyModal = function () {
+        $scope.createCompanyModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: "/components/modal/modal_createcompany.html",
                 size: "md",
                 controller: CreateCompanyModalCtrl
             });
-            modalInstance.result.then(function (ctrl) {
+            modalInstance.result.then(function(ctrl) {
                 if (ctrl) {
                     console.log("modal closed");
                 }
             });
         };
     };
-
-    var CreateCompanyModalCtrl = function ($rootScope, $scope, $modalInstance) {
+    var CreateCompanyModalCtrl = function($rootScope, $scope, $modalInstance) {
         $scope.submitted = false;
         $scope.company = {};
         $scope.errors = {};
-        $scope.createCompany = function (form) {
+        $scope.createCompany = function(form) {
             $scope.submitted = true;
             if (form.$valid) {
                 // (TODO) HTTP POST REQUEST TO CREATE A COMPANY
-                $http.post("/api/companies", $scope.company).success(function (data) {
+                $http.post("/api/companies", $scope.company).success(function(data) {
                     console.log(data);
                     $rootScope.getCompanies();
                     $modalInstance.close(true);
 
-                }).error(function (data) {
+                }).error(function(data) {
 
                 });
                 // (TODO) UPDATE ROOTSCOPE FOR COMPANY LIST
@@ -117,44 +116,50 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
                 console.log("Form Invalid");
             }
         };
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $modalInstance.close(false);
         };
     };
 
-    $scope.loginModal = function () {
+    $scope.loginModal = function() {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_login.html",
             size: "md",
             controller: LoginModalCtrl
         });
-        modalInstance.result.then(function (ctrl) {
+        modalInstance.result.then(function(ctrl) {
             if (ctrl) {
                 console.log("Form Submitted");
             }
         });
     };
-    var LoginModalCtrl = function ($scope, $modalInstance, Auth, $location) {
+    var LoginModalCtrl = function($scope, $modalInstance, Auth, $location) {
         $scope.user = {};
         $scope.errors = {};
-        $scope.login = function (form) {
+        $scope.login = function(form) {
             $scope.submitted = true;
             if (form.$valid) {
                 Auth.login({
                     user_email: $scope.user.user_email,
                     password: $scope.user.password
-                }).then(function () {
+                }).then(function() {
                     $location.path('/project');
                     $modalInstance.close(true);
-                }).catch(function (err) {
+                }).catch(function(err) {
                     $scope.errors.other = err.message;
                 });
             } else {
                 console.log("Form Invalid")
             }
         };
-        $scope.cancel = function () {
+        $scope.cancel = function() {
             $modalInstance.close(false);
         };
     };
+    // slide show
+    $scope.myInterval = 5000;
+    $scope.slides = [];
+    for (var item = 1; item <= 4; item++) {
+        $scope.slides.push({image: "/assets/images/s" + item + ".jpg"});
+    }
 });
