@@ -22,27 +22,19 @@
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a style="cursor: pointer"><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
-                <li><a style="cursor: pointer"><img src="/assets/images/notification.ico" /></span></a></li>
+                <li><a><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
+                <li><a><img src="/assets/images/notification.ico" /></span></a></li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle clear">
+                    <a class="dropdown-toggle clear">
                         <img ng-src="{{ getCurrentUser().user_profile_url }}" />
                     </a>
-                    <ul class="dropdown-menu" dropdown-menu>
+                    <ul dropdown-menu class="dropdown-menu" role="menu">
                         <li>
-                            <a ng-click="action1()">Action1</a>
+                            <a style="cursor: default">v1.0.0</a>
                         </li>
+                        <li class="divider"></li>
                         <li>
-                            <a ng-click="action2()">Action2</a>
-                        </li>
-                        <li>
-                            <a ng-click="action3()">Action3</a>
-                        </li>
-                        <li>
-                            <a ng-click="action4()">Action4</a>
-                        </li>
-                        <li>
-                            <a ng-click="action5()">Action5</a>
+                            <a ng-click="logout()">logout</a>
                         </li>
                     </ul>
                 </li>

@@ -11,7 +11,7 @@ angular.module('qiApp').controller('NavbarCtrl', function($scope, $location, Aut
     // logout
     $scope.logout = function() {
         Auth.logout();
-        $location.path('/login');
+        $location.path('/');
     };
     // login modal
     $scope.loginModal = function () {
