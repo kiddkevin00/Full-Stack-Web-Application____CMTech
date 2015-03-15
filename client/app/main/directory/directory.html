@@ -122,7 +122,38 @@
             <accordion-heading>
               COMPANIES
             </accordion-heading>
-
+            <div ng-repeat = "(_id , company) in companies">
+              <table class="table table-striped">
+                <u><b>{{company.company_name}}  {{company.company_title}}</b></u>
+                <div>{{company.company_address}}</div>
+                <tr>
+                  <th>Title</th>
+                  <th>Name Last Name</th>
+                  <th>Email</th>
+                  <th>Office No.</th>
+                  <th>Cell No.</th>
+                </tr>
+                <tr ng-repeat="user in company.users">
+                  <td>
+                    <span>{{ user.user_last_name  || 'N/A'}}</span>
+                  </td> 
+                  <td>
+                    <span>{{ user.user_first_name  || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ user.user_email  || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ user.user_office_phone  || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ user.user_mobile_phone  || 'N/A'}}</span>
+                  </td>
+                    <button ng-click="updatePersonModal()" type="button" class="btn btn-info btn-xs">Edit</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </accordion-group>
 
           <accordion-group>
@@ -144,36 +175,30 @@
                   <th>Email</th>
                   <th></th>
                 </tr>
-                <tr ng-repeat="projectUser in projectUsers track by $index">
-                  <td ng-switch on="projectUser.user_first_name || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_first_name }}</span>
-                  </td>
-                  <td ng-switch on="projectUser.user_last_name || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_last_name }}</span>
-                  <td ng-switch on="projectUser.link_company || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.link_company }}</span>
-                  </td>
-                  <td ng-switch on="projectUser.user_title || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_title }}</span>
-                  </td>
-                  <td ng-switch on="projectUser.user_office_phone || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_office_phone }}</span>
-                  </td>
-                  <td ng-switch on="projectUser.user_mobile_phone || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_mobile_phone }}</span>
-                  </td>
-                  <td ng-switch on="projectUser.user_email || '_null_'">
-                    <span ng-switch-when="_null_">N/A</span>
-                    <span ng-default> {{ projectUser.user_email }}</span>
+                <tr ng-repeat="projectUser in projectAllInfo track by $index">
+                  <td>
+                    <span>{{ projectUser.link_user.user_first_name || 'N/A'}}</span>
                   </td>
                   <td>
-                    <button ng-click="updatePersonModal()" type="button" class="btn btn-info btn-xs">Edit</button>
+                    <span>{{ projectUser.link_user.user_last_name || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ projectUser.link_company.company_name || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ projectUser.link_user.user_title || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ projectUser.link_user.user_office_phone || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ projectUser.link_user.user_mobile_phone || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <span>{{ projectUser.link_user.user_email || 'N/A'}}</span>
+                  </td>
+                  <td>
+                    <button ng-click="updatePersonModal(projectUser.link_user)" type="button" class="btn btn-info btn-xs">Edit</button>
                   </td>
                 </tr>
               </table>

@@ -12,7 +12,7 @@ angular.module('qiApp').controller('NavbarCtrl', function($scope, $location, Aut
 
     $scope.loginModal = function () {
         var modalInstance = $modal.open({
-            templateUrl: "/components/modal/modal_login.html",
+            templateUrl: "components/modal/modal_login.html",
             size: "md",
             controller: LoginModalCtrl
         });

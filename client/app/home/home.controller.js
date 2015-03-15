@@ -3,7 +3,7 @@
 angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $http, $modal, $location, Auth) {
     $scope.signupModal = function () {
         var modalInstance = $modal.open({
-            templateUrl: "/components/modal/modal_signup.html",
+            templateUrl: "components/modal/modal_signup.html",
             size: "md",
             controller: SignupModalCtrl,
             resolve : {
@@ -83,7 +83,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
 
         $scope.createCompanyModal = function () {
             var modalInstance = $modal.open({
-                templateUrl: "/components/modal/modal_createcompany.html",
+                templateUrl: "components/modal/modal_createcompany.html",
                 size: "md",
                 controller: CreateCompanyModalCtrl
             });
@@ -124,7 +124,7 @@ angular.module('qiApp').controller('HomeCtrl', function ($rootScope, $scope, $ht
 
     $scope.loginModal = function () {
         var modalInstance = $modal.open({
-            templateUrl: "/components/modal/modal_login.html",
+            templateUrl: "components/modal/modal_login.html",
             size: "md",
             controller: LoginModalCtrl
         });

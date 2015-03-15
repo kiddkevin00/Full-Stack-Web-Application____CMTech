@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('qiApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location,$stateParams, $http, $modal) {
+  .controller('SignupCtrl', function ($scope, Auth, $location,$stateParams, $http, $modal, $q) {
     $scope.user = {};
     $scope.errors = {};
     $scope.companies = [];
@@ -85,13 +85,15 @@ angular.module('qiApp')
                 $scope.user.link_projects = [];
                 $scope.user.link_projects.push($scope.projectId);
                 Auth.createUser($scope.user).then(function (user) {
+                  Auth.getCurrentUser().$promise.then(function(user){
                     $http.post('/api/tbl_user_company_projects',{
-                      link_user :  Auth.getCurrentUser()._id,
+                      link_user :  user._id,
                       link_company : $scope.company.selected._id,
                       link_project : $scope.projectId
                     }).success(function(){
                         $location.path('/project');
                     });
+                  });
                 }).catch(function (err) {
                     err = err.data;
                     $scope.errors = {};
@@ -105,14 +107,16 @@ angular.module('qiApp')
                 $http.post('/api/companies/' + $scope.projectId, $scope.company).then(function(company){
                   $scope.user.link_projects = [];
                   $scope.user.link_projects.push($scope.projectId);
-                    Auth.createUser($scope.user).then(function (user) {
+                    Auth.createUser($scope.user).then(function(){
+                      Auth.getCurrentUser().$promise.then(function(user){
                         $http.post('/api/tbl_user_company_projects',{
-                          link_user :  Auth.getCurrentUser()._id,
-                          link_company : company._id,
+                          link_user :  user._id,
+                          link_company : company.data._id,
                           link_project : $scope.projectId
                         }).success(function(){
                             $location.path('/project');
                         });
+                      })
                     }).catch(function (err) {
                         err = err.data;
                         $scope.errors = {};
