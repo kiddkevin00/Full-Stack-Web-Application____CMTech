@@ -121,7 +121,7 @@ angular.module('qiApp').controller('HomeCtrl', function($rootScope, $scope, $htt
         };
     };
     // slide show
-    $scope.myInterval = 5000;
+    $scope.myInterval = 2000;
     $scope.slides = [];
     for (var item = 1; item <= 4; item++) {
         $scope.slides.push({image: "/assets/images/s" + item + ".jpg"});
