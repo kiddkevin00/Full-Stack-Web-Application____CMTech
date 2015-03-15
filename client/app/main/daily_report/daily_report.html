@@ -1,85 +1,350 @@
-<div class="cmtech-tab-contianer">
-	<br>
+<!--
 
-	<div class='container' ng-hide='edit'>
-		<button class='btn btn-info' ng-click="edit=true">Create New Report</button>
-		<div class="row">
-			<div >
-			  <accordion close-others="oneAtATime">
-			    <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-			      This content is straight in the template.
-			    </accordion-group>
-			    <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-			      {{group.content}}
-			    </accordion-group>
-			    <accordion-group heading="Dynamic Body Content">
-			      <p>The body of the accordion group grows to fit the contents</p>
-			        <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-			        <div ng-repeat="item in items">{{item}}</div>
-			    </accordion-group>
-			    <accordion-group is-open="status.open">
-			        <accordion-heading>
-			            I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-			        </accordion-heading>
-			        This is just some content to illustrate fancy headings.
-			    </accordion-group>
-			  </accordion>
-			</div>
-		</div>
-	</div>
-	<div class='container' ng-show="edit">
-		<div class='row'>
-			<div class='col-lg-3'>
-				<span>Daily report #:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Project:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Location:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Reporter:</span>
-			</div>
-		</div>
-		<div class='row'>
-			<div class='col-lg-3'>
-				<span>Date:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Weather:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Temperature:</span>
-			</div>
-			<div class='col-lg-3'>
-				<span>Tide:</span>
-			</div>
-		</div>
-		<hr style='border: 1px solid grey'>
-		<div class='row'>Work progress</div>
-		<br>
-		<div class='row'><button class='btn btn-info' style="border-radius:10px 10px 0 0; width:20%"> Concrete</button></div>
-		<div class='row' style='background-color:grey'>
-			<div class="col-lg-3 col-lg-offset-1">
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-			</div>
-			<div class="col-lg-3 col-lg-offset-1">
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-					<input class='col-lg-12'>
-			</div>
-			<div class="col-lg-3 col-lg-offset-1">
-					<img src="">
-			</div>
-		</div>
-	</div>
+VARIABLE NAME:
+- isEditForm: show or hide view
+- project
+- user
+- report
+
+-->
+
+<div ng-hide="isEditForm" class="cmtech-tab-content">
+    <div class="row">
+        <div class="col-lg-offset-10 col-lg-2">
+            <div class="page-header">
+                <button class="btn btn-info" ng-click="isEditForm = true">Create New Report</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <accordion close-others="oneAtATime">
+                <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen"
+                                 is-disabled="status.isFirstDisabled">
+                    This content is straight in the template.
+                </accordion-group>
+                <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                    {{group.content}}
+                </accordion-group>
+                <accordion-group heading="Dynamic Body Content">
+                    <p>The body of the accordion group grows to fit the contents</p>
+                    <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                    <div ng-repeat="item in items">{{item}}</div>
+                </accordion-group>
+                <accordion-group is-open="status.open">
+                    <accordion-heading>
+                        I can have markup, too! <i class="pull-right glyphicon"
+                                                   ng-class="{ 'glyphicon-chevron-down': status.open,
+                                                               'glyphicon-chevron-right': !status.open }"></i>
+                    </accordion-heading>
+                    This is just some content to illustrate fancy headings.
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+</div>
+
+<div ng-show="isEditForm" class="cmtech-tab-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <span>Daily report #:</span>
+                        {{ project.project_number }}
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Project:</span>
+                        {{ project.project_name }}
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Location:</span>
+                        {{ project.project_address }}
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Reporter:</span>
+                        {{ user.user_first_name + user.user_last_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <span>Date:</span>
+                        {{ report.now }}
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Weather:</span>
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Temperature:</span>
+                    </div>
+                    <div class="col-lg-3">
+                        <span>Tide:</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <b>Work progress</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            Active Trades:
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Concrete
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Steel
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Land
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Elec
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Mech
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Plum
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    HVAC
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Fire
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1">
+            <div class="row">
+                <div class="col-lg-2">
+                    <input type="checkbox" />
+                </div>
+                <div class="col-lg-5">
+                    Paint
+                </div>
+            </div>
+        </div>
+        <div style="opacity: 0.5" class="col-lg-1">
+            + trades
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%"> Concrete</button>
+    </div>
+    <div class="row" style="background-color: lightgrey">
+        <div class="col-lg-4">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <span style="padding-left: 34%">Description</span>
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <span style="padding-left: 34%">Personal # Hours</span>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div ng-switch on="imageSrc || '_false_'" style="margin: 0 2%;">
+                <a ng-switch-when="_false_" style="display:block; height:162px; width:100%;"
+                   ng-click="pickImage()">
+                    <i style="display:block; padding-left:39%; padding-top:21%" ng-hide="imageSrc || submitted">No image
+                        chosen</i>
+                </a>
+                <img ng-switch-default style="width:100%" ng-src="{{ imageSrc }}" />
+            </div>
+        </div>
+        <div class="col-lg-3 col-lg-offset-1">
+            <img src="">
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%">Steal</button>
+    </div>
+    <div class="row" style="background-color: lightgrey">
+        <div class="col-lg-4">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <span style="padding-left: 34%">Description</span>
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+                <input class="col-lg-12">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <span style="padding-left: 34%">Personal # Hours</span>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+                <div class="row">
+                    <input style="margin-right: 10px" class="col-lg-4">
+                    <input style="margin-right: 10px" class="col-lg-3">
+                    <input class="col-lg-4">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div ng-switch on="imageSrc || '_false_'" style="margin: 0 2%;">
+                <a ng-switch-when="_false_" style="display:block; height:162px; width:100%;"
+                   ng-click="pickImage()">
+                    <i style="display:block; padding-left:39%; padding-top:21%" ng-hide="imageSrc || submitted">No image
+                        chosen</i>
+                </a>
+                <img ng-switch-default style="width:100%" ng-src="{{ imageSrc }}" />
+            </div>
+        </div>
+        <div class="col-lg-3 col-lg-offset-1">
+            <img src="">
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        Equipment, Material, Deriveries
+    </div>
+    <div class="row" style="background-color:lightgrey; height:74px;">
+        <div class="col-lg-12">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <input class="col-lg-12" />
+                <input class="col-lg-12" />
+                <input class="col-lg-12" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        Other issues
+    </div>
+    <div class="row" style="background-color:lightgrey; height:74px;">
+        <div class="col-lg-12">
+            <div class="cmtech-multi-input-line" style="margin: 0 2%">
+                <input class="col-lg-12" />
+                <input class="col-lg-12" />
+                <input class="col-lg-12" />
+            </div>
+        </div>
+    </div>
 </div>

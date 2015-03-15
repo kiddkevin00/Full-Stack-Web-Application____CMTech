@@ -1,45 +1,45 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl" style="margin-bottom:0px">
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl" style="margin-bottom: 0px">
     <div class="container">
-        <!--<div class="navbar-header">-->
-            <!--<button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">-->
-            <!--<span class="sr-only">Toggle navigation</span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--</button>-->
-            <a href="#" class="navbar-brand"><img src="/assets/images/logoblack.png"
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"><img src="/assets/images/logoblack.png"
                                                   style="width:79%; margin-top:-1%;" /></a>
-        <!--</div>-->
+        </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <!--<ul class="nav navbar-nav">-->
-            <!--<li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">-->
-            <!--<a ng-href="{{item.link}}">{{item.title}}</a>-->
-            <!--</li>-->
-            <!--<li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>-->
-            <!--</ul>-->
-
-            <!--<ul class="navbar-brand" style="position: absolute; width: 100%; left: 0; text-align: center;-->
-            <!--margin: auto;">-->
-            <!--<li style="list-style: none;">Project List</li>-->
-            <!--</ul>-->
-
-            <div class="btn-group" style="position:absolute; width:100%; left:50%; margin-top:0.8%;">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <div class="btn-group dropdown" style="position:absolute; left:50%; margin-top:0.8%;">
+                <button type="button" class="btn btn-default dropdown-toggle clear">
                     Project List<span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" dropdown-menu>
                     <li ng-repeat="item in getCurrentUser().link_projects track by item._id">
                         <a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>
                     </li>
                 </ul>
             </div>
-
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
-                <li><a href="#"><img src="/assets/images/notification.ico" /></span></a></li>
-                <!--<li><a href="#"><img src="/assets/images/profile-picture.ico" /></a></li>-->
-                <li><a href="#"><img ng-src="{{ getCurrentUser().user_profile_url }}" /></a></li>
+                <li><a><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
+                <li><a><img src="/assets/images/notification.ico" /></span></a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle clear">
+                        <img ng-src="{{ getCurrentUser().user_profile_url }}" />
+                    </a>
+                    <ul dropdown-menu class="dropdown-menu" role="menu">
+                        <li>
+                            <a style="cursor: default">v1.0.0</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a ng-click="logout()">logout</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+
         </div>
     </div>
 </div>
