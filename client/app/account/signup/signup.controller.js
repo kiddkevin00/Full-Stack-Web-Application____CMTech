@@ -13,6 +13,9 @@ angular.module('qiApp')
       $scope.projectId = data.message_project;
       $http.get("/api/tbl_user_company_projects/project/" + data.message_project).success(function(info){
         info.forEach(function(item){
+          for(var i=0 ;i < $scope.companies.lengt;i++) {
+            if($scope.companies[i]._id === item.link_company._id) return;
+          }
           $scope.companies.push(item.link_company);
         });
       });

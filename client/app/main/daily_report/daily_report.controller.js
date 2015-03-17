@@ -1,13 +1,161 @@
 'use strict';
 
-angular.module('qiApp').controller('DailyReportCtrl', function ($scope, $stateParams) {
+angular.module('qiApp').controller('DailyReportCtrl', function ($scope, $stateParams, $http, socket, Auth) {
     $scope.projectID = $stateParams.projectID;
-     uploadcare.SingleWidget('[role=uploadcare-uploader]').onChange(function(file) {
+    $scope.user = Auth.getCurrentUser();
+    // $scope.steel_detail = [];
+    // $scope.concrete_detail = [];
+    // $scope.report_issues = [];
+    // $scope.report_other_issues = [];
+    // $scope.report_concrete = [];
+    // $scope.report_steel = [];
+    $scope.report = {
+      report_concrete : {
+        detail : []
+      },
+      report_steel : {
+        detail :[]
+      }
+    };
+    $http.get('/api/projects/' + $scope.projectID).success(function(data){
+    	$scope.project = data;
+      $scope.report.report_number = _.max(data.link_daily_report,function(item){
+        return item.report_number;
+      }).report_number + 1;
+      if(!data.link_daily_report.length) $scope.report.report_number = 1;
+      $scope.reports =_.groupBy(data.link_daily_report,function(item){
+        var date = moment(item.report_create_date);
+        item.day = date.format('dddd');
+        item.format_date = date.format('MMM D,YYYY');
+        return date.format('MMM YYYY');
+      });
+      //console.log(test)
+    	socket.syncUpdateSingle("project",$scope.project,function(){
+          var data = $scope.project;
+          $scope.report.report_number = _.max(data.link_daily_report,function(item){
+            return item.report_number;
+          }).report_number + 1;
+          if(!data.link_daily_report.length) $scope.report.report_number = 1;
+          $scope.reports =_.groupBy(data.link_daily_report,function(item){
+            var date = moment(item.report_create_date);
+            item.day = date.format('dddd');
+            item.format_date = date.format('MMM D,YYYY');
+            return date.format('MMM YYYY');
+          });
+      });
+    });
+
+
+     uploadcare.SingleWidget('#concrete').onChange(function(file) {
        if (file) {
          file.done(function(info) {
         // Handle uploaded file info.
-           $scope.uuid = info.uuid;
+           $scope.concrete_photo_uuid = info.uuid;
+           $scope.concrete_imageSrc = info.originalUrl + "-/resize/170x100/";
+           $scope.$apply();
+           // $http.post('/api/reports',{id : info.uuid}).success(function(){
+           // 	console.log("done");
+           // });
          });
-       };
+       }
+       else {
+        uploadcare.SingleWidget('#concrete').value(null);
+        $scope.concrete_imageSrc = "";
+        //$scope.$apply();
+       }
      });
+     uploadcare.SingleWidget('#steel').onChange(function(file) {
+
+       if (file) {
+         file.done(function(info) {
+        // Handle uploaded file info.
+           $scope.steel_photo_uuid = info.uuid;
+           $scope.steel_imageSrc = info.originalUrl + "-/resize/170x100/";
+           $scope.$apply();
+         });
+       }
+       else {
+        uploadcare.SingleWidget('#steel').value(null);
+        $scope.steel_imageSrc = "";
+       // $scope.$apply();
+       }
+     });
+
+     $scope.createReport = function(){
+        $scope.isEditForm = true;
+        var data = $scope.project;
+        $scope.report.report_number = _.max(data.link_daily_report,function(item){
+          return item.report_number;
+        }).report_number + 1;
+        if(!data.link_daily_report.length) $scope.report.report_number = 1;
+     }
+     $scope.editReports = function(report) {
+        // $scope.concrete_imageSrc = report.report_concrete.concrete_photo_url;
+        // $scope.steel_imageSrc = report.report_steel.steel_photo_url;
+        uploadcare.SingleWidget('#concrete').value(report.report_concrete.concrete_photo_url);
+        uploadcare.SingleWidget('#steel').value(report.report_steel.steel_photo_url);
+        $scope.report = report;
+        $scope.isEditForm =true;
+     };
+
+     $scope.cancel = function() {
+       $scope.concrete_imageSrc = "";
+       $scope.steel_imageSrc = "";
+        uploadcare.SingleWidget('#concrete').value(null);
+        uploadcare.SingleWidget('#steel').value(null);
+        var data = $scope.project;
+        $scope.report = {
+          report_concrete : {
+            detail : []
+          },
+          report_steel : {
+            detail :[]
+          }
+        };
+       $scope.isEditForm = false;
+     }
+     $scope.save = function() {
+       $scope.report.link_user  = $scope.user._id;
+       $scope.report.link_project =  $scope.projectID;
+       var promise;
+       if($scope.report._id) {
+          promise = $http.put("/api/reports/" + $scope.report._id);
+       } else {
+          promise = $http.post("/api/reports/",{
+                       concrete_photo_uuid :  $scope.concrete_photo_uuid,
+                       steel_photo_uuid :  $scope.steel_photo_uuid, 
+                       report: $scope.report
+                     });
+       }
+       promise.then(function(data){
+            console.log(data)
+            uploadcare.SingleWidget('#concrete').value(null);
+            uploadcare.SingleWidget('#steel').value(null);
+            $scope.report = {
+              report_concrete : {
+                detail : []
+              },
+              report_steel : {
+                detail :[]
+              }
+            };
+           $scope.isEditForm = false;
+       });
+       // $http.post("/api/reports/",{
+       //   concrete_photo_uuid :  $scope.concrete_photo_uuid,
+       //   steel_photo_uuid :  $scope.steel_photo_uuid, 
+       //   report: $scope.report
+       // }).success(function(){
+       //    uploadcare.SingleWidget('#concrete').value(null);
+       //    uploadcare.SingleWidget('#steel').value(null);
+       //    $scope.report = {
+       //      report_concrete : {
+       //        detail : []
+       //      },
+       //      report_steel : {
+       //        detail :[]
+       //      }
+       //    };
+       // });
+     }
 });
