@@ -1,328 +1,327 @@
-<div ng-hide="isSubmittalFormView" ng-init="getSubmittals(); getUserInfo(); getProjectInfo(); getProjectUsers();" class="cmtech-tab-content">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <button type="button" class="btn btn-primary btn-md" ng-click="gotoCreateSubmittalForm()">
-          Create New Submittal
-        </button>
-        <button type="button" class="btn btn-info btn-md" ng-click="">To Be Submittal Log</button>
-      </div>
+<div ng-hide="isSubmittalFormView" ng-init="getSubmittals(); getUserInfo(); getProjectInfo(); getProjectUsers();"
+     class="cmtech-tab-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <button type="button" class="btn btn-primary btn-md" ng-click="gotoCreateSubmittalForm()">
+                    Create New Submittal
+                </button>
+                <button type="button" class="btn btn-info btn-md" ng-click="">To Be Submittal Log</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <button type="button" class="btn btn-default col-lg-2">My Incomplete Items</button>
-    <div class="col-lg-10">
-      Filter submittal view by
+    <div class="row">
+        <button type="button" class="btn btn-default col-lg-2">My Incomplete Items</button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table">
-        <thead>
-        <tr>
-          <th></th>
-          <th>Spec section</th>
-          <th>#</th>
-          <th>Revision</th>
-          <th>Title</th>
-          <th>Type</th>
-          <th>Issued</th>
-          <th>Responded</th>
-          <th>Status</th>
-          <th>Assignee</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td class="col-lg-1">
-            <button type="button" class="btn btn-primary col-lg-12">
-              VIEW
-            </button>
-          </td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-          <td>....</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Spec section</th>
+                    <th>#</th>
+                    <th>Revision</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Issued</th>
+                    <th>Responded</th>
+                    <th>Status</th>
+                    <th>Assignee</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-lg-1">
+                        <button type="button" class="btn btn-primary col-lg-12">
+                            VIEW
+                        </button>
+                    </td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                    <td>....</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <button type="button" class="btn btn-default col-lg-2" ng-click="">Submittal Log</button>
-    <div class="col-lg-10">
-      Filter submittal view by
+    <div class="row">
+        <button type="button" class="btn btn-default col-lg-2" ng-click="">Submittal Log</button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table">
-        <thead>
-        <tr>
-          <th></th>
-          <th>Spec section</th>
-          <th>#</th>
-          <th>Revision</th>
-          <th>Title</th>
-          <th>Type</th>
-          <th>Issued</th>
-          <th>Responded</th>
-          <th>Status</th>
-          <th>Tag</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="item in submittals">
-          <td class="col-lg-1">
-            <button ng-click="gotoCreateSubmittalForm(true, item)" type="button" class="btn btn-primary col-lg-12">
-              VIEW
-            </button>
-          </td>
-          <td ng-bind="item.submittal_spec_section"></td>
-          <td ng-bind="item.submittal_number"></td>
-          <td ng-bind="item.submittal_revision"></td>
-          <td ng-bind="item.submittal_title"></td>
-          <td ng-bind="item.submittal_type"></td>
-          <td ng-bind="item.submittal_issue_date"></td>
-          <td ng-bind="item.submittal_due_date"></td>
-          <td ng-bind="item.submittal_response_date"></td>
-          <td ng-bind="item.submittal_tag"></td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Spec section</th>
+                    <th>#</th>
+                    <th>Revision</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Issued</th>
+                    <th>Responded</th>
+                    <th>Status</th>
+                    <th>Tag</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in submittals">
+                    <td class="col-lg-1">
+                        <button ng-click="gotoCreateSubmittalForm(true, item)" type="button" class="btn btn-primary col-lg-12">
+                            VIEW
+                        </button>
+                    </td>
+                    <td ng-bind="item.submittal_spec_section"></td>
+                    <td ng-bind="item.submittal_number"></td>
+                    <td ng-bind="item.submittal_revision"></td>
+                    <td ng-bind="item.submittal_title"></td>
+                    <td ng-bind="item.submittal_type"></td>
+                    <td ng-bind="item.submittal_issue_date"></td>
+                    <td ng-bind="item.submittal_due_date"></td>
+                    <td ng-bind="item.submittal_response_date"></td>
+                    <td ng-bind="item.submittal_tag"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
 
 <div ng-show="isSubmittalFormView" class="cmtech-tab-content">
-  <form name="form" ng-submit="createSubmittal(form)">
-    <div class="row">
-      <div class="col-lg-2" style="padding-top:35%; border-right:1px solid black">
-        <!-- (TODO) margin-top: 320% doesn't work for TV screen -->
-        <button type="submit" class="btn btn-primary col-lg-12" ng-disabled="viewOnly">
-          Save
-        </button>
-        <button style="margin-top: 2%" type="button" class="btn btn-danger col-lg-12" ng-click="leaveCreateSubmittalForm(true)" ng-disabled="viewOnly">
-          Delete
-        </button>
-        <button style="margin-top: 2%" type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittalForm()">
-          Back
-        </button>
-      </div>
-      <div class="col-lg-10">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="page-header">
-              <b>{{ projectInfo.projectName }}</b>
+<form name="form" ng-submit="createSubmittal(form)">
+<div class="row">
+<div class="col-lg-2" style="padding-top:35%; border-right:1px solid black">
+    <!-- (TODO) margin-top: 320% doesn't work for TV screen -->
+    <button type="submit" class="btn btn-primary col-lg-12" ng-disabled="viewOnly">
+        Save
+    </button>
+    <button style="margin-top: 2%" type="button" class="btn btn-danger col-lg-12" ng-click="leaveCreateSubmittalForm(true)"
+            ng-disabled="viewOnly">
+        Delete
+    </button>
+    <button style="margin-top: 2%" type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittalForm()">
+        Back
+    </button>
+</div>
+<div class="col-lg-10">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <b>{{ projectInfo.projectName }}</b>
 
-              {{ projectInfo.projectAddress }}
-            </div>
-          </div>
+            {{ projectInfo.projectAddress }}
         </div>
-        <div class="row">
-          <div class="col-lg-3">
-            <p>Contact: Tom Collins</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <p>Contact: Tom Collins</p>
 
-            <p>Phone: (646) 151-1234</p>
-          </div>
-          <div class="col-lg-offset-2 col-lg-6">
-            <b>Project:&nbsp;</b>{{ projectInfo.projectName }}
-            <b>Residential:&nbsp;</b>{{ projectInfo.projectAddress }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="page-header">
-              <h4>
+        <p>Phone: (646) 151-1234</p>
+    </div>
+    <div class="col-lg-offset-2 col-lg-6">
+        <b>Project:&nbsp;</b>{{ projectInfo.projectName }}&nbsp;
+        <b>Residential:&nbsp;</b>{{ projectInfo.projectAddress }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header" style="margin:0; font-size:125% !important;">
+            <h4>
                 <b>
-                  Submittal {{ createSubmittalForm.submittal_spec_section }}-{{ createSubmittalForm.submittal_number }}-{{ createSubmittalForm.submittal_revision}}
+                    Submittal {{ createSubmittalForm.submittal_spec_section }}-{{ createSubmittalForm.submittal_number }}-{{
+                    createSubmittalForm.submittal_revision}}
                 </b>
-              </h4>
-            </div>
-          </div>
+            </h4>
         </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <b>General Information</b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Title
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_title" class="col-lg-12" type="text" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Spec Section
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_spec_section" class="col-lg-12" type="text" ng-disabled="viewOnly" />
-          </div>
-          <div class="col-lg-2">
-            Issue Date
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_issue_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Number
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_number" class="col-lg-12" type="number" ng-disabled="viewOnly" />
-          </div>
-          <div class="col-lg-2">
-            Due Date
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_due_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Revision
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_revision" class="col-lg-12" type="number" ng-disabled="viewOnly" />
-          </div>
-          <div class="col-lg-2">
-            Response Date
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_response_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Type
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_type" class="col-lg-12" type="text" ng-disabled="viewOnly" />
-          </div>
-          <div class="col-lg-2">
-            Tag
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input ng-model="createSubmittalForm.submittal_tag" class="col-lg-12" type="text" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Add more titles
-          </div>
-          <div class="cmtech-input-line col-lg-4">
-            <input class="col-lg-12" type="text" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <b>General Information</b>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Title
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_title" class="col-lg-12" type="text" ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Spec Section
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_spec_section" class="col-lg-12" type="text" ng-disabled="viewOnly" />
+    </div>
+    <div class="col-lg-2">
+        Issue Date
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_issue_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Number
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_number" class="col-lg-12" type="number" ng-disabled="viewOnly" />
+    </div>
+    <div class="col-lg-2">
+        Due Date
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_due_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Revision
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_revision" class="col-lg-12" type="number" ng-disabled="viewOnly" />
+    </div>
+    <div class="col-lg-2">
+        Response Date
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_response_date" class="col-lg-12" type="date" ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Type
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_type" class="col-lg-12" type="text" ng-disabled="viewOnly" />
+    </div>
+    <div class="col-lg-2">
+        Tag
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input ng-model="createSubmittalForm.submittal_tag" class="col-lg-12" type="text" ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2" style="opacity: 0.5">
+        Add more titles
+    </div>
+    <div class="cmtech-input-line col-lg-4">
+        <input class="col-lg-12" type="text" ng-disabled="viewOnly" />
+    </div>
+</div>
+<br />
 
-        <div class="row">
-          <div class="col-lg-12">
-            <b>Assignees</b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Issued by:
-          </div>
-          <div class="col-lg-4">
-            <b>{{ userInfo.user_first_name + ' ' + userInfo.user_last_name }}</b>&nbsp;
-            {{ userInfo.user_email }}
-          </div>
-          <div class="col-lg-2">
-            Distribution:
-          </div>
-          <div ng-if="!viewOnly" class="col-lg-4">
-            <ui-select ng-model="distributor.selected" theme="selectize" ng-disabled="viewOnly" style="width: 300px;">
-              <ui-select-match placeholder="Select or search a distributor in the list...">
+<div class="row">
+    <div class="col-lg-12">
+        <b>Assignees</b>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Issued by:
+    </div>
+    <div class="col-lg-4">
+        <b>{{ userInfo.user_first_name + ' ' + userInfo.user_last_name }}</b>&nbsp;
+        {{ userInfo.user_email }}
+    </div>
+    <div class="col-lg-2">
+        Distribution:
+    </div>
+    <div ng-if="!viewOnly" class="col-lg-4">
+        <ui-select ng-model="distributor.selected" theme="selectize" ng-disabled="viewOnly" style="width: 300px;">
+            <ui-select-match placeholder="Select or search a distributor in the list...">
                 {{ $select.selected.user_first_name + ' ' + $select.selected.user_last_name }}
-              </ui-select-match>
-              <ui-select-choices repeat="projectUser in projectUsers | filter: $select.search">
+            </ui-select-match>
+            <ui-select-choices repeat="projectUser in projectUsers | filter: $select.search">
                 <span ng-bind-html="projectUser.user_first_name | highlight: $select.search"></span>
                 <small ng-bind-html="projectUser.user_last_name | highlight: $select.search"></small>
-              </ui-select-choices>
-            </ui-select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2">
-            Approver:
-          </div>
-          <div ng-switch on="viewOnly" class="col-lg-4">
-            <div ng-switch-when="false">
-              <ui-select ng-model="approver.selected" theme="selectize" ng-disabled="viewOnly" style="width: 300px;">
+            </ui-select-choices>
+        </ui-select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        Approver:
+    </div>
+    <div ng-switch on="viewOnly" class="col-lg-4">
+        <div ng-switch-when="false">
+            <ui-select ng-model="approver.selected" theme="selectize" ng-disabled="viewOnly" style="width: 300px;">
                 <ui-select-match placeholder="Select or search a approver in the list...">
-                  {{ $select.selected.user_first_name + ' ' + $select.selected.user_last_name }}
+                    {{ $select.selected.user_first_name + ' ' + $select.selected.user_last_name }}
                 </ui-select-match>
                 <ui-select-choices repeat="projectUser in projectUsers | filter: $select.search">
-                  <span ng-bind-html="projectUser.user_first_name | highlight: $select.search"></span>
-                  <small ng-bind-html="projectUser.user_last_name | highlight: $select.search"></small>
+                    <span ng-bind-html="projectUser.user_first_name | highlight: $select.search"></span>
+                    <small ng-bind-html="projectUser.user_last_name | highlight: $select.search"></small>
                 </ui-select-choices>
-              </ui-select>
-            </div>
-            <div ng-switch-when="true">
-              <b>{{ approverView.user_first_name + ' ' + approverView.user_last_name }}</b>&nbsp;
-              {{ approverView.user_email }}
-            </div>
-          </div>
-          <div class="col-lg-4 col-lg-offset-2">
-            <div ng-repeat="item in distributors track by $index" class="row">
-              <b>{{ item.user_first_name + ' ' + item.user_last_name }}</b>&nbsp;
-              {{ item.user_email }}
-              <button ng-if="!viewOnly" ng-click="removeDistributorList(item)" type="button" class="btn btn-danger btn-xs">
+            </ui-select>
+        </div>
+        <div ng-switch-when="true">
+            <b>{{ approverView.user_first_name + ' ' + approverView.user_last_name }}</b>&nbsp;
+            {{ approverView.user_email }}
+        </div>
+    </div>
+    <div class="col-lg-4 col-lg-offset-2">
+        <div ng-repeat="item in distributors track by $index" class="row">
+            <b>{{ item.user_first_name + ' ' + item.user_last_name }}</b>&nbsp;
+            {{ item.user_email }}
+            <button ng-if="!viewOnly" ng-click="removeDistributorList(item)" type="button" class="btn btn-danger btn-xs">
                 <span class="glyphicon glyphicon-remove"></span>
-              </button>
-            </div>
-          </div>
+            </button>
         </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <b>Description</b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="cmtech-input-line col-lg-6">
-            <input ng-model="createSubmittalForm.submittal_description" type="text" class="col-lg-12" placeholder="Please see the attachments"
-                   ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="cmtech-input-line col-lg-6">
-            <input ng-model="createSubmittalForm._submittal_description2" type="text" class="col-lg-12" ng-disabled="viewOnly" />
-          </div>
-        </div>
-        <br />
+    </div>
+</div>
+<br />
 
-        <div class="row">
-          <div class="col-lg-6">
-            <b>Attachments</b>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-9">
-            <div class="row" ng-repeat="row in createSubmittalForm.submittal_attachments | chunk: 3">
-              <div class="col-lg-4" ng-repeat="item in row">
+<div class="row">
+    <div class="col-lg-12">
+        <b>Description</b>
+    </div>
+</div>
+<div class="row">
+    <div class="cmtech-input-line col-lg-6">
+        <input ng-model="createSubmittalForm.submittal_description" type="text" class="col-lg-12"
+               placeholder="Please see the attachments"
+               ng-disabled="viewOnly" />
+    </div>
+</div>
+<div class="row">
+    <div class="cmtech-input-line col-lg-6">
+        <input ng-model="createSubmittalForm._submittal_description2" type="text" class="col-lg-12" ng-disabled="viewOnly" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-6">
+        <b>Attachments</b>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="row" ng-repeat="row in createSubmittalForm.submittal_attachments | chunk: 3">
+            <div class="col-lg-4" ng-repeat="item in row">
                 <span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;
                 {{ item.pdf_file_name }}
                 <button ng-if="!viewOnly" ng-click="removeAttachmentList(item)" type="button" class="btn btn-danger btn-xs">
-                  <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-remove"></span>
                 </button>
-              </div>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <button ng-if="!viewOnly" type="button" ng-click="pickPDF()">Attach a new file</button>
-          </div>
         </div>
-      </div>
     </div>
-  </form>
+    <div class="col-lg-3">
+        <button ng-if="!viewOnly" type="button" ng-click="pickPDF()">Attach a new file</button>
+    </div>
+</div>
+</div>
+</div>
+</form>
 </div>
