@@ -11,8 +11,8 @@
                                                   style="width:79%; margin-top:-1%;" /></a>
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <div class="btn-group dropdown" style="position:absolute; left:50%; margin-top:0.8%;">
-                <button type="button" class="btn btn-default dropdown-toggle clear">
+            <div class="btn-group dropdown" style="position:absolute; left:43%; margin-top:0.8%;">
+                <button style="width:155%" type="button" class="btn btn-default dropdown-toggle clear">
                     Project List<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" dropdown-menu>
@@ -22,11 +22,14 @@
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
-                <li><a><img src="/assets/images/notification.ico" /></span></a></li>
+                <li style="width: 12%"><a style="padding-top:auto; padding-bottom:auto;"><img style="width:100%" class="glyphicon"
+                                                                           src="/assets/images/help.ico" /></a></li>
+                <li style="width: 12%"><a style="padding-top:auto; padding-bottom:auto;"><img style="width:100%"
+                                                                           src="/assets/images/notification.ico" /></span></a>
+                </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle clear">
-                        <img ng-src="{{ getCurrentUser().user_profile_url }}" />
+                    <a style="padding-top:auto; padding-bottom:auto;" class="dropdown-toggle clear">
+                        <img style="width:172%" ng-src="{{ getCurrentUser().user_profile_url }}" />
                     </a>
                     <ul dropdown-menu class="dropdown-menu" role="menu">
                         <li>
