@@ -1,385 +1,349 @@
-
-
-
 <div ng-hide="isEditForm" class="cmtech-tab-content">
-    <div class="row">
-        <div class="col-lg-offset-10 col-lg-2">
-            <div class="page-header">
-                <button class="btn btn-info" ng-click="createReport()">Create New Report</button>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-lg-offset-10 col-lg-2">
+      <div class="page-header">
+        <button class="btn btn-info" ng-click="createReport()">Create New Report</button>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <accordion close-others="oneAtATime">
-                <accordion-group heading="{{key}}" is-open="status.isFirstOpen"
-                                 is-disabled="status.isFirstDisabled" ng-repeat="(key, value) in reports">
-                <div>
-                  <table class="table table-striped">
-                    <tr>
-                      <th>#</th>
-                      <th>day</th>
-                      <th>date</th>
-                      <th>reported</th>
-                      <th>Active Trades</th>
-                      <th></th>
-                    </tr>
-                    <tr ng-repeat="r in value track by $index">
-                      <td>
-                        <span>{{ r.report_number | numberFixedLen:4 }}</span>
-                      </td>
-                      <td>
-                        <span>{{ r.day || 'N/A'}}</span>
-                      </td>
-                      <td>
-                        <span>{{ r.format_date || 'N/A'}}</span>
-                      </td>
-                      <td>
-                        <span>{{ r.link_user.user_first_name + ' ' + r.link_user.user_last_name || 'N/A'}}</span>
-                      </td>
-                      <td>
-                        <span>{{ r.link_user.user_office_phone || 'N/A'}}</span>
-                      </td>
-                      <td><button class='btn btn-info' ng-click="editReports(r)">edit</button></td>
-                    </tr>
-                  </table>
-                </div>
-                </accordion-group>
-              <!--   <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-                    {{group.content}}
-                </accordion-group>
-                <accordion-group heading="Dynamic Body Content">
-                    <p>The body of the accordion group grows to fit the contents</p>
-                    <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                    <div ng-repeat="item in items">{{item}}</div>
-                </accordion-group>
-                <accordion-group is-open="status.open">
-                    <accordion-heading>
-                        I can have markup, too! <i class="pull-right glyphicon"
-                                                   ng-class="{ 'glyphicon-chevron-down': status.open,
-                                                               'glyphicon-chevron-right': !status.open }"></i>
-                    </accordion-heading>
-                    This is just some content to illustrate fancy headings.
-                </accordion-group> -->
-            </accordion>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <accordion close-others="oneAtATime">
+        <accordion-group heading="{{key}}" is-open="status.isFirstOpen"
+                         is-disabled="status.isFirstDisabled" ng-repeat="(key, value) in reports">
+          <div>
+            <table class="table table-striped">
+              <tr>
+                <th>#</th>
+                <th>day</th>
+                <th>date</th>
+                <th>reported</th>
+                <th>Active Trades</th>
+                <th></th>
+              </tr>
+              <tr ng-repeat="r in value track by $index">
+                <td>
+                  <span>{{ r.report_number | numberFixedLen:4 }}</span>
+                </td>
+                <td>
+                  <span>{{ r.day || 'N/A'}}</span>
+                </td>
+                <td>
+                  <span>{{ r.format_date || 'N/A'}}</span>
+                </td>
+                <td>
+                  <span>{{ r.link_user.user_first_name + ' ' + r.link_user.user_last_name || 'N/A'}}</span>
+                </td>
+                <td>
+                  <span>{{ r.link_user.user_office_phone || 'N/A'}}</span>
+                </td>
+                <td>
+                  <button class='btn btn-info' ng-click="editReports(r)">edit</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </accordion-group>
+      </accordion>
     </div>
+  </div>
 </div>
 
 <div ng-show="isEditForm" class="cmtech-tab-content">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <span>Daily report #:</span>
-                        {{ report.report_number | numberFixedLen:4 }}
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Project:</span>
-                        {{ project.project_name }}
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Location:</span>
-                        {{ project.project_address }}
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Reporter:</span>
-                        {{ user.user_first_name + user.user_last_name }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <span>Date:</span>
-                        {{ report.now }}
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Weather:</span>
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Temperature:</span>
-                    </div>
-                    <div class="col-lg-3">
-                        <span>Tide:</span>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Daily report #:</span>
+            {{ report.report_number | numberFixedLen:4 }}
+          </div>
+          <div class="col-lg-3">
+            <span>Project:</span>
+            {{ project.project_name }}
+          </div>
+          <div class="col-lg-3">
+            <span>Location:</span>
+            {{ project.project_address }}
+          </div>
+          <div class="col-lg-3">
+            <span>Reporter:</span>
+            {{ user.user_first_name + user.user_last_name }}
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <b>Work progress</b>
+        <div class="row">
+          <div class="col-lg-3">
+            <span>Date:</span>
+            {{ report.now }}
+          </div>
+          <div class="col-lg-3">
+            <span>Weather:</span>
+          </div>
+          <div class="col-lg-3">
+            <span>Temperature:</span>
+          </div>
+          <div class="col-lg-3">
+            <span>Tide:</span>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <b>Work progress</b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+      Active Trades:
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
         <div class="col-lg-2">
-            Active Trades:
+          <input type="checkbox" />
         </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Concrete
-                </div>
-            </div>
+        <div class="col-lg-5">
+          Concrete
         </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Steel
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Land
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Elec
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Mech
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Plum
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    HVAC
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Fire
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div class="row">
-                <div class="col-lg-2">
-                    <input type="checkbox" />
-                </div>
-                <div class="col-lg-5">
-                    Paint
-                </div>
-            </div>
-        </div>
-        <div style="opacity: 0.5" class="col-lg-1">
-            + trades
-        </div>
+      </div>
     </div>
-    <br />
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Steel
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Land
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Elec
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Mech
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Plum
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          HVAC
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Fire
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="row">
+        <div class="col-lg-2">
+          <input type="checkbox" />
+        </div>
+        <div class="col-lg-5">
+          Paint
+        </div>
+      </div>
+    </div>
+    <div style="opacity: 0.5" class="col-lg-1">
+      + trades
+    </div>
+  </div>
+  <br />
 
-    <div class="row">
-        <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%; background-color: white"> Concrete</button>
+  <div class="row">
+    <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%; background-color: white"> Concrete</button>
+  </div>
+  <div class="row" style="background-color: white">
+    <div class="col-lg-4">
+      <div class="cmtech-multi-input-line" style="margin: 0 2%">
+        <span style="padding-left: 34%">Description</span>
+        <textarea class="col-lg-12" ng-model="report.report_concrete.description"></textarea>
+        <br>
+      </div>
     </div>
-    <div class="row" style="background-color: white">
-        <div class="col-lg-4">
-            <div class="cmtech-multi-input-line" style="margin: 0 2%">
-                <span style="padding-left: 34%">Description</span>
-                <textarea class="col-lg-12" ng-model="report.report_concrete.description"></textarea>
-                <!-- <input class="col-lg-12" ng-model="concrete_detail[0]">
-                <input class="col-lg-12" ng-model="concrete_detail[1]">
-                <input class="col-lg-12" ng-model="concrete_detail[2]">
-                <input class="col-lg-12" ng-model="concrete_detail[3]">
-                <input class="col-lg-12" ng-model="concrete_detail[4]">
-                <input class="col-lg-12" ng-model="concrete_detail[5]"> -->
-                <br>
-            </div>
+    <div class="col-lg-4">
+      <div class="cmtech-multi-input-line" style="margin: 0 2%">
+        <div class="row">
+          <span class="col-lg-4 text-center">Personal</span>
+          <span class="col-lg-3 text-center">#</span>
+          <span class="col-lg-4 text-center">Hours</span>
         </div>
-        <div class="col-lg-4">
-            <div class="cmtech-multi-input-line" style="margin: 0 2%">
-                <div class="row">
-                    <span class="col-lg-4 text-center">Personal</span>
-                    <span class="col-lg-3 text-center">#</span>
-                    <span class="col-lg-4 text-center">Hours</span>
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[0].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[0].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[0].hours" class="col-lg-4">
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[1].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[1].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[1].hours" class="col-lg-4">
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[2].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[2].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[2].hours" class="col-lg-4">
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[3].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[3].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[3].hours" class="col-lg-4">
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[4].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[4].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[4].hours"  class="col-lg-4">
-                </div>
-                <div class="row">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[5].person" class="col-lg-4">
-                    <input style="margin-right: 10px" ng-model="report.report_concrete.detail[5].number" class="col-lg-3">
-                    <input ng-model="report.report_concrete.detail[5].hours"  class="col-lg-4">
-                </div>
-                <br>
-            </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[0].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[0].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[0].hours" class="col-lg-4">
         </div>
-        <!-- <div class="col-lg-1">
-            <div ng-switch on="imageSrc || '_false_'" style="margin: 0 2%;">
-                <a ng-switch-when="_false_" style="display:block; height:162px; width:100%;"
-                   ng-click="pickImage()">
-                    <i style="display:block; padding-left:39%; padding-top:21%" ng-hide="imageSrc || submitted">No image
-                        chosen</i>
-                </a>
-                <img ng-switch-default style="width:100%" ng-src="{{ imageSrc }}" />
-            </div>
-           <input type="hidden" data-images-only="" id="concrete" role="uploadcare-uploader" />
-        </div> -->
-        <div class="col-lg-4 image-preview-single text-center">
-          <img ng-src="{{ concrete_imageSrc || '//:0' }}">
-          <input type="hidden" id="concrete" role="uploadcare-uploader" data-clearable="" data-images-only="">
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[1].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[1].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[1].hours" class="col-lg-4">
         </div>
-      <!--   <div class="col-lg-3">
-        	<img style="width:80%" ng-src="{{ concrete_imageSrc }}">
-        </div> -->
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[2].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[2].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[2].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[3].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[3].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[3].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[4].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[4].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[4].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[5].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_concrete.detail[5].number" class="col-lg-3">
+          <input ng-model="report.report_concrete.detail[5].hours" class="col-lg-4">
+        </div>
+        <br>
+      </div>
     </div>
-    <br />
-    <div class="row">
-        <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%;background-color: white">Steel</button>
+    <!-- <div class="col-lg-1">
+        <div ng-switch on="imageSrc || '_false_'" style="margin: 0 2%;">
+            <a ng-switch-when="_false_" style="display:block; height:162px; width:100%;"
+               ng-click="pickImage()">
+                <i style="display:block; padding-left:39%; padding-top:21%" ng-hide="imageSrc || submitted">No image
+                    chosen</i>
+            </a>
+            <img ng-switch-default style="width:100%" ng-src="{{ imageSrc }}" />
+        </div>
+       <input type="hidden" data-images-only="" id="concrete" role="uploadcare-uploader" />
+    </div> -->
+    <div class="col-lg-4 image-preview-single text-center">
+      <img ng-src="{{ concrete_imageSrc || '//:0' }}">
+      <input type="hidden" id="concrete" role="uploadcare-uploader" data-clearable="" data-images-only="">
     </div>
-    <div class="row" style="background-color: white">
-        <div class="col-lg-4">
-            <div class="cmtech-multi-input-line" style="margin: 0 2%">
-                <span style="padding-left: 34%">Description</span>
-                   <textarea class="col-lg-12" ng-model="report.report_steel.description"></textarea>
-	               <!-- <input class="col-lg-12" ng-model="steel_detail[0]">
-	               <input class="col-lg-12" ng-model="steel_detail[1]">
-	               <input class="col-lg-12" ng-model="steel_detail[2]">
-	               <input class="col-lg-12" ng-model="steel_detail[3]">
-	               <input class="col-lg-12" ng-model="steel_detail[4]">
-	               <input class="col-lg-12" ng-model="steel_detail[5]"> -->
-	               <br>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="cmtech-multi-input-line" style="margin: 0 2%">
-             <div class="row">
-                 <span class="col-lg-4 text-center">Personal</span>
-                 <span class="col-lg-3 text-center">#</span>
-                 <span class="col-lg-4 text-center">Hours</span>
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[0].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[0].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[0].hours" class="col-lg-4">
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[1].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[1].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[1].hours" class="col-lg-4">
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[2].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[2].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[2].hours" class="col-lg-4">
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[3].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[3].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[3].hours" class="col-lg-4">
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[4].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[4].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[4].hours"  class="col-lg-4">
-             </div>
-             <div class="row">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[5].person" class="col-lg-4">
-                 <input style="margin-right: 10px" ng-model="report.report_steel.detail[5].number" class="col-lg-3">
-                 <input ng-model="report.report_steel.detail[5].hours"  class="col-lg-4">
-             </div>
-             <br>
-            </div>
-        </div>
-        <div class="col-lg-4 image-preview-single text-center">
-          <img ng-src="{{ steel_imageSrc || '//:0'}}">
-          <input type="hidden" id="steel" role="uploadcare-uploader" data-clearable="" data-images-only="">
-        </div>
-    </div>
-    <br />
+    <!--   <div class="col-lg-3">
+          <img style="width:80%" ng-src="{{ concrete_imageSrc }}">
+      </div> -->
+  </div>
+  <br />
 
-    <div class="row">
-        Equipment, Material, Deriveries
+  <div class="row">
+    <button class="btn btn-default" style="border-radius:10px 10px 0 0; width:20%;background-color: white">Steel</button>
+  </div>
+  <div class="row" style="background-color: white">
+    <div class="col-lg-4">
+      <div class="cmtech-multi-input-line" style="margin: 0 2%">
+        <span style="padding-left: 34%">Description</span>
+        <textarea class="col-lg-12" ng-model="report.report_steel.description"></textarea>
+        <br>
+      </div>
     </div>
-    <div class="row" style="background-color:white; height:74px;">
-        <div class="col-lg-12">
-            <!-- <div class="cmtech-multi-input-line" style="margin: 0 2%"> -->
-              <!--   <input ng-model="report_issues[0]" class="col-lg-12" />
-                <input ng-model="report_issues[1]" class="col-lg-12" />
-                <input ng-model="report_issues[2]" class="col-lg-12" /> -->
-                <textarea ng-model="report.report_issues"></textarea>
-            <!-- </div> -->
+    <div class="col-lg-4">
+      <div class="cmtech-multi-input-line" style="margin: 0 2%">
+        <div class="row">
+          <span class="col-lg-4 text-center">Personal</span>
+          <span class="col-lg-3 text-center">#</span>
+          <span class="col-lg-4 text-center">Hours</span>
         </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[0].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[0].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[0].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[1].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[1].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[1].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[2].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[2].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[2].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[3].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[3].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[3].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[4].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[4].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[4].hours" class="col-lg-4">
+        </div>
+        <div class="row">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[5].person" class="col-lg-4">
+          <input style="margin-right: 10px" ng-model="report.report_steel.detail[5].number" class="col-lg-3">
+          <input ng-model="report.report_steel.detail[5].hours" class="col-lg-4">
+        </div>
+        <br>
+      </div>
     </div>
-    <br />
+    <div class="col-lg-4 image-preview-single text-center">
+      <img ng-src="{{ steel_imageSrc || '//:0'}}">
+      <input type="hidden" id="steel" role="uploadcare-uploader" data-clearable="" data-images-only="">
+    </div>
+  </div>
+  <br />
 
-    <div class="row">
-        Other issues
+  <div class="row">
+    Equipment, Material, Deriveries
+  </div>
+  <div class="row" style="background-color:white; height:74px;">
+    <div class="col-lg-12">
+      <textarea ng-model="report.report_issues"></textarea>
     </div>
-    <div class="row" style="background-color:white; height:74px;">
-        <div class="col-lg-12">
-            <div class="cmtech-multi-input-line" style="margin: 0 2%">
-               <!--  <input ng-model="report_other_issues[0]" class="col-lg-12" />
-                <input ng-model="report_other_issues[1]" class="col-lg-12" />
-                <input ng-model="report_other_issues[2]" class="col-lg-12" /> -->
-                <textarea ng-model="report.report_other_issues"></textarea>
-            </div>
-        </div>
+  </div>
+  <br />
+
+  <div class="row">
+    Other issues
+  </div>
+  <div class="row" style="background-color:white; height:74px;">
+    <div class="col-lg-12">
+      <div class="cmtech-multi-input-line" style="margin: 0 2%">
+        <textarea ng-model="report.report_other_issues"></textarea>
+      </div>
     </div>
-    <button class='btn btn-info' ng-click="save()">save</button>
-    <button class='btn btn-danger' ng-click="cancel()">cancel</button>
+  </div>
+  <button class='btn btn-info' ng-click="save()">save</button>
+  <button class='btn btn-danger' ng-click="cancel()">cancel</button>
 </div>
