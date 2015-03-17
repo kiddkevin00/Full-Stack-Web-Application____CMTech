@@ -16,6 +16,7 @@ var ReportSchema = new Schema({
   	type: Date,
   	default: Date.now()
   },
+  report_number:Number,
   report_weather: String,
   report_temperature : String,
   report_tide : String,
@@ -23,7 +24,7 @@ var ReportSchema = new Schema({
   	description : String,
   	detail : [{
   		   person : String,
-  		   numer : Number,
+  		   numer : String,
   		   hours : String
      	}
   	],
@@ -33,7 +34,7 @@ var ReportSchema = new Schema({
   	description : String,
 	detail : [{
 		   person : String,
-		   numer : Number,
+		   numer : String,
 		   hours : String
    	}
 	],

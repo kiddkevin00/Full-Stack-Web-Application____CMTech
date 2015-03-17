@@ -15,10 +15,15 @@ exports.index = function(req, res) {
 
 // Get a single project
 exports.show = function(req, res) {
-  Project.findById(req.params.id).populate('link_submittal').exec(function(err, project) {
+  Project.findById(req.params.id).populate('link_submittal link_daily_report').exec(function(err, project) {
     if(err) { return res.json(401,err);  }
     if(!project) { return res.send(401); }
-    return res.json(project);
+    User.populate(project.link_daily_report,{path:'link_user', select:'user_first_name user_last_name'},function(err, reports){
+        if(err) { return res.json(401,err);  }
+        if(!reports) { return res.send(401); }
+        project.link_daily_report  = reports;
+        return res.json(project);
+    })
   });
 };
 

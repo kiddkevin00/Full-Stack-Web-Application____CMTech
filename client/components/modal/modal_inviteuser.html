@@ -1,5 +1,5 @@
 <div class="modal-header">
-<h3 class="modal-title">invite users</h3>
+<h3 class="modal-title">Invite Others</h3>
 </div>
 <form class="form" novalidate>
    <div class='row'>
@@ -17,6 +17,12 @@
     <div class='col-md-4'></div>
         <button class='btn btn-primary' ng-click="addEmail()">Add</button>
    </div>
+   <table>
+      <tr ng-repeat='email in emails track by $index'>
+        <td> <span>{{email}}</span></td>
+        <td> <button class='btn btn-danger' ng-click="emails.splice($index,1)">X</button></td>
+      </tr>
+   </table>
    <div class='row' ng-repeat='email in emails track by $index'>
         <div class='col-md-4'>
             <span>{{email}}</span>

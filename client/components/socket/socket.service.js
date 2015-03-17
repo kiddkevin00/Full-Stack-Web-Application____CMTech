@@ -24,7 +24,13 @@ angular.module('qiApp')
               }
           });
       },
-
+       syncUpdateSingle: function(modelName,oldItem, cb) {
+          cb = cb || angular.noop;
+          socket.on(modelName + ':save', function (item) {
+             _.assign(oldItem, item);
+             cb();
+          })
+       },
       /**
        * Register listeners to sync an array with updates on a model
        *
