@@ -22,14 +22,15 @@
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li style="width: 12%"><a style="padding-top:auto; padding-bottom:auto;"><img style="width:100%" class="glyphicon"
-                                                                           src="/assets/images/help.ico" /></a></li>
-                <li style="width: 12%"><a style="padding-top:auto; padding-bottom:auto;"><img style="width:100%"
-                                                                           src="/assets/images/notification.ico" /></span></a>
+                <li>
+                    <a><img style="width: 25px" class="glyphicon" src="/assets/images/help.ico" /></a>
+                </li>
+                <li>
+                    <a><img style="width: 25px" class="glyphicon" src="/assets/images/notification.ico" /></span></a>
                 </li>
                 <li class="dropdown">
-                    <a style="padding-top:auto; padding-bottom:auto;" class="dropdown-toggle clear">
-                        <img style="width:172%" ng-src="{{ getCurrentUser().user_profile_url }}" />
+                    <a class="dropdown-toggle clear">
+                        <img style="width: 25px" ng-src="{{ getCurrentUser().user_profile_url }}" />
                     </a>
                     <ul dropdown-menu class="dropdown-menu" role="menu">
                         <li>
