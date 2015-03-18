@@ -1,12 +1,16 @@
 'use strict';
 
-angular.module('qiApp').controller('NavbarCtrl', function($scope, $location, Auth, $modal, $log) {
+angular.module('qiApp').controller('NavbarCtrl', function($scope, $location, Auth,$state, $modal, $log) {
     // init view control
     $scope.isCollapsed = true;
     // $scope.isLoggedIn = Auth.isLoggedIn;
     // $scope.isAdmin = Auth.isAdmin;
 
     // init
+    $scope.pickProject = function(){
+        if(!$scope.project) $state.go('project');
+        else $state.go('main.home',{projectID : $scope.project._id});
+    }
     $scope.getCurrentUser = Auth.getCurrentUser;
     // logout
     $scope.logout = function() {

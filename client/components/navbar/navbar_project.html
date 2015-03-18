@@ -12,14 +12,17 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
             <div class="btn-group dropdown" style="position:absolute; left:50%; margin-top:0.8%;">
-                <button type="button" class="btn btn-default dropdown-toggle clear">
+                <select ng-model="$root.project" ng-options="item.project_name for item in getCurrentUser().link_projects track by item._id" ng-change="pickProject()">
+                    <option value="">Project List</option>
+                </select>
+                <!-- <button type="button" class="btn btn-default dropdown-toggle clear">
                     Project List<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" dropdown-menu>
                     <li ng-repeat="item in getCurrentUser().link_projects track by item._id">
                         <a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a><img class="glyphicon" src="/assets/images/help.ico" /></a></li>
