@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $state, $modal, socket, Auth, $location) {
+angular.module('qiApp').controller('ProjectCtrl', function($rootScope, $scope, $http, $state, $modal, socket, Auth, $location) {
     $scope.user = Auth.getCurrentUser();
     $scope.main = {};
     
@@ -23,9 +23,9 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $state
         });
     };
     $scope.createProjectModal = function(form) {
-
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal_createproject.html",
+            //templateUrl: "/components/modal/modal_inviteuser.html",
             size: "md",
             controller: CreateMainModalCtrl,
             resolve: {
@@ -39,6 +39,13 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $state
                 socket.syncUpdateUser(Auth.getCurrentUser());
                 console.log("Form Submitted");
             }
+        });
+    };
+    $scope.goProject = function(id) {
+        $http.get('/api/projects/' + id).success(function(data){
+            $rootScope.project = data;
+            socket.syncUpdateSingle("project",$scope.project);
+            $state.go('main.home',{projectID : data._id});
         });
     };
     var CreateMainModalCtrl = function($scope, $modalInstance, user) {
@@ -61,6 +68,7 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $state
             $scope.submitted = true;
             if (!$scope.email) return;
             $scope.emails.push($scope.email);
+            $scope.email = null;
             $scope.submitted = false;
         };
         $scope.project = {};

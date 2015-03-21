@@ -1,19 +1,25 @@
 'use strict';
 
-angular.module('qiApp').controller('NavbarCtrl', function($rootScope, $scope, $location, Auth,$state, $modal, $log) {
+angular.module('qiApp').controller('NavbarCtrl', function($rootScope,$scope, socket,$http,$location, Auth,$state, $modal, $log) {
     // init view control
     $scope.isCollapsed = true;
     // $scope.isLoggedIn = Auth.isLoggedIn;
     // $scope.isAdmin = Auth.isAdmin;
 
     // init
-    $scope.pickProject = function(projectName){
-        if(!$scope.project) $state.go('project');
-        else {
-            $scope.project.name = projectName;
-            console.log($rootScope.project)
-            $state.go('main.home',{projectID : $scope.project._id});
+    $scope.pickProject = function(){
+        if(!$rootScope.project) {
+            $state.go('project');
+            return;
         }
+        if($state.current.name === 'project') return $state.go('main.home',{projectID : $rootScope.project._id});
+        $state.go($state.current.name,{projectID : $rootScope.project._id});
+//        if ($state.current)
+//        $http.get('/api/projects/' + $rootScope.project._id).success(function(data){
+//          $rootScope.project = data;
+//          socket.syncUpdateSingle("project",$scope.project);
+//           $state.go($state.current.name,{projectID : $rootScope.project._id});
+//        });
     }
     $scope.getCurrentUser = Auth.getCurrentUser;
     // logout

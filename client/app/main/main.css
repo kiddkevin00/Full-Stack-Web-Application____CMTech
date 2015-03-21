@@ -1,5 +1,4 @@
 .cmtech-tabs {
-    margin-top: 15px;
     height: 700px;
     width: 100%;
     background: url("/assets/images/tab1.png");
@@ -17,13 +16,14 @@
 }
 
 .cmtech-tabs ul li a {
+    font-size: 108% !important;
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
     border: 0;
     text-align: center;
-    padding: 20px 0 10px 0;
+    padding: 17px 0 10px 0;
     color: #000000;
 }
 

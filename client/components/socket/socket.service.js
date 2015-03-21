@@ -28,6 +28,8 @@ angular.module('qiApp')
           cb = cb || angular.noop;
           socket.on(modelName + ':save', function (item) {
              _.assign(oldItem, item);
+              console.log(oldItem)
+
              cb();
           })
        },

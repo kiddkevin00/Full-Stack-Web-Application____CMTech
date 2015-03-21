@@ -12,22 +12,21 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
             <!--<div class="btn-group dropdown" style="position:absolute; left:43%; margin-top:0.8%;">-->
-                <!--<button style="width:155%" type="button" class="btn btn-default dropdown-toggle clear">-->
-                    <!--Project List<span class="caret"></span>-->
-                <!--</button>-->
-                <!--<ul class="dropdown-menu" dropdown-menu>-->
-                    <!--<li ng-repeat="item in getCurrentUser().link_projects track by item._id">-->
-                        <!--<a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>-->
-                    <!--</li>-->
-                <!--</ul>-->
+            <!--<button style="width:155%" type="button" class="btn btn-default dropdown-toggle clear">-->
+            <!--Project List<span class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul class="dropdown-menu" dropdown-menu>-->
+            <!--<li ng-repeat="item in getCurrentUser().link_projects track by item._id">-->
+            <!--<a ng-bind="item.project_name" ui-sref="main.home({projectID : item._id})"></a>-->
+            <!--</li>-->
+            <!--</ul>-->
             <!--</div>-->
-            <div class="" style="position:absolute; left:46%; margin-top:0.8%;">
-                <select class="form-control" ng-model="$root.project"
+            <div class="" style="position:absolute; left:41%; margin-top:0.8%;">
+                <select style="width: 250px" class="form-control" ng-model="$root.project"
                         ng-options="item.project_name for item in getCurrentUser().link_projects track by item._id"
-                        ng-change="pickProject(item.project_name )">
+                        ng-change="pickProject()">
                     <option value="">Project List</option>
                 </select>
-                {{ $root.project.project_name }}
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>

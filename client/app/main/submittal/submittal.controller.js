@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $stateParams, Auth) {
-    $scope.projectID = $stateParams.projectID;
+    //$scope.project._id = $stateParams.projectID;
     $scope.isSubmittalFormView = false;
     $scope.viewOnly = false;
     $scope.projectInfo = {};
@@ -17,7 +17,7 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
     };
     // get project info
     $scope.getProjectInfo = function() {
-        $http.get("/api/projects/" + $scope.projectID).success(function(data) {
+        $http.get("/api/projects/" + $scope.project._id).success(function(data) {
             $scope.projectInfo.projectName = data.project_name;
             $scope.projectInfo.projectAddress = data.project_address;
         }).error(function(data) {
