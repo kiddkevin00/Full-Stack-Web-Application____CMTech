@@ -113,7 +113,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
           },
           report_steel : {
             detail :[]
-          }
+          },
+          report_create_date : new Date()
         };
        $scope.isEditForm = false;
      }
@@ -144,7 +145,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
               },
               report_steel : {
                 detail :[]
-              }
+              },
+              report_create_date : new Date()
             };
            $scope.isEditForm = false;
        });
@@ -161,7 +163,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        //      },
        //      report_steel : {
        //        detail :[]
-       //      }
+       //      },
+       report_create_date : new Date()
        //    };
        // });
      }
