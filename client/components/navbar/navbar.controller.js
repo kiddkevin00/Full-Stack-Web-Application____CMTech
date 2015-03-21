@@ -24,11 +24,6 @@ angular.module('qiApp').controller('NavbarCtrl', function($scope, $location, Aut
             size: "md",
             controller: LoginModalCtrl
         });
-        modalInstance.result.then(function (ctrl) {
-            if (ctrl) {
-                console.log("Form Submitted");
-            }
-        });
     };
     // login modal controller
     var LoginModalCtrl = function ($scope, $modalInstance, Auth, $location) {
