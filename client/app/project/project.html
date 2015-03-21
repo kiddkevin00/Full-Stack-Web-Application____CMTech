@@ -10,7 +10,7 @@
     <div class="row" ng-repeat="row in user.link_projects | chunk: 3">
         <div class="col-lg-4" ng-repeat="item in row">
             <span>{{item.project_name}}</span>
-            <a ui-sref="main.home({projectID : item._id})"  class="thumbnail">
+            <a ng-click="goProject(item._id)" class="thumbnail">
                 <img style='width:100%; height:100%' ng-src="{{ item.project_image_url }}" />
             </a>
         </div>

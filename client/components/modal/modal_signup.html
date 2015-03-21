@@ -45,7 +45,7 @@
                  ng-class="{ 'has-success': form.user_role.$valid && submitted,'has-error': form.user_role.$invalid && submitted }">
                 <select ng-model="user.user_role" class="form-control" name="user_role" ng-options="item for item in roles"
                         required>
-                    <option value="">-- choose role --</option>
+                    <option value="">-- Choose Your Role --</option>
                 </select>
                 <span class="help-block" ng-show="form.user_role.$invalid && submitted">
                     user role is required
@@ -124,7 +124,7 @@
                 <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
                                                     'has-error': form.phoneNumber.$invalid && submitted }">
                     <input type="text" ng-model="user.user_title" class="form-control" id="phoneNumber" name="phoneNumber"
-                           placeholder="title" required />
+                           placeholder="Title" required />
 
                     <p class="help-block" ng-show="form.phoneNumber.$error.required && submitted">
                         title is required

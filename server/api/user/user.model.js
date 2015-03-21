@@ -23,7 +23,7 @@ var UserSchema = new Schema({
   user_view_schedule: Boolean,
   user_role: {
     type: String,
-    enum: ['Construction Manager', 'Contructor', 'Engineer', 'Owner']
+    enum: ['Construction Manager', 'Contractor', 'Engineer', 'Owner']
   },
   link_company: {
     type: Schema.Types.ObjectId,

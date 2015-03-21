@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('qiApp').controller('DailyReportCtrl', function ($scope, $stateParams, $http, socket, Auth) {
-    $scope.projectID = $stateParams.projectID;
+angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scope, $stateParams, $http, socket, Auth) {
+    //$scope.project._id = $stateParams.projectID;
     $scope.user = Auth.getCurrentUser();
     // $scope.steel_detail = [];
     // $scope.concrete_detail = [];
@@ -15,9 +15,10 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($scope, $statePa
       },
       report_steel : {
         detail :[]
-      }
+      },
+      report_create_date : new Date()
     };
-    $http.get('/api/projects/' + $scope.projectID).success(function(data){
+    $http.get('/api/projects/' + $scope.project._id).success(function(data){
     	$scope.project = data;
       $scope.report.report_number = _.max(data.link_daily_report,function(item){
         return item.report_number;
@@ -116,7 +117,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($scope, $statePa
      }
      $scope.save = function() {
        $scope.report.link_user  = $scope.user._id;
-       $scope.report.link_project =  $scope.projectID;
+       $scope.report.link_project =  $scope.project._id;
        var promise;
        if($scope.report._id) {
           promise = $http.put("/api/reports/" + $scope.report._id);

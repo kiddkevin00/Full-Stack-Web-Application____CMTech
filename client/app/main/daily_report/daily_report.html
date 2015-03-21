@@ -72,7 +72,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-lg-3">
-                        <span>Daily report #:</span>
+                        <span>Daily Report #:</span>
                         {{ report.report_number | numberFixedLen:4 }}
                     </div>
                     <div class="col-lg-3">
@@ -90,17 +90,36 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <span>Date:</span>
-                        {{ report.now }}
+                        <form class="form-inline">
+                          <span for="rg-from">Date: </span>
+                          <div class="form-group">
+                            <input style="height:18px" type="date" ng-model='report.report_create_date' name="rg-from" value="" class="form-control">
+                          </div>
+                        </form>                  
                     </div>
                     <div class="col-lg-3">
-                        <span>Weather:</span>
+                        <form class="form-inline">
+                          <span for="rg-from">Weather: </span>
+                          <div class="form-group">
+                            <input style="height:18px" type="text" ng-model='report.report_weather' value="" class="form-control">
+                          </div>
+                        </form> 
                     </div>
                     <div class="col-lg-3">
-                        <span>Temperature:</span>
+                       <form class="form-inline">
+                         <span for="rg-from">Temperature: </span>
+                         <div class="form-group">
+                           <input style="height:18px" type="text" ng-model='report.report_temperature' value="" class="form-control">
+                         </div>
+                       </form> 
                     </div>
                     <div class="col-lg-3">
-                        <span>Tide:</span>
+                        <form class="form-inline">
+                          <span for="rg-from">Tide: </span>
+                          <div class="form-group">
+                            <input style="height:18px" type="text" ng-model='report.report_tide' value="" class="form-control">
+                          </div>
+                        </form> 
                     </div>
                 </div>
             </div>

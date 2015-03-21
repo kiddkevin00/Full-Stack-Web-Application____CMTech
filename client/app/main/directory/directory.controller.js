@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams, $http, $modal) {
-  $scope.projectID = $stateParams.projectID;
+  //$scope.project._id = $stateParams.projectID;
 
   // project section
   $scope.viewOnly = true;
   $scope.updateProjectForm = {};
   $scope.getProjectInfo = function() {
-    $http.get("/api/projects/" + $scope.projectID).success(function(data) {
+    $http.get("/api/projects/" + $scope.project._id).success(function(data) {
       if (data.project_plan_start) {
         data.project_plan_start = new Date(moment(data.project_plan_start).format('YYYY-MM-DD'));
       }
@@ -38,7 +38,7 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
     if ($scope.updateProjectForm._project_scope3) {
       $scope.updateProjectForm.project_scope += $scope.updateProjectForm._project_scope3;
     }
-    $http.put("/api/projects/" + $scope.projectID, $scope.updateProjectForm).success(function(data) {
+    $http.put("/api/projects/" + $scope.project._id, $scope.updateProjectForm).success(function(data) {
       $scope.updateProjectForm = {};
       $scope.getProjectInfo();
       $scope.viewOnly = true;
@@ -56,7 +56,7 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
   // persons section
   $scope.projectUsers = [];
   $scope.getProjectUsers = function() {
-    $http.get("/api/tbl_user_company_projects/project/" + $scope.projectID ).success(function(data) {
+    $http.get("/api/tbl_user_company_projects/project/" + $scope.project._id ).success(function(data) {
       $scope.projectAllInfo = data;
       $scope.companies = {};
       data.forEach(function(d){

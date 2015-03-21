@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('qiApp').controller('MainCtrl', function ($scope, $http, socket, $location ) {
-    $scope.projectID = $location.path().substring($location.path().indexOf("/", 1) + 1);
+    //$scope.projectID = $location.path().substring($location.path().indexOf("/", 1) + 1);
 });
 
 $(document).ready(function () {
