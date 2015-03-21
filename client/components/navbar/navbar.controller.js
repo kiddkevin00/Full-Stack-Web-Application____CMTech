@@ -14,12 +14,10 @@ angular.module('qiApp').controller('NavbarCtrl', function($rootScope,$scope, soc
         }
         if($state.current.name === 'project') return $state.go('main.home',{projectID : $rootScope.project._id});
         $state.go($state.current.name,{projectID : $rootScope.project._id});
-//        if ($state.current)
-//        $http.get('/api/projects/' + $rootScope.project._id).success(function(data){
-//          $rootScope.project = data;
-//          socket.syncUpdateSingle("project",$scope.project);
-//           $state.go($state.current.name,{projectID : $rootScope.project._id});
-//        });
+        // $http.get('/api/projects/' + $rootScope.project._id).success(function(data){
+        //   $rootScope.project = data;
+        //    $state.go($state.current.name,{projectID : $rootScope.project._id});
+        // });
     }
     $scope.getCurrentUser = Auth.getCurrentUser;
     // logout

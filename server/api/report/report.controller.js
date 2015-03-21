@@ -49,6 +49,7 @@ exports.create = function(req, res) {
               console.log("uploadcare error");
               return  callback(err);
             }
+            req.body.report.report_concrete.concrete_photo_url = res.original_file_url;
             callback(null);
           });
        },
@@ -58,13 +59,14 @@ exports.create = function(req, res) {
               console.log("uploadcare error");
               return  callback(err);
             }
+            req.body.report.report_steel.steel_photo_url = res.original_file_url;
             callback(null);
           });
        }
     
     ],function(err, results){
       if(err) { return handleError(res, err); }
-      console.log(req.body)
+      console.log(req.body.report)
       Report.create(req.body.report, function(err, report) {
         if(err) { return handleError(res, err); }
         Project.findById(req.body.report.link_project, function(err, project){
