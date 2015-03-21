@@ -42,7 +42,6 @@ exports.create = function(req, res) {
   //     text: 'Hello world ✔', // plaintext body
   //     html: '<b>Hello world ✔</b>' // html body
   // };
-
   var userId = req.body.userId;
   var projectId = req.body.projectId;
   var recipients = req.body.recipients;
@@ -58,15 +57,19 @@ exports.create = function(req, res) {
         message.message_expire_date = moment().add(10, 'd').utc().format();
         message.save(function(err, m){
           if(err) callback(err);
+          console.log("start send email")
           m.sendEmail(r,function(err,info){
             if(err) callback(err);
             console.log(info)
             callback();
           })
         });
+      } else {
+        callback();
       }
     })
   },function(err){
+    console.log(err)
     if(err) return res.send(err);
     return res.json(205,'ok')
   })

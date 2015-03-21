@@ -6,10 +6,10 @@
     <div class="form-group col-md-4" ng-class="{ 'has-success': form.email.$valid && submitted,
                                         'has-error': form.email.$invalid && submitted }">
         <input type="email" ng-model="$parent.email" class="form-control" name="email"
-               placeholder="email" required/>
-        <p class="help-block" ng-show="form.email.$error.required && submitted">
+               placeholder="email" />
+        <!-- <p class="help-block" ng-show="form.email.$error.required && submitted">
             email is required
-        </p> 
+        </p>  -->
         <p class="help-block" ng-show="form.email.$error.email && submitted">
             email is invalid
         </p>
@@ -17,12 +17,6 @@
     <div class='col-md-4'></div>
         <button class='btn btn-primary' ng-click="addEmail()">Add</button>
    </div>
-   <table>
-      <tr ng-repeat='email in emails track by $index'>
-        <td> <span>{{email}}</span></td>
-        <td> <button class='btn btn-danger' ng-click="emails.splice($index,1)">X</button></td>
-      </tr>
-   </table>
    <div class='row' ng-repeat='email in emails track by $index'>
         <div class='col-md-4'>
             <span>{{email}}</span>

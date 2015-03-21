@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal, socket, Auth, $location) {
+angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $state, $modal, socket, Auth, $location) {
     $scope.user = Auth.getCurrentUser();
     $scope.main = {};
+    
     $scope.createMainModal = function() {
         var modalInstance = $modal.open({
             templateUrl: "/components/modal/modal.html",
@@ -58,7 +59,7 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal
         };
         $scope.addEmail = function() {
             $scope.submitted = true;
-            if ($scope.form.$invalid) return;
+            if (!$scope.email) return;
             $scope.emails.push($scope.email);
             $scope.submitted = false;
         };
@@ -100,7 +101,9 @@ angular.module('qiApp').controller('ProjectCtrl', function($scope, $http, $modal
                                 projectId: data._id,
                                 recipients: $scope.emails
                             }).success(function() {
+                                console.log("finish")
                                 $modalInstance.close(true);
+                                $state.go('project')
                             });
                         })
                     });
