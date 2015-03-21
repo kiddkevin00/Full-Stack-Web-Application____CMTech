@@ -13,10 +13,12 @@ angular.module('qiApp').controller('NavbarCtrl', function($rootScope,$scope, $ht
             $state.go('project');
             return;
         }
-        $http.get('/api/projects/' + $rootScope.project._id).success(function(data){
-          $rootScope.project = data;
-           $state.go($state.current.name,{projectID : $rootScope.project._id});
-        });
+        if($state.current.name === 'project') return $state.go('main.home',{projectID : $rootScope.project._id});
+        $state.go($state.current.name,{projectID : $rootScope.project._id});
+        // $http.get('/api/projects/' + $rootScope.project._id).success(function(data){
+        //   $rootScope.project = data;
+        //    $state.go($state.current.name,{projectID : $rootScope.project._id});
+        // });
     }
     $scope.getCurrentUser = Auth.getCurrentUser;
     // logout

@@ -27,8 +27,10 @@ angular.module('qiApp')
        syncUpdateSingle: function(modelName,oldItem, cb) {
           cb = cb || angular.noop;
           socket.on(modelName + ':save', function (item) {
-             _.assign(oldItem, item);
-             cb();
+            if(oldItem._id === item._id) {
+              _.assign(oldItem, item);
+              cb();
+            }
           })
        },
       /**

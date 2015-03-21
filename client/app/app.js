@@ -10,11 +10,16 @@ angular.module('qiApp', [
   'ui.select'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $stateProvider.state('expire', {
-        url: '/expire',
-        templateUrl: '/components/error/expire.html'
-    })
-    $urlRouterProvider.otherwise('/');
+    // $stateProvider.state('expire', {
+    //     url: '/expire',
+    //     templateUrl: '/components/error/expire.html'
+    // })
+    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise( function($injector, $location) {
+      console.log('otherwi')
+        var $state = $injector.get("$state");
+      //  $state.go("app.home");
+    });
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
@@ -50,13 +55,18 @@ angular.module('qiApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, $state) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/');
-        }
+        } 
+        else if(!$rootScope.project) {
+          $location.path('/project');
+          //event.preventDefault();
+        //  return;
+       }
       });
     });
   });

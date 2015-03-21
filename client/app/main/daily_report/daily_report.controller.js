@@ -25,6 +25,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
       }).report_number + 1;
       if(!data.link_daily_report.length) $scope.report.report_number = 1;
       $scope.reports =_.groupBy(data.link_daily_report,function(item){
+        item.report_create_date = new Date(item.report_create_date);
         var date = moment(item.report_create_date);
         item.day = date.format('dddd');
         item.format_date = date.format('MMM D,YYYY');
@@ -38,6 +39,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
           }).report_number + 1;
           if(!data.link_daily_report.length) $scope.report.report_number = 1;
           $scope.reports =_.groupBy(data.link_daily_report,function(item){
+            item.report_create_date = new Date(item.report_create_date);
             var date = moment(item.report_create_date);
             item.day = date.format('dddd');
             item.format_date = date.format('MMM D,YYYY');
@@ -120,7 +122,11 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        $scope.report.link_project =  $scope.project._id;
        var promise;
        if($scope.report._id) {
-          promise = $http.put("/api/reports/" + $scope.report._id);
+          promise = $http.put("/api/reports/" + $scope.report._id,{
+                       concrete_photo_uuid :  $scope.concrete_photo_uuid,
+                       steel_photo_uuid :  $scope.steel_photo_uuid, 
+                       report: $scope.report
+                     });
        } else {
           promise = $http.post("/api/reports/",{
                        concrete_photo_uuid :  $scope.concrete_photo_uuid,

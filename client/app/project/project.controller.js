@@ -41,11 +41,13 @@ angular.module('qiApp').controller('ProjectCtrl', function($rootScope, $scope, $
             }
         });
     };
-    $scope.goProject = function(id) {
-        $http.get('/api/projects/' + id).success(function(data){
-            $rootScope.project = data;
-            $state.go('main.home',{projectID : data._id});
-        });
+    $scope.goProject = function(item) {
+        $rootScope.project = item;
+        $state.go('main.home',{projectID : item._id});
+        // $http.get('/api/projects/' + id).success(function(data){
+        //     $rootScope.project = data;
+        //     $state.go('main.home',{projectID : data._id});
+        // });
     };
     var CreateMainModalCtrl = function($scope, $modalInstance, user) {
         $scope.emails = [];

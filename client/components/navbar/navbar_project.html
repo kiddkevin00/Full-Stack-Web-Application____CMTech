@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl" style="margin-bottom: 0px">
+`<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl" style="margin-bottom: 0px">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
@@ -12,7 +12,7 @@
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
             <div class="btn-group dropdown" style="position:absolute; left:50%; margin-top:0.8%;">
-                <select ng-model="$root.project" ng-options="item.project_name for item in getCurrentUser().link_projects track by item._id" ng-change="pickProject()">
+                <select ng-model="$root.project" ng-options="item as item.project_name for item in getCurrentUser().link_projects" ng-change="pickProject()">
                     <option value="">Project List</option>
                 </select>
                 <!-- <button type="button" class="btn btn-default dropdown-toggle clear">
