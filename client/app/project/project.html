@@ -9,10 +9,10 @@
     </div>
     <div class="row" ng-repeat="row in user.link_projects | chunk:3">
         <div class="col-lg-4" ng-repeat="item in row">
-            <a ui-sref="main.home({projectID : item._id})" class="thumbnail">
+            <a ui-sref="main.home({projectID : item._id})" style="margin-bottom: 8px" class="thumbnail">
                 <img style='width:100%; height:100%' ng-src="{{ item.project_image_url }}" />
             </a>
-            <h4 class="text-center">{{item.project_name}}</h4>
+            <h4 style="color: darkgray" class="text-left">{{item.project_name}}</h4>
         </div>
     </div>
 </div>
