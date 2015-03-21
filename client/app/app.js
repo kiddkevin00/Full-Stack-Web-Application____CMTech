@@ -62,10 +62,8 @@ angular.module('qiApp', [
         if (next.authenticate && !loggedIn) {
           $location.path('/');
         } 
-        else if(!$rootScope.project) {
-          $location.path('/project');
-          //event.preventDefault();
-        //  return;
+        else if(loggedIn && !$rootScope.project) {
+         $location.path('/project');
        }
       });
     });
