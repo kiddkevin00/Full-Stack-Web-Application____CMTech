@@ -18,7 +18,6 @@ angular.module('qiApp').controller('ProjectCtrl', function($rootScope, $scope, $
         modalInstance.result.then(function(ctrl) {
             if (ctrl) {
                 socket.syncUpdateUser(Auth.getCurrentUser());
-                console.log("Form Submitted");
             }
         });
     };
@@ -37,13 +36,12 @@ angular.module('qiApp').controller('ProjectCtrl', function($rootScope, $scope, $
         modalInstance.result.then(function(ctrl) {
             if (ctrl) {
                 socket.syncUpdateUser(Auth.getCurrentUser());
-                console.log("Form Submitted");
             }
         });
     };
     $scope.goProject = function(item) {
         $rootScope.project = item;
-        $state.go('main.home',{projectID : item._id});
+        $state.go('main.daily_report',{projectID : item._id});
         // $http.get('/api/projects/' + id).success(function(data){
         //     $rootScope.project = data;
         //     $state.go('main.home',{projectID : data._id});

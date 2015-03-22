@@ -64,7 +64,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        else {
         uploadcare.SingleWidget('#concrete').value(null);
         $scope.concrete_imageSrc = "";
-        //$scope.$apply();
+        $scope.$apply();
        }
      });
      uploadcare.SingleWidget('#steel').onChange(function(file) {
@@ -80,7 +80,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        else {
         uploadcare.SingleWidget('#steel').value(null);
         $scope.steel_imageSrc = "";
-       // $scope.$apply();
+        $scope.$apply();
        }
      });
 
@@ -113,7 +113,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
           },
           report_steel : {
             detail :[]
-          }
+          },
+          report_create_date : new Date()
         };
        $scope.isEditForm = false;
      }
@@ -144,7 +145,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
               },
               report_steel : {
                 detail :[]
-              }
+              },
+              report_create_date : new Date()
             };
            $scope.isEditForm = false;
        });
@@ -161,7 +163,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        //      },
        //      report_steel : {
        //        detail :[]
-       //      }
+       //      },
+       report_create_date : new Date()
        //    };
        // });
      }
