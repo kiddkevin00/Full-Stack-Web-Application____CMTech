@@ -8,6 +8,7 @@ var Report = require('./report.model');
 
 exports.register = function(socket) {
   Report.schema.post('save', function (doc) {
+  	console.log("socket report", doc.report_concrete.detail)
     onSave(socket, doc);
   });
   Report.schema.post('remove', function (doc) {
