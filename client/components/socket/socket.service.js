@@ -53,15 +53,18 @@ angular.module('qiApp')
           var oldItem = _.find(array, {_id: item._id});
           var index = array.indexOf(oldItem);
           var event = 'created';
-
+          if(item.report_create_date) {
+            item.report_create_date = new Date(item.report_create_date)
+          }
           // replace oldItem if it exists
           // otherwise just add item to the collection
           if (oldItem) {
             array.splice(index, 1, item);
             event = 'updated';
-          } else {
-            array.push(item);
-          }
+          } 
+          // else {
+          //   array.push(item);
+          // }
 
           cb(event, item, array);
         });

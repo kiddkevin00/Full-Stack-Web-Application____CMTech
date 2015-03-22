@@ -84,16 +84,44 @@ exports.create = function(req, res) {
 
 // Updates an existing report in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Report.findById(req.params.id, function (err, report) {
-    if (err) { return handleError(res, err); }
-    if(!report) { return res.send(404); }
-    var updated = _.merge(report, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, report);
-    });
-  });
+  async.parallel([
+       function(callback){
+          uploadcare.files.store(req.body.concrete_photo_uuid, function(err,res){
+            console.log(err,res)
+            if(err) {
+              console.log("uploadcare error");
+              return  callback(err);
+            }
+            req.body.report.report_concrete.concrete_photo_url = res.original_file_url;
+            callback(null);
+          });
+       },
+       function(callback){
+          uploadcare.files.store(req.body.steel_photo_uuid, function(err,res){
+            if(err) {
+              console.log("uploadcare error");
+              return  callback(err);
+            }
+            req.body.report.report_steel.steel_photo_url = res.original_file_url;
+            callback(null);
+          });
+       }
+    
+    ],function(err, results){
+      if(err) { return handleError(res, err); }
+      console.log(req.body.report)
+      if(req.body._id) { delete req.body._id; }
+      Report.findById(req.params.id, function (err, report) {
+        if (err) { return handleError(res, err); }
+        if(!report) { return res.send(404); }
+        var updated = _.merge(report, req.body.report);
+        updated.save(function (err) {
+          if (err) { return handleError(res, err); }
+          return res.json(200, report);
+        });
+      });
+  })
+  
 };
 
 // Deletes a report from the DB.
