@@ -90,7 +90,9 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   async.parallel([
        function(callback){
-         if(!req.body.concrete_photo_uuid) return callback(null);
+         if(!req.body.concrete_photo_uuid) {
+              return callback(null);
+         }
           uploadcare.files.store(req.body.concrete_photo_uuid, function(err,res){
             console.log(err,res)
             if(err) {
@@ -102,7 +104,9 @@ exports.update = function(req, res) {
           });
        },
        function(callback){
-        if(!req.body.steel_photo_uuid) return callback(null);
+        if(!req.body.steel_photo_uuid) {
+          return callback(null);
+        }
           uploadcare.files.store(req.body.steel_photo_uuid, function(err,res){
             if(err) {
               console.log("uploadcare error");
@@ -120,7 +124,9 @@ exports.update = function(req, res) {
         if (err) { return handleError(res, err); }
         if(!report) { return res.send(404); }
         var updated = _.merge(report, req.body.report);
-        console.log(updated.report_concrete.detail)
+        if(!req.body.concrete_photo_uuid)  updated.report_concrete.concrete_photo_url = ""
+        if(!req.body.steel_photo_uuid)  updated.report_steel.steel_photo_url = ""
+        console.log("++" , updated)
         updated.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, report);

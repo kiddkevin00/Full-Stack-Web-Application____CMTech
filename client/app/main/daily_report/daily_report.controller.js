@@ -78,6 +78,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        else {
         uploadcare.SingleWidget('#concrete').value(null);
         $scope.concrete_imageSrc = "";
+        $scope.concrete_photo_uuid = null;
         $scope.safeApply();
        }
      });
@@ -93,6 +94,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        }
        else {
         uploadcare.SingleWidget('#steel').value(null);
+        $scope.steel_photo_uuid = null;
         $scope.steel_imageSrc = "";
         $scope.safeApply();
        }
