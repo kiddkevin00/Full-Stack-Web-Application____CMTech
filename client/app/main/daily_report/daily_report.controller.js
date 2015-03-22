@@ -32,6 +32,11 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
         return date.format('MMM YYYY');
       });
       //console.log(test)
+      for(var  key in $scope.reports) {
+         console.log(key);
+         socket.syncUpdates('report',$scope.reports[key]);
+      }
+      
     	socket.syncUpdateSingle("project",$scope.project,function(){
           var data = $scope.project;
           $scope.report.report_number = _.max(data.link_daily_report,function(item){
@@ -48,14 +53,23 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
       });
     });
 
-
+    $scope.safeApply = function(fn) {
+      var phase = this.$root.$$phase;
+      if(phase == '$apply' || phase == '$digest') {
+        if(fn && (typeof(fn) === 'function')) {
+          fn();
+        }
+      } else {
+        this.$apply(fn);
+      }
+    };
      uploadcare.SingleWidget('#concrete').onChange(function(file) {
        if (file) {
          file.done(function(info) {
         // Handle uploaded file info.
            $scope.concrete_photo_uuid = info.uuid;
            $scope.concrete_imageSrc = info.originalUrl + "-/resize/170x100/";
-           $scope.$apply();
+           $scope.safeApply();
            // $http.post('/api/reports',{id : info.uuid}).success(function(){
            // 	console.log("done");
            // });
@@ -64,7 +78,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        else {
         uploadcare.SingleWidget('#concrete').value(null);
         $scope.concrete_imageSrc = "";
-        $scope.$apply();
+        $scope.safeApply();
        }
      });
      uploadcare.SingleWidget('#steel').onChange(function(file) {
@@ -74,13 +88,13 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
         // Handle uploaded file info.
            $scope.steel_photo_uuid = info.uuid;
            $scope.steel_imageSrc = info.originalUrl + "-/resize/170x100/";
-           $scope.$apply();
+           $scope.safeApply();
          });
        }
        else {
         uploadcare.SingleWidget('#steel').value(null);
         $scope.steel_imageSrc = "";
-        $scope.$apply();
+        $scope.safeApply();
        }
      });
 
@@ -136,7 +150,6 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
                      });
        }
        promise.then(function(data){
-            console.log(data)
             uploadcare.SingleWidget('#concrete').value(null);
             uploadcare.SingleWidget('#steel').value(null);
             $scope.report = {
@@ -164,7 +177,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        //      report_steel : {
        //        detail :[]
        //      },
-       report_create_date : new Date()
+       //report_create_date : new Date()
        //    };
        // });
      }

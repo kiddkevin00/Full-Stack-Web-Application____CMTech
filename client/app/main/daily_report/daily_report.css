@@ -1,29 +1,70 @@
 .cmtech-multi-input-line input {
+    text-align: center;
     background-color: rgba(255, 0, 0, 0);
     outline: 0;
     border: 0;
-    border-bottom: 1px solid #000000;
-}
-.image-preview-single {
-  padding: 10px 0;
-}
-.image-preview-single > img {
-  width: 235px;
-  height: 106px;
-  vertical-align: middle;
+    border-bottom: 1px solid #CACACA;
 }
 
-.uploadcare-widget {
-	display:  block
+.image-preview-single {
+    padding: 10px 0 0 0;
+}
+
+.image-preview-single > img {
+    width: 235px;
+    height: 136px;
+    vertical-align: middle;
 }
 
 textarea {
- /*background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;*/
- width: 100%;
- height: 120px;
- font: normal 14px verdana;
- line-height: 25px;
- padding: 2px 10px;
- margin-bottom:  19px;
- border: solid 1px #ddd;
+    /*background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;*/
+    resize: none;
+    width: 100%;
+    height: 132px;
+    font: normal 14px verdana;
+    line-height: 25px;
+    padding: 2px 10px;
+    margin-bottom: 0;
+    border: solid 1px #ddd;
+}
+
+/**
+ *  My Customized UPLOADCARE Style
+ */
+
+.uploadcare-widget {
+    display: block;
+}
+
+/* choose an image */
+.uploadcare-widget-button.uploadcare-widget-button-open {
+    wdidth: 120px;
+    height: 20px;
+    visibility: hidden;
+}
+
+/* choose an image */
+.uploadcare-widget-button.uploadcare-widget-button-open:after {
+    visibility: visible;
+    content: "Choose an Image";
+    color: #808080;
+}
+
+/* remove button */
+.uploadcare-widget-button.uploadcare-widget-button-remove {
+    wdidth: 120px;
+    height: 20px;
+    visibility: hidden;
+}
+
+/* remove button */
+.uploadcare-widget-button.uploadcare-widget-button-remove:after {
+    visibility: visible;
+    content: "Remove";
+    color: #808080;
+}
+
+/* uploaded file info */
+div.uploadcare-widget.uploadcare-widget-status-loaded > div.uploadcare-widget-text {
+    display: none !important;
 }
