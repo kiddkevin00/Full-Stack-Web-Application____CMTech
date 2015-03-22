@@ -43,6 +43,8 @@ exports.create = function(req, res) {
   console.log(req.body.concrete_photo_uuid,req.body.steel_photo_uuid)
   async.parallel([
        function(callback){
+          if(!req.body.concrete_photo_uuid) return callback(null);
+          console.log(!req.body.concrete_photo_uuid)
           uploadcare.files.store(req.body.concrete_photo_uuid, function(err,res){
             console.log(err,res)
             if(err) {
@@ -54,6 +56,8 @@ exports.create = function(req, res) {
           });
        },
        function(callback){
+          if(!req.body.steel_photo_uuid) return callback(null);
+          console.log(!req.body.steel_photo_uuid)
           uploadcare.files.store(req.body.steel_photo_uuid, function(err,res){
             if(err) {
               console.log("uploadcare error");
@@ -86,6 +90,9 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   async.parallel([
        function(callback){
+         if(!req.body.concrete_photo_uuid) {
+              return callback(null);
+         }
           uploadcare.files.store(req.body.concrete_photo_uuid, function(err,res){
             console.log(err,res)
             if(err) {
@@ -97,6 +104,9 @@ exports.update = function(req, res) {
           });
        },
        function(callback){
+        if(!req.body.steel_photo_uuid) {
+          return callback(null);
+        }
           uploadcare.files.store(req.body.steel_photo_uuid, function(err,res){
             if(err) {
               console.log("uploadcare error");
@@ -109,12 +119,14 @@ exports.update = function(req, res) {
     
     ],function(err, results){
       if(err) { return handleError(res, err); }
-      console.log(req.body.report)
       if(req.body._id) { delete req.body._id; }
       Report.findById(req.params.id, function (err, report) {
         if (err) { return handleError(res, err); }
         if(!report) { return res.send(404); }
         var updated = _.merge(report, req.body.report);
+        if(!req.body.concrete_photo_uuid)  updated.report_concrete.concrete_photo_url = ""
+        if(!req.body.steel_photo_uuid)  updated.report_steel.steel_photo_url = ""
+        console.log("++" , updated)
         updated.save(function (err) {
           if (err) { return handleError(res, err); }
           return res.json(200, report);

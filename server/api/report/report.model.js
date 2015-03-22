@@ -24,21 +24,21 @@ var ReportSchema = new Schema({
   	description : String,
   	detail : [{
   		   person : String,
-  		   numer : String,
+  		   number : String,
   		   hours : String
      	}
   	],
-  	concrete_photo_url : {type : String, default : 'http://www.ucarecdn.com/0f6afb90-31bf-46cb-a14b-cdf7af172339/'}
+  	concrete_photo_url : String
   },
   report_steel : {
   	description : String,
 	detail : [{
   		   person : String,
-  		   numer : String,
+  		   number : String,
   		   hours : String
      	}
   	],
-  	steel_photo_url : {type : String, default : 'http://www.ucarecdn.com/0f6afb90-31bf-46cb-a14b-cdf7af172339/'}
+  	steel_photo_url : String
   },
   report_issues: String,
   report_other_issues : String

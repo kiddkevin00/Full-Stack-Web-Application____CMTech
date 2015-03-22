@@ -78,6 +78,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        else {
         uploadcare.SingleWidget('#concrete').value(null);
         $scope.concrete_imageSrc = "";
+        $scope.concrete_photo_uuid = null;
         $scope.safeApply();
        }
      });
@@ -93,6 +94,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
        }
        else {
         uploadcare.SingleWidget('#steel').value(null);
+        $scope.steel_photo_uuid = null;
         $scope.steel_imageSrc = "";
         $scope.safeApply();
        }
@@ -121,6 +123,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
         uploadcare.SingleWidget('#concrete').value(null);
         uploadcare.SingleWidget('#steel').value(null);
         var data = $scope.project;
+        $scope.concrete_photo_uuid = null;
+        $scope.steel_photo_uuid = null;
         $scope.report = {
           report_concrete : {
             detail : []
@@ -161,6 +165,8 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
               },
               report_create_date : new Date()
             };
+            $scope.concrete_photo_uuid = null;
+            $scope.steel_photo_uuid = null;
            $scope.isEditForm = false;
        });
        // $http.post("/api/reports/",{
