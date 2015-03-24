@@ -1,23 +1,23 @@
 <div ng-hide="isEditForm" class="cmtech-tab-content">
     <div class="row">
         <div class="col-lg-offset-10 col-lg-2">
-            <div class="page-header">
-                <button class="btn btn-info" ng-click="createReport()">Create New Report</button>
+            <div style="border: 0" class="page-header">
+                <button style="border:0; background-color:#357ebd;" class="btn btn-info" ng-click="createReport()">Create New
+                    Report</button>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <accordion close-others="oneAtATime">
-                <accordion-group heading="{{key}}" is-open="status.isFirstOpen"
-                                 is-disabled="status.isFirstDisabled" ng-repeat="(key, value) in reports">
+                <accordion-group heading="{{ key }}" is-open="$first" ng-repeat="(key, value) in reports">
                     <div>
                         <table class="table table-striped">
                             <tr>
-                                <th>#</th>
-                                <th>day</th>
-                                <th>date</th>
-                                <th>reported</th>
+                                <th>No.</th>
+                                <th>Day</th>
+                                <th>Date</th>
+                                <th>Reporter</th>
                                 <th>Active Trades</th>
                                 <th></th>
                             </tr>
@@ -38,7 +38,10 @@
                                     <span>{{ r.link_user.user_office_phone || 'N/A'}}</span>
                                 </td>
                                 <td>
-                                    <button class='btn btn-info' ng-click="editReports(r)">edit</button>
+                                    <button style="border:0; background-color:darkgray" class='btn btn-info'
+                                            ng-click="editReports(r)">
+                                        VIEW
+                                    </button>
                                 </td>
                             </tr>
                         </table>
@@ -239,11 +242,11 @@
     <div class="col-lg-4">
         <div class="cmtech-multi-input-line" style="margin: 0 2%">
             <div class="row">
-                <p class="col-lg-4 text-center">Personal</p>
+                <p class="col-lg-4 text-center">Perssonel</p>
 
-                <p class="col-lg-3 text-center">#</p>
+                <p style="padding-left: 10%" class="col-lg-3 text-center">No.</p>
 
-                <p style="padding-left: 10%" class="col-lg-4 text-center">Hours</p>
+                <p style="padding-left: 15%" class="col-lg-4 text-center">Hours</p>
             </div>
             <div class="row">
                 <input style="text-align:left; margin-right: 10px" ng-model="report.report_concrete.detail[0].person"
@@ -308,11 +311,11 @@
     <div class="col-lg-4">
         <div class="cmtech-multi-input-line" style="margin: 0 2%">
             <div class="row">
-                <p style="padding-left: 10%" class="col-lg-4 text-center">Personal</p>
+                <p class="col-lg-4 text-center">Perssonel</p>
 
-                <p style="padding-left: 10%" class="col-lg-3 text-center">#</p>
+                <p style="padding-left: 10%" class="col-lg-3 text-center">No.</p>
 
-                <p style="padding-left: 10%" class="col-lg-4 text-center">Hours</p>
+                <p style="padding-left: 15%" class="col-lg-4 text-center">Hours</p>
             </div>
             <div class="row">
                 <input style="text-align:left; margin-right: 10px" ng-model="report.report_steel.detail[0].person"
@@ -356,7 +359,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            Equipment, Material, Deriveries
+            Equipment, Materials, Deliveries
         </div>
     </div>
 </div>
@@ -365,12 +368,10 @@
         <textarea ng-model="report.report_issues"></textarea>
     </div>
 </div>
-<br />
-
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            Other issues
+            Other Issues
         </div>
     </div>
 </div>
@@ -379,10 +380,10 @@
         <textarea ng-model="report.report_other_issues"></textarea>
     </div>
 </div>
-<div style="height: 80px" class="row"></div>
+<div style="height: 32px" class="row"></div>
 <div class="row">
-    <button class='btn btn-info' ng-click="save()">save</button>
-    <button class='btn btn-danger' ng-click="cancel()">cancel</button>
+    <button class='btn btn-info' ng-click="save()">Save</button>
+    <button class='btn btn-danger' ng-click="cancel()">Cancel</button>
 </div>
 <div style="height: 50px" class="row"></div>
 </div>

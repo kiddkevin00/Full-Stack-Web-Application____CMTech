@@ -13,6 +13,16 @@
     margin-left: 0.3%
 }
 
+/* slide show */
+.carousel-indicators li {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}
+
 /* ================================== Default CSS ====================================== */
 .thing-form {
     margin: 20px 0;

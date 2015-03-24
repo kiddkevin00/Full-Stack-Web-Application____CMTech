@@ -60,6 +60,7 @@ textarea {
 /* remove button */
 .uploadcare-widget-button.uploadcare-widget-button-remove:after {
     visibility: visible;
+    padding-left: 49%;
     content: "Remove";
     color: #808080;
 }

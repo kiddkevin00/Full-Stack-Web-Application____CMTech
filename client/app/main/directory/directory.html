@@ -1,211 +1,219 @@
 <div class="cmtech-tab-content">
-  <div class="row">
-    <div class="col-lg-offset-1 col-lg-10">
-      <div ng-init="getProjectInfo(); getProjectUsers ()" class="page-header">
-        <accordion close-others="true">
-          <accordion-group>
-            <accordion-heading>
-              PROJECT INFO
-              <button ng-click="editUpdateProjectForm($event)" type="button"
-                      class="pull-right btn btn-primary btn-xs">Edit
-              </button>
-            </accordion-heading>
-            <form name="form" ng-submit="updateProjectInfo(form)">
-              <div class="row">
-                <div class=" col-lg-2">
-                  Project Name:
-                </div>
-                <div class="cmtech-input-line col-lg-9">
-                  <input ng-model="updateProjectForm.project_name" type="text" class="col-lg-12"
-                         ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <div class="row">
-                <div class=" col-lg-2">
-                  Project Number:
-                </div>
-                <div class="cmtech-input-line col-lg-9">
-                  <input ng-model="updateProjectForm.project_number" type="text" class="col-lg-12"
-                         ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <div class="row">
-                <div class=" col-lg-2">
-                  Address:
-                </div>
-                <div class="cmtech-input-line col-lg-9">
-                  <input ng-model="updateProjectForm.project_address" type="text" class="col-lg-12" />
-                </div>
-              </div>
-              <br />
+<div class="row">
+<div class="col-lg-offset-1 col-lg-10">
+<div ng-init="getProjectInfo(); getProjectUsers();" class="page-header">
+<accordion close-others="true">
+<accordion-group is-open="true">
+    <accordion-heading>
+        PROJECT INFO
+        <button ng-click="editUpdateProjectForm($event)" type="button"
+                class="pull-right btn btn-primary btn-xs">Edit
+        </button>
+    </accordion-heading>
+    <form name="form" ng-submit="updateProjectInfo(form)">
+        <div class="row">
+            <div class=" col-lg-2">
+                Project Name:
+            </div>
+            <div class="cmtech-input-line col-lg-9">
+                <input ng-model="updateProjectForm.project_name" type="text" class="col-lg-12"
+                       ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-lg-2">
+                Project Number:
+            </div>
+            <div class="cmtech-input-line col-lg-9">
+                <input ng-model="updateProjectForm.project_number" type="text" class="col-lg-12"
+                       ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-lg-2">
+                Address:
+            </div>
+            <div class="cmtech-input-line col-lg-9">
+                <input ng-model="updateProjectForm.project_address" type="text" class="col-lg-12" />
+            </div>
+        </div>
+        <br />
 
-              <div class="row">
-                <div class=" col-lg-2">
-                  Project Type:
-                </div>
-                <div class="cmtech-input-line col-lg-5">
-                  <input ng-model="updateProjectForm.project_type" type="text"
-                         class="col-lg-12" ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <br />
+        <div class="row">
+            <div class=" col-lg-2">
+                Project Type:
+            </div>
+            <div class="cmtech-input-line col-lg-5">
+                <input ng-model="updateProjectForm.project_type" type="text"
+                       class="col-lg-12" ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <br />
 
-              <div class="row">
-                <div class=" col-lg-2">
-                  Project Scope:
-                </div>
-                <div class="cmtech-input-line col-lg-9">
-                  <input ng-model="updateProjectForm.project_scope" type="text"
-                         class="col-lg-12" ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-offset-2 col-lg-9 cmtech-input-line">
-                  <input ng-model="updateProjectForm._project_scope2" type="text"
-                         class="col-lg-12" ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-offset-2 col-lg-9 cmtech-input-line">
-                  <input ng-model="updateProjectForm._project_scope3" type="text"
-                         class="col-lg-12" ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <br />
+        <div class="row">
+            <div class=" col-lg-2">
+                Project Scope:
+            </div>
+            <div class="cmtech-input-line col-lg-9">
+                <input ng-model="updateProjectForm.project_scope" type="text"
+                       class="col-lg-12" ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-9 cmtech-input-line">
+                <input ng-model="updateProjectForm._project_scope2" type="text"
+                       class="col-lg-12" ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-9 cmtech-input-line">
+                <input ng-model="updateProjectForm._project_scope3" type="text"
+                       class="col-lg-12" ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <br />
 
-              <div class="row">
-                <div class=" col-lg-2">
-                  Timeline:
-                </div>
-                <div class="cmtech-input-line col-lg-2">
-                  <input ng-model="updateProjectForm.project_plan_start" type="date" ng-disabled="viewOnly" />
-                </div>
-                <div class="cmtech-input-line col-lg-offset-2 col-lg-2">
-                  <input ng-model="updateProjectForm.project_plan_complete" type="date"
-                         ng-disabled="viewOnly" />
-                </div>
-                <div class="cmtech-input-line col-lg-offset-2 col-lg-1">
-                  <input ng-model="updateProjectForm.project_plan_duration" type="number"
-                         style="width:130%" ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <br />
+        <div class="row">
+            <div class=" col-lg-2">
+                Timeline:
+            </div>
+            <div class="cmtech-input-line col-lg-2">
+                <input ng-model="updateProjectForm.project_plan_start" type="date" ng-disabled="viewOnly" />
+            </div>
+            <div class="cmtech-input-line col-lg-offset-2 col-lg-2">
+                <input ng-model="updateProjectForm.project_plan_complete" type="date"
+                       ng-disabled="viewOnly" />
+            </div>
+            <div class="cmtech-input-line col-lg-offset-2 col-lg-1">
+                <input ng-model="updateProjectForm.project_plan_duration" type="number"
+                       style="width:130%" ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <br />
 
-              <div class="row">
-                <div class=" col-lg-2">
-                  Budget:
-                </div>
-                <div class="cmtech-input-line col-lg-4">
-                  <input ng-model="updateProjectForm.project_origin_budget" type="text" class="col-lg-12"
-                         ng-disabled="viewOnly" />
-                </div>
-                <div class="cmtech-input-line col-lg-offset-1 col-lg-4">
-                  <input ng-model="updateProjectForm.project_current_cost" type="text" class="col-lg-12"
-                         ng-disabled="viewOnly" />
-                </div>
-              </div>
-              <br />
-              <br />
+        <div class="row">
+            <div class=" col-lg-2">
+                Budget:
+            </div>
+            <div class="cmtech-input-line col-lg-4">
+                <input ng-model="updateProjectForm.project_origin_budget" type="text" class="col-lg-12"
+                       ng-disabled="viewOnly" />
+            </div>
+            <div class="cmtech-input-line col-lg-offset-1 col-lg-4">
+                <input ng-model="updateProjectForm.project_current_cost" type="text" class="col-lg-12"
+                       ng-disabled="viewOnly" />
+            </div>
+        </div>
+        <br />
+        <br />
 
-              <div ng-if="!viewOnly" class="row">
-                <div class="col-lg-offset-3 col-lg-3">
-                  <button type="submit" class="btn btn-primary col-lg-12">Save</button>
-                </div>
-                <div class="col-lg-3">
-                  <button ng-click="cancel()" type="button" class="btn btn-warning col-lg-12">Cancel</button>
-                </div>
-              </div>
-            </form>
-          </accordion-group>
+        <div ng-if="!viewOnly" class="row">
+            <div class="col-lg-offset-3 col-lg-3">
+                <button type="submit" class="btn btn-primary col-lg-12">Save</button>
+            </div>
+            <div class="col-lg-3">
+                <button ng-click="cancel()" type="button" class="btn btn-warning col-lg-12">Cancel</button>
+            </div>
+        </div>
+    </form>
+</accordion-group>
 
-          <accordion-group>
-            <accordion-heading>
-              COMPANIES
-            </accordion-heading>
-            <div ng-repeat = "(_id , company) in companies">
-              <table class="table table-striped">
-                <u><b>{{company.company_name}}  {{company.company_title}}</b></u>
-                <div>{{company.company_address}}</div>
-                <tr>
-                  <th>Title</th>
-                  <th>Name Last Name</th>
-                  <th>Email</th>
-                  <th>Office No.</th>
-                  <th>Cell No.</th>
-                </tr>
-                <tr ng-repeat="user in company.users">
-                  <td>
+<accordion-group>
+    <accordion-heading>
+        COMPANIES
+    </accordion-heading>
+    <div ng-repeat="(_id , company) in companies">
+        <table class="table table-striped">
+            <u><b>{{company.company_name}} {{company.company_title}}</b></u>
+
+            <div>{{company.company_address}}</div>
+            <tr>
+                <th>Title</th>
+                <th>Name Last Name</th>
+                <th>Email</th>
+                <th>Office No.</th>
+                <th>Cell No.</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="user in company.users">
+                <td>
                     <span>{{ user.user_last_name  || 'N/A'}}</span>
-                  </td> 
-                  <td>
+                </td>
+                <td>
                     <span>{{ user.user_first_name  || 'N/A'}}</span>
-                  </td>
-                  <td>
+                </td>
+                <td>
                     <span>{{ user.user_email  || 'N/A'}}</span>
-                  </td>
-                  <td>
+                </td>
+                <td>
                     <span>{{ user.user_office_phone  || 'N/A'}}</span>
-                  </td>
-                  <td>
+                </td>
+                <td>
                     <span>{{ user.user_mobile_phone  || 'N/A'}}</span>
-                  </td>
-                    <button ng-click="updatePersonModal()" type="button" class="btn btn-info btn-xs">Edit</button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </accordion-group>
-
-          <accordion-group>
-            <accordion-heading>
-              PERSONS
-              <button ng-click="createPersonModal($event)" type="button" class="pull-right btn btn-primary btn-xs">Add
-                Person
-              </button>
-            </accordion-heading>
-            <div>
-              <table class="table table-striped">
-                <tr>
-                  <th>Name</th>
-                  <th>Last Name</th>
-                  <th>Company</th>
-                  <th>Title</th>
-                  <th>Office No.</th>
-                  <th>Mobile No.</th>
-                  <th>Email</th>
-                  <th></th>
-                </tr>
-                <tr ng-repeat="projectUser in projectAllInfo track by $index">
-                  <td>
-                    <span>{{ projectUser.link_user.user_first_name || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_user.user_last_name || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_company.company_name || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_user.user_title || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_user.user_office_phone || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_user.user_mobile_phone || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <span>{{ projectUser.link_user.user_email || 'N/A'}}</span>
-                  </td>
-                  <td>
-                    <button ng-click="updatePersonModal(projectUser.link_user)" type="button" class="btn btn-info btn-xs">Edit</button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </accordion-group>
-        </accordion>
-      </div>
+                </td>
+                <td>
+                    <button ng-click="updatePersonModal()" type="button"
+                            style="background-color:darkgray; border-color:darkgray;" class="btn btn-info btn-xs">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+        </table>
     </div>
-  </div>
+</accordion-group>
+
+<accordion-group>
+    <accordion-heading>
+        PERSONS
+        <button ng-click="createPersonModal($event)" type="button" class="pull-right btn btn-primary btn-xs">Add
+            Person
+        </button>
+    </accordion-heading>
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Last Name</th>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Office No.</th>
+                <th>Mobile No.</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="projectUser in projectAllInfo track by $index">
+                <td>
+                    <span>{{ projectUser.link_user.user_first_name || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_user.user_last_name || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_company.company_name || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_user.user_title || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_user.user_office_phone || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_user.user_mobile_phone || 'N/A'}}</span>
+                </td>
+                <td>
+                    <span>{{ projectUser.link_user.user_email || 'N/A'}}</span>
+                </td>
+                <td>
+                    <button ng-click="updatePersonModal(projectUser.link_user)" type="button" class="btn btn-info btn-xs">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</accordion-group>
+</accordion>
+</div>
+</div>
+</div>
 </div>

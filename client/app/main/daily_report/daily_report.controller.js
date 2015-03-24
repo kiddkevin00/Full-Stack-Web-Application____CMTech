@@ -31,9 +31,7 @@ angular.module('qiApp').controller('DailyReportCtrl', function ($rootScope,$scop
         item.format_date = date.format('MMM D,YYYY');
         return date.format('MMM YYYY');
       });
-      //console.log(test)
       for(var  key in $scope.reports) {
-         console.log(key);
          socket.syncUpdates('report',$scope.reports[key]);
       }
       

@@ -8,7 +8,7 @@ $(document).ready(function () {
     $(document).on('click', ".cmtech-tabs > .nav-tabs a", function () {
         var index = $(this).attr('id').slice(-1);
         $(".cmtech-tabs").css({
-            "margin-top": "5px",
+            "border": 0,
             "width": "100%",
             "background": "url('/assets/images/tab" + index + ".png')",
             "background-size": "100%",

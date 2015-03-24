@@ -99,23 +99,16 @@
 </div>
 
 <div ng-show="isSubmittalFormView" class="cmtech-tab-content">
-<form name="form" ng-submit="createSubmittal(form)">
+<form name="form" ng-submit="deleteSubmittal(form)">
 <div class="row">
 <div class="col-lg-2" style="padding-right:4%; padding-top:42%;">
-    <button ng-if="viewOnly" type="submit" class="btn btn-primary col-lg-12">
-        Edit
+    <button ng-if="viewOnly" type="submit" class="btn btn-danger col-lg-12">
+        Delete
     </button>
     <button ng-if="!viewOnly" type="submit" class="btn btn-primary col-lg-12" ng-disabled="viewOnly">
         Save
     </button>
-    <!-- FOR EDIT FORM ONLY -->
-    <!--<button ng-if="!viewOnly" style="margin-top: 2%" type="button" class="btn btn-danger col-lg-12"-->
-            <!--ng-click="leaveCreateSubmittalForm(true)">-->
-        <!--Delete-->
-    <!--</button>-->
-    <button style="background-color:darkgray; border-color:darkgray; margin-top:2%" type="button"
-            class="btn btn-info col-lg-12"
-            ng-click="leaveCreateSubmittalForm()">
+    <button style="background-color:darkgray; border-color:darkgray; margin-top:2%" type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittalForm()">
         Back
     </button>
 </div>

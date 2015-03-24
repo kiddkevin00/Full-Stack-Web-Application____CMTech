@@ -98,7 +98,7 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
     // leave create submittal form view
     $scope.leaveCreateSubmittalForm = function(resetForm) {
         if ($scope.viewOnly) {
-            var resetForm = true;
+            resetForm = true;
             $scope.viewOnly = false;
         }
         if (resetForm) {
@@ -178,6 +178,15 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
             $scope.getSubmittals();
             $scope.getProjectUsers();
             $scope.isSubmittalFormView = false;
+        }).error(function(data) {
+
+        });
+    };
+    // delete submittal
+    $scope.deleteSubmittal = function(form) {
+        $http.delete("/api/submittals/" + $scope.createSubmittalForm._id).success(function(data) {
+            $scope.leaveCreateSubmittalForm(true)
+            console.log("submittal deleted");
         }).error(function(data) {
 
         });

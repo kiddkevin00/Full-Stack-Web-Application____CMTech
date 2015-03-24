@@ -56,10 +56,11 @@ angular.module('qiApp')
           if(item.report_create_date) {
             item.report_create_date = new Date(item.report_create_date)
           }
+          var newItem = _.merge(oldItem, item);
           // replace oldItem if it exists
           // otherwise just add item to the collection
           if (oldItem) {
-            array.splice(index, 1, item);
+            array.splice(index, 1, newItem);
             event = 'updated';
           } 
           // else {
