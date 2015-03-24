@@ -13,6 +13,13 @@ exports.show_roles = function(req,res) {
     return res.json(User.schema.path('user_role').enumValues);
 };
 
+
+exports.update = function(req,res){
+  User.findOneAndUpdate({_id : req.params.id}, req.body,function(err, user) {
+    if(err) { return res.json(401,err); }
+    return res.json(200, user);
+  });
+};
 /**
  * Get list of users
  * restriction: 'user'

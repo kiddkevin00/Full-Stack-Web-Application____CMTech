@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams, $http, $modal) {
+angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams, $http, $modal, socket) {
   //$scope.project._id = $stateParams.projectID;
 
   // project section
@@ -47,6 +47,7 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
     });
 
   };
+
   $scope.cancel = function() {
     $scope.viewOnly = true;
     $scope.getProjectInfo();
@@ -63,6 +64,7 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
         if(!$scope.companies[d.link_company._id]) {
           var temp = [];
           temp.push(d.link_user);
+          socket.syncUpdateSingle("company",d.link_company);
           $scope.companies[d.link_company._id] = {
             company_name : d.link_company.company_name,
             company_title : d.link_company.company_title,
@@ -84,6 +86,53 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
     }
 
   };
+
+  var UpdateCompanyModalCtrl = function($scope, $modalInstance,company) {
+    $scope.company = company;
+    $scope.createCompany = function (form) {
+         $scope.submitted = true;
+         if ($scope.form.$valid) {
+             $http.put('/api/companies/' + $scope.company._id,$scope.company).then(function (data) {
+              console.log(data)
+                 $modalInstance.close(data.data);
+             });
+         } else {
+             console.log("Form Invalid");
+         }
+     };
+    $scope.cancel = function() {
+      $modalInstance.close();
+    };
+
+  };
+  $scope.updateCompany = function(id,company) {
+    console.log(company)
+    var new_company = {
+      _id : id,
+      company_name : company.company_name,
+      company_title : company.company_title,
+      company_address : company.company_address
+    }
+    var modalInstance = $modal.open({
+      templateUrl: "/components/modal/modal_updatecompany.html",
+      size: "md",
+      controller: UpdateCompanyModalCtrl,
+      resolve: {
+        company : function() {
+          return new_company;
+        }
+        // user : function(){
+        //   return user;
+        // }
+      }
+    });
+    modalInstance.result.then(function(data) {
+      if (data) {
+        _.merge(company, data);
+      }
+    });
+  };
+
   $scope.updatePersonModal = function(user) {
     // if (event) {
     //   event.preventDefault();
@@ -105,10 +154,13 @@ angular.module('qiApp').controller('ScheduleCtrl', function($scope, $stateParams
       }
     });
   };
-  var UpdatePersonModalCtrl = function($scope, $modalInstance,user) {
+  var UpdatePersonModalCtrl = function($scope, $modalInstance,user, $http) {
     $scope.user = user;
     $scope.createPerson = function() {
-
+      $http.put('/api/users/' + user._id, $scope.user).success(function(data){
+          console.log(data);
+          $modalInstance.close(data.data);
+      }) 
     };
     $scope.cancel = function() {
 

@@ -126,6 +126,7 @@
               <table class="table table-striped">
                 <u><b>{{company.company_name}}  {{company.company_title}}</b></u>
                 <div>{{company.company_address}}</div>
+                <button ng-click="updateCompany(_id,company)" type="button" class="btn btn-info btn-xs">Edit</button>
                 <tr>
                   <th>Title</th>
                   <th>Name Last Name</th>
@@ -135,10 +136,10 @@
                 </tr>
                 <tr ng-repeat="user in company.users">
                   <td>
-                    <span>{{ user.user_last_name  || 'N/A'}}</span>
+                    <span>{{ user.user_title  || 'N/A'}}</span>
                   </td> 
                   <td>
-                    <span>{{ user.user_first_name  || 'N/A'}}</span>
+                    <span>{{ user.user_last_name  || 'N/A'}}</span><span>{{ user.user_first_name  || 'N/A'}}</span>
                   </td>
                   <td>
                     <span>{{ user.user_email  || 'N/A'}}</span>
@@ -148,8 +149,6 @@
                   </td>
                   <td>
                     <span>{{ user.user_mobile_phone  || 'N/A'}}</span>
-                  </td>
-                    <button ng-click="updatePersonModal()" type="button" class="btn btn-info btn-xs">Edit</button>
                   </td>
                 </tr>
               </table>
