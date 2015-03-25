@@ -75,10 +75,10 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!company) { return res.send(404); }
     var updated = _.merge(company, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, company);
-    });
+    updated.save(function(err, company) {
+       if (err) return validationError(res, err);
+       res.json(company);
+     });
   });
 };
 

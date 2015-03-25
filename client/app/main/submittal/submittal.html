@@ -99,13 +99,13 @@
 </div>
 
 <div ng-show="isSubmittalFormView" class="cmtech-tab-content">
-<form name="form" ng-submit="deleteSubmittal(form)">
+<form name="form" ng-submit="">
 <div class="row">
 <div class="col-lg-2" style="padding-right:4%; padding-top:42%;">
-    <button ng-if="viewOnly" type="submit" class="btn btn-danger col-lg-12">
+    <button ng-if="viewOnly" ng-click="deleteSubmittal(form)" type="button" class="btn btn-danger col-lg-12">
         Delete
     </button>
-    <button ng-if="!viewOnly" type="submit" class="btn btn-primary col-lg-12" ng-disabled="viewOnly">
+    <button ng-if="!viewOnly" ng-click="createSubmittal(form)" type="button" class="btn btn-primary col-lg-12" ng-disabled="viewOnly">
         Save
     </button>
     <button style="background-color:darkgray; border-color:darkgray; margin-top:2%" type="button" class="btn btn-info col-lg-12" ng-click="leaveCreateSubmittalForm()">

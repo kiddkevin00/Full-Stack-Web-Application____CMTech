@@ -3,7 +3,7 @@
 <div class="col-lg-offset-1 col-lg-10">
 <div ng-init="getProjectInfo(); getProjectUsers();" class="page-header">
 <accordion close-others="true">
-<accordion-group is-open="true">
+<accordion-group is-open="isOpen">
     <accordion-heading>
         PROJECT INFO
         <button ng-click="editUpdateProjectForm($event)" type="button"
@@ -126,7 +126,15 @@
         <table class="table table-striped">
             <u><b>{{company.company_name}} {{company.company_title}}</b></u>
 
-            <div>{{company.company_address}}</div>
+            <div>
+                <span>{{company.company_address}}</span>
+                <button ng-click="updateCompany(_id, company)" type="button" style="margin-bottom:9px; float:right;
+                 background-color:darkgray;
+                    border-color:darkgray;"
+                    class="btn btn-info btn-xs">Edit
+                </button>
+            </div>
+
             <tr>
                 <th>Title</th>
                 <th>Name Last Name</th>
@@ -137,10 +145,10 @@
             </tr>
             <tr ng-repeat="user in company.users">
                 <td>
-                    <span>{{ user.user_last_name  || 'N/A'}}</span>
+                    <span>{{ user.user_title  || 'N/A'}}</span>
                 </td>
                 <td>
-                    <span>{{ user.user_first_name  || 'N/A'}}</span>
+                    <span>{{ user.user_last_name  || 'N/A'}}</span><span>{{ user.user_first_name  || 'N/A'}}</span>
                 </td>
                 <td>
                     <span>{{ user.user_email  || 'N/A'}}</span>
@@ -152,10 +160,7 @@
                     <span>{{ user.user_mobile_phone  || 'N/A'}}</span>
                 </td>
                 <td>
-                    <button ng-click="updatePersonModal()" type="button"
-                            style="background-color:darkgray; border-color:darkgray;" class="btn btn-info btn-xs">
-                        Edit
-                    </button>
+
                 </td>
             </tr>
         </table>
@@ -204,7 +209,9 @@
                     <span>{{ projectUser.link_user.user_email || 'N/A'}}</span>
                 </td>
                 <td>
-                    <button ng-click="updatePersonModal(projectUser.link_user)" type="button" class="btn btn-info btn-xs">
+                    <button ng-click="updatePersonModal(projectUser.link_user)" type="button" style="background-color:darkgray;
+                     border-color:darkgray;"
+                            class="btn btn-info btn-xs">
                         Edit
                     </button>
                 </td>

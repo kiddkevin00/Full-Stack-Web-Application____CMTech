@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h3 class="modal-title">COMPANY</h3>
+</div>
+<div class="modal-body">
+<form name='form'>
+  <div class='row'>
+       <div class="col-lg-6">
+           <div class="form-group" ng-class="{ 'has-success': form.companyName.$valid && submitted,
+                                               'has-error': form.companyName.$invalid && submitted }">
+               <input type="text" ng-model="company.company_name" class="form-control" name="companyName"
+                      placeholder="Company Name" mongoose-error ng-required="showCompanyForm === 'yes'"/>
+
+               <p class="help-block" ng-show="form.companyName.$error.required && submitted">
+                   Company name is required
+               </p>
+               <p class="help-block" ng-show="form.companyName.$error.mongoose">
+                   {{ errors.companyName }}
+               </p>
+           </div>
+       </div>
+       <div class="col-lg-6">
+           <div class="form-group" ng-class="{ 'has-success': form.companyTitle.$valid && submitted,
+                                               'has-error': form.companyTitle.$invalid && submitted }">
+               <input type="text" ng-model="company.company_title" class="form-control" name="companyTitle"
+                      placeholder="Title" ng-required="showCompanyForm === 'yes'"/>
+               <p class="help-block" ng-show="form.companyTitle.required && submitted">
+                   Company title is required
+               </p>
+           </div>
+       </div>
+   
+   </div>
+   <div class="row">
+       <div class="col-lg-12">
+           <div class="form-group" ng-class="{ 'has-success': form.companyAddress.$valid && submitted,
+                                               'has-error': form.companyAddress.$invalid && submitted }">
+               <input type="text" ng-model="company.company_address" class="form-control" name="companyAddress" placeholder="Address" ng-required="showCompanyForm === 'yes'"/>
+               <p class="help-block" ng-show="form.companyAddress.$error.required && submitted">
+                   Company city is required
+               </p>
+           </div>
+       </div>
+   </div>
+   <button class='btn btn-primary' ng-click='createCompany()'>save</button>
+   <button type="button" class="btn btn-warning" ng-click="cancel()">Back</button>
+</form>
+</DIV>

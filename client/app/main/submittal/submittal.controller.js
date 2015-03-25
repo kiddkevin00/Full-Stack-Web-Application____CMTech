@@ -167,6 +167,7 @@ angular.module('qiApp').controller('SubmittalCtrl', function($scope, $http, $sta
         if ($scope.createSubmittalForm._submittal_description2) {
             $scope.createSubmittalForm.submittal_description += $scope.createSubmittalForm._submittal_description2;
         }
+        console.log($scope.createSubmittalForm)
         $http.post("/api/submittals", $scope.createSubmittalForm).success(function(data) {
             $scope.createSubmittalForm = {
                 link_distributors: [],
